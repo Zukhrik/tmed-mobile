@@ -1,8 +1,8 @@
 import {HomeSvg} from '../Icons/Home'
-import {SearchSvg} from '../Icons/Search'
 import {ProfileSvg} from '../Icons/People'
 import {LogInSvg} from '../Icons/ProfMenuIcons'
 import {resetOfferingModelStoreList} from '../Models/offerings-model'
+import {OfferingSvg} from '../Icons/Offering'
 
 const generatePath = (defaultPath, customPath = false) => {
     return customPath ? customPath : defaultPath
@@ -18,8 +18,8 @@ export const bottomNavbarWithToken = [
     },
     {
         id: 'search',
-        path: '/search',
-        icon: SearchSvg,
+        path: '/records/unregistered',
+        icon: OfferingSvg,
         generatePath: generatePath,
         onClick: () => false
     },
@@ -43,7 +43,7 @@ export const bottomNavbarWithToken = [
         onClick: () => {
             resetOfferingModelStoreList()
         }
-    },
+    }
     // {
     //     id: 'menu',
     //     path: '/menu',
@@ -63,8 +63,8 @@ export const bottomNavbarWithoutToken = [
     },
     {
         id: 'search',
-        path: '/search',
-        icon: SearchSvg,
+        path: '/records/unregistered',
+        icon: OfferingSvg,
         generatePath: generatePath,
         onClick: () => false
     },
