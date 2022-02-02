@@ -2,16 +2,16 @@ import React from 'react'
 import {Col, Row} from 'antd'
 import {useStore} from 'effector-react'
 import {AccountInfoWrap} from '../style'
-import {useHistory, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
 import {$appModel} from '../../../Models/app'
 import {Button} from '../../../UIComponents/Button'
 import {Avatar} from '../../../UIComponents/Avatar'
-import {PageBodyNavigate} from '../PageBodyNavigate'
 import {Text} from '../../../UIComponents/Typography/Text'
 import {$accountModel} from '../../../Models/account-model'
 import {Title} from '../../../UIComponents/Typography/Title'
 import {SkeletonUI, SkeletonWrapper} from '../../../UIComponents/GlobalStyles'
+import {degreesData} from '../../../data'
 
 
 export const UserPageHeader = (
@@ -21,29 +21,26 @@ export const UserPageHeader = (
         imgUrl,
         forceLoading,
         subscription,
-        followers,
-        following
+        aesthetics,
+        esthetics,
+        professional
     }
 ) => {
     const {t} = useTranslation()
-    const {push} = useHistory()
-    const {username, organization} = useParams()
+    const {username} = useParams()
     const {$app: {token}} = useStore($appModel)
     const {$profiles: {currentProfile}} = useStore($accountModel)
     
-    const handleClickTo = (evt) => {
-        if (evt === 'followers') {
-            if (username) {
-                push(`/@${username}/followers`)
-            } else if (organization) {
-                push(`/${organization}/followers`)
-            }
-        } else if (evt === 'following') {
-            if (username) {
-                push(`/@${username}/followings`)
-            } else if (organization) {
-                push(`/${organization}/followings`)
-            }
+    const generateOrgRating = (item) => {
+        switch (item.id) {
+            case 'aesthetics':
+                return aesthetics
+            case 'ethics':
+                return esthetics
+            case 'professional':
+                return professional
+            default:
+                return null
         }
     }
     
@@ -69,20 +66,21 @@ export const UserPageHeader = (
                         </Col>
                         <Col flex={1}>
                             <Row justify='space-around'>
-                                <Col
-                                    className='account-subs-wrapper'
-                                    onClick={() => handleClickTo('followers')}
-                                >
-                                    {followers}
-                                    <Text>{t('followers')}</Text>
-                                </Col>
-                                <Col
-                                    className='account-subs-wrapper'
-                                    onClick={() => handleClickTo('following')}
-                                >
-                                    {following}
-                                    <Text>{t('following')}</Text>
-                                </Col>
+                                {
+                                    degreesData.map((item, idx) => {
+                                        const Icon = item.icon
+                                        return (
+                                            <Col
+                                                key={`${idx + 1}`}
+                                                className='account-subs-wrapper'
+                                                style={{color: item.color, boxShadow: item.shadow_color}}
+                                            >
+                                                <Icon/>
+                                                {generateOrgRating(item)}
+                                            </Col>
+                                        )
+                                    })
+                                }
                             </Row>
                         </Col>
                     </Row>
@@ -158,9 +156,6 @@ export const UserPageHeader = (
                         </Col>
                     )
                 }
-                <Col span={24}>
-                    <PageBodyNavigate/>
-                </Col>
             </Row>
         </AccountInfoWrap>
     )

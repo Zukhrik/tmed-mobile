@@ -19,7 +19,6 @@ import {
     OrganizationInfoWrapper,
     SubscribeButton
 } from '../atoms'
-import {useHistory} from 'react-router-dom'
 
 export const OrganizationCard = (
     {
@@ -40,10 +39,9 @@ export const OrganizationCard = (
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const {$app: {token}} = useStore($appModel)
     const {t} = useTranslation()
-    const {push} = useHistory()
     
     return (
-        <OrganizationCardWrapper onClick={() => push(containerPath)}>
+        <OrganizationCardWrapper onClick={containerPath}>
             {
                 currentProfile && currentProfile.slug_name !== slug_name && token && subscribed &&
                 <SubscribeButton>

@@ -23,7 +23,7 @@ export const OrganizationPage = () => {
     const {location: {pathname}} = useHistory()
     const {handlePush, result} = usePushToCart()
     const {getSubscription} = useOrgSubscription()
-    const {goBack} = useGoBack({pathname: '/search'})
+    const {goBack} = useGoBack({pathname: '/'})
     const {$organizationInfo: {data, forceLoading}} = useStore($orgModel)
     
     
@@ -42,8 +42,9 @@ export const OrganizationPage = () => {
                         category={data?.[organization]?.category?.name}
                     />
                     : <UserPageHeader
-                        followers={data[organization]?.subs?.me}
-                        following={data[organization]?.subs?.my}
+                        aesthetics={data?.[organization]?.rating?.aesthetics?.level}
+                        esthetics={data?.[organization]?.rating?.ethics?.level}
+                        professional={data?.[organization]?.rating?.professional?.level}
                         forceLoading={forceLoading}
                         name={data?.[organization]?.name}
                         imgUrl={data?.[organization]?.logo}

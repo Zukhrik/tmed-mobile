@@ -54,11 +54,12 @@ export const AccountInfoWrap = styled.div`
     align-items: center;
     font-family: var(--medium-text);
     font-size: 15px;
-    justify-content: end;
-    height: 43.89px;
+    justify-content: space-between;
+    height: 48px;
 
-    ${StyledText} {
-      font-size: 13px;
+    svg {
+      width: 24px;
+      height: 24px;
     }
   }
 `
