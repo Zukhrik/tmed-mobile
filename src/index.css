@@ -1,0 +1,211 @@
+@import '~antd/dist/antd.css';
+@import '~react-phone-input-2/lib/style.css';
+@import '~react-slidedown/lib/slidedown.css';
+@import "~react-multi-carousel/lib/styles.css";
+
+@font-face {
+    font-family: 'Golos';
+    src: url('./Assets/fonts/GolosRegular.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'GolosMedium';
+    src: url('./Assets/fonts/GolosMedium.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'GolosDemi';
+    src: url('./Assets/fonts/GolosDemi.ttf');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'GolosBold';
+    src: url('./Assets/fonts/GolosBold.ttf');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'GolosBlack';
+    src: url('./Assets/fonts/GolosBlack.ttf');
+    font-weight: 900;
+}
+
+:root {
+    --bold-text: "GolosBold", sans-serif;
+    --regular-text: "Golos", sans-serif;
+    --medium-text: "GolosMedium", sans-serif;
+    --demi-text: "GolosDemi", sans-serif;
+    --black-text: "GolosBlack", sans-serif;
+    --chat-header-height: 50px;
+    --basic-shadow: 0 4px 8px rgba(38, 38, 38, 0.15);
+    --input-border-color: #f0f1f2;
+    --basic-border-radius: 4px;
+    --primary-dwed: #1da1f2;
+    --grey-border: #e4e9f2;
+    --default-white: #fff;
+    --active-bg: #DDF1FD;
+    --dark-dwed: #262626;
+    --input-bg: #fbfbfb;
+    --grey-dwed: #7F92A0;
+    --icon-color: #231F20;
+    --danger-dwed: #FF5A5F;
+    --ethic-color: #706FD3;
+    --input-hover-bg: #f5f9ff;
+    --aesthetic-color: #FD9644;
+    --light-grey-dwed: #464a54;
+    --bottom-navbar-height: 54px;
+    --input-focus-color: #0095ff;
+    --input-hover-color: #eaf4ff;
+    --input-danger-color: #ff3d71;
+    --professional-color: #2BCBBA;
+    --basic-grey-bg: #F8F8F8;
+    --basic-active-background: rgba(29, 161, 242, 0.15);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Golos', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+.bm-burger-button {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    left: 24px;
+    top: 24px;
+    z-index: 80 !important;
+}
+
+.bm-burger-button button {
+    outline: none;
+}
+
+.bm-burger-bars {
+    background: var(--dark-dwed);
+    height: 2px !important;
+    border-radius: 2px;
+}
+
+.bm-cross-button {
+    height: 20px;
+    width: 20px;
+}
+
+.bm-cross-button button {
+    outline: none;
+}
+
+.bm-cross {
+    background: #bdc3c7;
+}
+
+.bm-menu {
+    background: var(--default-white);
+    padding: 24px;
+    font-size: 1.15em;
+}
+
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 100 !important;
+}
+
+.bm-menu-wrap {
+    z-index: 110 !important;
+    box-shadow: 1px 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.bm-cross {
+    width: 2px !important;
+}
+
+.select-dropdown.MuiPaper-elevation8 {
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.16);
+}
+
+
+.css-1fzpoyk {
+    opacity: 1 !important;
+}
+
+span.lazy-load-image-background {
+    display: block !important;
+}
+
+
+.flyingBtn {
+    z-index: 1;
+    transform-origin: center bottom;
+    transform: scale(1);
+}
+
+.ant-message-notice-content {
+    padding: 8px 16px !important;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.06) !important;
+    border-radius: 4px !important;
+}
+
+.ant-message-custom-content {
+    display: flex;
+    align-items: center;
+}
+
+.ant-message-custom-content svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 16px;
+}
+
+.ant-message-custom-content span {
+    font-weight: 500;
+}
+
+.blur-overlay {
+    position: fixed;
+    background: rgba(204, 204, 204, 0.2);
+    backdrop-filter: blur(5px);
+    z-index: 4;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: .2s ease all;
+}
+
+.blur-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.MuiPaper-rounded {
+    border-radius: 8px !important;
+}
+
+.MuiPaper-elevation8 {
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+.body-height {
+    height: calc(var(--vh, 1vh) * 100);
+    position: fixed;
+    overflow: hidden;
+    -webkit-overflow-scrolling: unset;
+}
+
+.body-height::-webkit-scrollbar {
+    display: none;
+}
+

@@ -1,0 +1,1 @@
+export {OfferingPageWireframe} from './offering-page-wireframe'
