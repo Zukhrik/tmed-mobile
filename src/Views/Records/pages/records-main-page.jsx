@@ -4,21 +4,20 @@ import {$appModel} from '../../../Models/app'
 import {$accountModel} from '../../../Models/account-model'
 import {useGoBack} from '../../../Hooks/app'
 import {Container, RootContent} from '../../../UIComponents/GlobalStyles'
-import {INFO_MAT} from '../../../Constants/app'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {Switch} from 'react-router-dom'
 import {PrivateRoute} from '../../../Routes'
 import {Approved, Awaiting, Canceled, Finished, RecordsFixedHeader, Unregistered} from '../organisms'
 
 export const RecordsMainPage = () => {
-    const {$device, $app: {saveURL}} = useStore($appModel)
+    const {$app: {saveURL}} = useStore($appModel)
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const {goBack} = useGoBack({pathname: saveURL ? saveURL : `/@${currentProfile && currentProfile.slug_name}/tape`})
     
     return (
         <RootContent
             height='100vh'
-            paddingTop={$device && $device === INFO_MAT ? '100px' : '101px'}
+            paddingTop={100}
         >
             <FixedHeader
                 height='auto'

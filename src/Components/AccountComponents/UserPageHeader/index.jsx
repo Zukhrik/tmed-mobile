@@ -64,25 +64,29 @@ export const UserPageHeader = (
                                     />
                             }
                         </Col>
-                        <Col flex={1}>
-                            <Row justify='space-around'>
-                                {
-                                    degreesData.map((item, idx) => {
-                                        const Icon = item.icon
-                                        return (
-                                            <Col
-                                                key={`${idx + 1}`}
-                                                className='account-subs-wrapper'
-                                                style={{color: item.color, boxShadow: item.shadow_color}}
-                                            >
-                                                <Icon/>
-                                                {generateOrgRating(item)}
-                                            </Col>
-                                        )
-                                    })
-                                }
-                            </Row>
-                        </Col>
+                        {
+                            !username && (
+                                <Col flex={1}>
+                                    <Row justify='space-around'>
+                                        {
+                                            degreesData.map((item, idx) => {
+                                                const Icon = item.icon
+                                                return (
+                                                    <Col
+                                                        key={`${idx + 1}`}
+                                                        className='account-subs-wrapper'
+                                                        style={{color: item.color, boxShadow: item.shadow_color}}
+                                                    >
+                                                        <Icon/>
+                                                        {generateOrgRating(item)}
+                                                    </Col>
+                                                )
+                                            })
+                                        }
+                                    </Row>
+                                </Col>
+                            )
+                        }
                     </Row>
                 </Col>
                 <Col

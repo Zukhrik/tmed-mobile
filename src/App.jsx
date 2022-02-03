@@ -20,15 +20,8 @@ export const App = () => {
     const generateBottomNavbar = (
         pathname.indexOf('sign-in') === -1 &&
         pathname.indexOf('sign-up') === -1 &&
-        pathname.indexOf('records') === -1 &&
-        pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'chat' &&
         pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'offerings' &&
-        pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'records' &&
-        pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'repost' &&
-        pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'tape' &&
-        pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'unregistered' &&
-        pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'checkout' &&
-        pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'stream'
+        pathname.match(/([^/]*)\/[^/]*$/)[1] !== 'checkout'
     )
     
     useAppDb()

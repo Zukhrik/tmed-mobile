@@ -10,11 +10,11 @@ import {Col, Row} from 'antd'
 export const OrderRecordsPage = () => {
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const {t} = useTranslation()
-    const {goBack} = useGoBack(currentProfile && {pathname: `/@${currentProfile.slug_name}/tape`})
+    const {goBack} = useGoBack(currentProfile && {pathname: `/@${currentProfile.slug_name}`})
     
     return (
         <RootContent
-            paddingTop='62px'
+            paddingTop={62}
         >
             <FixedHeader
                 title={t('order_records')}
