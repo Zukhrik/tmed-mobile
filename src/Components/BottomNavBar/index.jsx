@@ -1,4 +1,4 @@
-import React, {Fragment, useCallback, useEffect, useState} from 'react'
+import React, {Fragment, useCallback, useState} from 'react'
 import {useStore} from 'effector-react'
 import {$appModel} from '../../Models/app'
 import {useLocation} from 'react-router-dom'
@@ -10,12 +10,10 @@ import {$accountModel} from '../../Models/account-model'
 import {bottomNavbarWithoutToken, bottomNavbarWithToken} from '../../data'
 import {BottomNavbarCounter, BottomNavbarItem, BottomNavWrapper, NavLinkItem, NavLinkWrapper} from './style'
 
-let prevScrollpos = window.pageYOffset
 
 export const BottomNavBar = () => {
     const {pathname} = useLocation()
     const {getChatList} = useChatCommon()
-    const [show, setShow] = useState(null)
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const {$app: {token}, $socketCounters, $device} = useStore($appModel)
@@ -44,25 +42,6 @@ export const BottomNavBar = () => {
         }
     }, [currentProfile, pathname])
     
-    const showHideBottomNavbar = useCallback(() => {
-        const currentScrollPos = window.pageYOffset
-        if (prevScrollpos > currentScrollPos) {
-            setShow(0)
-        } else {
-            setShow(-60)
-        }
-        prevScrollpos = currentScrollPos
-    }, [])
-    
-    useEffect(() => {
-        showHideBottomNavbar()
-        window.addEventListener('scroll', showHideBottomNavbar)
-        
-        return () => {
-            window.removeEventListener('scroll', showHideBottomNavbar)
-        }
-    }, [showHideBottomNavbar])
-    
     
     return (
         <>
@@ -73,7 +52,6 @@ export const BottomNavBar = () => {
             />
             <BottomNavWrapper
                 borderBottom
-                className={show && 'hide'}
                 style={{display: $device && $device === INFO_MAT && 'none'}}
             >
                 <NavLinkWrapper>
