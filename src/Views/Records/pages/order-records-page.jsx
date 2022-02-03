@@ -14,7 +14,7 @@ export const OrderRecordsPage = () => {
     
     return (
         <RootContent
-            paddingTop='62px'
+            paddingTop={62}
         >
             <FixedHeader
                 title={t('order_records')}

@@ -33,7 +33,7 @@ export const MobileView = () => {
     }
     
     return (
-        <RootContent paddingTop='70px' style={{paddingBottom: 60}}>
+        <RootContent paddingTop={70} paddingBottom={60}>
             <FixedHeader
                 goBack={goBackAndReset}
                 title={t('detailed_order_information')}
