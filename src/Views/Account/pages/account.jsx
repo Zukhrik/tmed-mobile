@@ -1,31 +1,33 @@
 import React from 'react'
+import {useUser} from '../../../Hooks/user'
 import {useHistory, useParams} from 'react-router-dom'
 import {useStore} from 'effector-react'
 import {$userModel} from '../../../Models/user-model'
-import {useUser} from '../../../Hooks/user'
 import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {FixedHeader} from '../../../Components/FixedHeader'
-import {AccountFixedHeader} from '../organisms'
+import {UserFixedHeaderComponent} from '../organisms/user-fixed-header-component'
 import {Col, Row} from 'antd'
 import {ShortCard, ShortCardSkeleton} from '../../../Components/Cards'
-import {Title} from '../../../UIComponents/Typography/Title'
-import {useTranslation} from 'react-i18next'
 import Cookies from 'js-cookie'
 import {getCurrentAccount} from '../../../Models/account-model'
 import {tokenMount} from '../../../Models/app'
 import {resetOrderCartList, resetOrgOrderCart} from '../../../Models/order-model'
+import {Title} from '../../../UIComponents/Typography/Title'
+import {useTranslation} from 'react-i18next'
 
 
 export const Account = () => {
     useUser()
-    const {push} = useHistory()
     const {t} = useTranslation()
+    const {push} = useHistory()
     const {username} = useParams()
     const {$user: {data, forceLoading}} = useStore($userModel)
     const userInfo = data && data?.[username]
     
-    const handleClick = (text) => {
-        if (text === 'logout') {
+    const handleClick = (evt) => {
+        if (evt === 'logo') {
+            push('/')
+        } else if (evt === 'logout') {
             Cookies.remove('token')
             Cookies.remove('users')
             Cookies.remove('refresh-token')
@@ -35,41 +37,31 @@ export const Account = () => {
             push('/')
             resetOrgOrderCart()
             resetOrderCartList()
-        } else if (text === 'logoClick') {
-            push('/')
         }
     }
     
     return (
-        <RootContent
-            paddingTop={62}
-            paddingBottom={60}
-        >
+        <RootContent height='100vh' paddingTop={62}>
             <FixedHeader
-                component={
-                    <AccountFixedHeader
-                        logoClick={() => handleClick('logoClick')}
-                        logOutClick={() => handleClick('logout')}
-                    />
-                }
+                component={<UserFixedHeaderComponent
+                    logoClick={() => handleClick('logo')}
+                    logoutClick={() => handleClick('logout')}
+                />}
             />
-            <Row gutter={[0, 12]} className='container'>
+            <Row className='container' gutter={[0, 12]}>
                 {
-                    forceLoading === 2 && data
+                    forceLoading === 2 && userInfo
                         ? (
                             <Col span={24}>
                                 <ShortCard
                                     imgSize={48}
-                                    imgUrl={userInfo && Object.values(userInfo) && userInfo?.avatar}
-                                    name={
-                                        userInfo && Object.values(userInfo) && !userInfo?.name
-                                            ? userInfo?.username
-                                            : `${userInfo?.name} ${userInfo?.lastname}`
-                                    }
-                                    text={userInfo && Object.values(userInfo) && userInfo?.main_cat?.name}
+                                    imgUrl={userInfo.avatar}
+                                    name={`${userInfo.name} ${userInfo.lastname}`}
+                                    text={userInfo.main_cat.name}
                                 />
                             </Col>
-                        ) : (
+                        )
+                        : (
                             <Col span={24}>
                                 <ShortCardSkeleton size={48}/>
                             </Col>

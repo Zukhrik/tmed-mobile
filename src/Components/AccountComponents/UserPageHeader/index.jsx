@@ -1,14 +1,9 @@
 import React from 'react'
 import {Col, Row} from 'antd'
-import {useStore} from 'effector-react'
 import {AccountInfoWrap} from '../style'
 import {useParams} from 'react-router-dom'
-import {useTranslation} from 'react-i18next'
-import {$appModel} from '../../../Models/app'
-import {Button} from '../../../UIComponents/Button'
 import {Avatar} from '../../../UIComponents/Avatar'
 import {Text} from '../../../UIComponents/Typography/Text'
-import {$accountModel} from '../../../Models/account-model'
 import {Title} from '../../../UIComponents/Typography/Title'
 import {SkeletonUI, SkeletonWrapper} from '../../../UIComponents/GlobalStyles'
 import {degreesData} from '../../../data'
@@ -26,10 +21,7 @@ export const UserPageHeader = (
         professional
     }
 ) => {
-    const {t} = useTranslation()
     const {username} = useParams()
-    const {$app: {token}} = useStore($appModel)
-    const {$profiles: {currentProfile}} = useStore($accountModel)
     
     const generateOrgRating = (item) => {
         switch (item.id) {
@@ -135,31 +127,6 @@ export const UserPageHeader = (
                             </Row>
                     }
                 </Col>
-                {
-                    !!token && !!currentProfile && currentProfile.slug_name !== username && (
-                        <Col
-                            span={24}
-                            className='subs-button-wrapper'
-                            onClick={() => subscription.toggle()}
-                        >
-                            {
-                                forceLoading === 2
-                                    ? <Button
-                                        variant={
-                                            subscription.text === t('subscribe')
-                                                ? 'primary'
-                                                : 'outlined'
-                                        }
-                                    >
-                                        {t(subscription.text)}
-                                    </Button>
-                                    : <div style={{height: 30, display: 'flex', alignItems: 'center'}}>
-                                        <SkeletonUI variant='rect' height={12} width='100%'/>
-                                    </div>
-                            }
-                        </Col>
-                    )
-                }
             </Row>
         </AccountInfoWrap>
     )

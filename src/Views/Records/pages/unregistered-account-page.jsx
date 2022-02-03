@@ -42,10 +42,6 @@ export const UnregisteredAccountPage = () => {
                         ? currentOrg?.seller?.name
                         : ''
                 }
-                // header={
-                //     $device && $device !== INFO_MAT
-                //     && <AccountInfo currentOrg={currentOrg} otherOrgs={otherOrgs}/>
-                // }
                 specCard={<AccountSpecialists/>}
                 offerings={<UnregisteredOfferings/>}
             />

@@ -12,7 +12,7 @@ import {Approved, Awaiting, Canceled, Finished, RecordsFixedHeader, Unregistered
 export const RecordsMainPage = () => {
     const {$app: {saveURL}} = useStore($appModel)
     const {$profiles: {currentProfile}} = useStore($accountModel)
-    const {goBack} = useGoBack({pathname: saveURL ? saveURL : `/@${currentProfile && currentProfile.slug_name}/tape`})
+    const {goBack} = useGoBack({pathname: saveURL ? saveURL : `/@${currentProfile && currentProfile.slug_name}`})
     
     return (
         <RootContent

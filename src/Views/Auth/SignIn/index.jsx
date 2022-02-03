@@ -14,9 +14,11 @@ import {
     AuthForm,
     ImageWrapper,
     LinkToWrapper,
-    SignInWrapper
+    SignInWrapper,
+    WelcomeWrapper
 } from '../style'
-import {DWEDSvg} from '../../../Icons/DWED'
+import {LogoSvg} from '../../../Icons/Logo'
+import {Title} from '../../../UIComponents/Typography/Title'
 
 export default () => {
     const {t} = useTranslation()
@@ -32,7 +34,11 @@ export default () => {
                     <CloseSvg/>
                 </AuthCloseBtnWrap>
                 <ImageWrapper>
-                    <DWEDSvg/>
+                    <LogoSvg/>
+                    <WelcomeWrapper>
+                        <Title>{t('welcome')}</Title>
+                        <Text>{t('enter_phone_number')}</Text>
+                    </WelcomeWrapper>
                 </ImageWrapper>
                 <AuthForm onSubmit={formik.handleSubmit}>
                     <Row gutter={[0, 24]} style={{marginBottom: 0}}>
