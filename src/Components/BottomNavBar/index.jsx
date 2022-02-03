@@ -10,6 +10,7 @@ import {$accountModel} from '../../Models/account-model'
 import {bottomNavbarWithoutToken, bottomNavbarWithToken} from '../../data'
 import {BottomNavbarCounter, BottomNavbarItem, BottomNavWrapper, NavLinkItem, NavLinkWrapper} from './style'
 
+
 export const BottomNavBar = () => {
     const {pathname} = useLocation()
     const {getChatList} = useChatCommon()
@@ -18,7 +19,7 @@ export const BottomNavBar = () => {
     const {$app: {token}, $socketCounters, $device} = useStore($appModel)
     
     const generateCustomPath = (id) => {
-        const customPath = currentProfile && `${currentProfile.url}`
+        const customPath = currentProfile && `${currentProfile.url}/tape`
         return id.indexOf('profile') !== -1 && customPath
     }
     
