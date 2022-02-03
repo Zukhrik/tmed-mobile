@@ -32,9 +32,7 @@ export const RegisterForm = () => {
     
     return (
         <AuthContainer>
-            <AuthForm
-                onSubmit={formik.handleSubmit}
-            >
+            <AuthForm onSubmit={formik.handleSubmit}>
                 <Row gutter={[0, 24]}>
                     <Col
                         span={24}
