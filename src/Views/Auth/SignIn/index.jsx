@@ -8,15 +8,16 @@ import {Button} from '../../../UIComponents/Button'
 import {InputUI} from '../../../UIComponents/mu-inputs'
 import {Text} from '../../../UIComponents/Typography/Text'
 import {
-    AuthAction,
     AuthCloseBtnWrap,
     AuthContainer,
     AuthForm,
     ImageWrapper,
     LinkToWrapper,
-    SignInWrapper
+    SignInWrapper,
+    WelcomeWrapper
 } from '../style'
-import {DWEDSvg} from '../../../Icons/DWED'
+import {LogoSvg} from '../../../Icons/Logo'
+import {Title} from '../../../UIComponents/Typography/Title'
 
 export default () => {
     const {t} = useTranslation()
@@ -32,7 +33,11 @@ export default () => {
                     <CloseSvg/>
                 </AuthCloseBtnWrap>
                 <ImageWrapper>
-                    <DWEDSvg/>
+                    <LogoSvg/>
+                    <WelcomeWrapper>
+                        <Title>{t('welcome')}</Title>
+                        <Text>{t('enter_phone_number')}</Text>
+                    </WelcomeWrapper>
                 </ImageWrapper>
                 <AuthForm onSubmit={formik.handleSubmit}>
                     <Row gutter={[0, 24]} style={{marginBottom: 0}}>
@@ -70,11 +75,6 @@ export default () => {
                                 {t('enter')}
                             </Button>
                         </Col>
-                        <Col span={24}>
-                            <AuthAction justifyContent='center'>
-                                <Text>{t('forgot_your_password?')}</Text>
-                            </AuthAction>
-                        </Col>
                     </Row>
                 </AuthForm>
                 <LinkToWrapper marginTop='24px'>
@@ -82,7 +82,7 @@ export default () => {
                         size={12}
                         color='var(--default-white)'
                     >
-                        {t('i_have_no_account')}
+                        {`${t('i_have_no_account')} `}
                         <Link to={'/sign-up'}>
                             {t('sign_up')}
                         </Link>

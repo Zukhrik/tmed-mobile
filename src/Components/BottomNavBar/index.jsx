@@ -9,6 +9,7 @@ import {IconBox} from '../../UIComponents/GlobalStyles'
 import {$accountModel} from '../../Models/account-model'
 import {bottomNavbarWithoutToken, bottomNavbarWithToken} from '../../data'
 import {BottomNavbarCounter, BottomNavbarItem, BottomNavWrapper, NavLinkItem, NavLinkWrapper} from './style'
+
 let prevScrollpos = window.pageYOffset
 
 export const BottomNavBar = () => {

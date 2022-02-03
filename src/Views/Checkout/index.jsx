@@ -44,7 +44,7 @@ export const Checkout = () => {
     
     return (
         <RootContent
-            paddingTop={$device && $device === INFO_MAT ? '100px' : '70px'}
+            paddingTop={$device && $device === INFO_MAT ? 100 : 70}
             height='100vh'
         >
             <CheckoutPageWireframe

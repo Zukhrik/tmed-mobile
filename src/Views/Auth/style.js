@@ -32,12 +32,13 @@ export const AuthContainer = styled.div`
 
 export const AuthCloseBtnWrap = styled(Link)`
   position: absolute;
+  top: 12px;
+  right: 12px;
   color: var(--default-white);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  width: 100%;
 
   svg {
     width: 24px;
@@ -63,13 +64,13 @@ export const ImageWrapper = styled.div`
   align-items: center;
 
   ${StyledTitle} {
-    color: var(--default-white);
+    color: var(--dark-dwed);
     margin: 20px 0 50px 0;
     font-size: 18px;
     font-weight: 500;
 
     @media (min-width: 576px) {
-      color: var(--dark-dwed);
+      color: var(--default-white);
     }
   }
 
@@ -82,13 +83,27 @@ export const ImageWrapper = styled.div`
   }
 
   svg {
-    width: 129px;
+    width: 225px;
     height: 48px;
 
     @media (min-width: 1024px) {
       width: 180px;
       height: 70px;
     }
+  }
+`
+
+export const WelcomeWrapper = styled.div`
+  ${StyledTitle} {
+    font-family: var(--bold-text);
+    font-size: 28px;
+    margin: 24px 0 8px 0;
+  }
+
+  ${StyledText} {
+    color: var(--grey-dwed);
+    font-size: 14px;
+    text-align: center;
   }
 `
 
@@ -190,9 +205,9 @@ export const ConfirmButtonsWrapper = styled.div`
 
 export const AuthAction = styled.div`
   display: flex;
-  justify-content: ${({justifyContent}) =>
-          justifyContent ? justifyContent : 'unset'};
+  justify-content: ${({justifyContent}) => justifyContent ? justifyContent : 'unset'};
   padding: 0 12px;
+  align-items: end;
 
   input {
     margin-right: 15px;
@@ -205,6 +220,7 @@ export const AuthAction = styled.div`
 
   .ant-checkbox-wrapper {
     font-size: 12px;
+    align-items: revert;
   }
 
   ${StyledText} {

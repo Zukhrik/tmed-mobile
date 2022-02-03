@@ -119,15 +119,15 @@ export const RegisterForm = () => {
                         />
                     </Col>
                     <Col span={24}>
-                        <AuthAction alignType='flex-end'>
+                        <AuthAction alignType='flex-end' justifyContent='flex-start'>
+                            <Checkbox
+                                checked={formik.values.checkbox}
+                                onChange={(e) => formik.setFieldValue('checkbox', e.target.checked)}
+                            >
+                                
+                                {t('i_accept_custom')}
+                            </Checkbox>
                             <Text>
-                                <Checkbox
-                                    checked={formik.values.checkbox}
-                                    onChange={(e) => formik.setFieldValue('checkbox', e.target.checked)}
-                                >
-                                    
-                                    {t('i_accept_custom')}
-                                </Checkbox>
                                 <Link
                                     to='/'
                                 >
@@ -151,7 +151,7 @@ export const RegisterForm = () => {
             </AuthForm>
             <LinkToWrapper>
                 <Text>
-                    {t('already_have_an_account? ')}
+                    {`${t('already_have_an_account? ')} `}
                     <Link to={'/sign-in'}>
                         {t('enter')}
                     </Link>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Carousel from 'react-multi-carousel'
-import {ImageCountView, SliderWrapper} from '../style'
+import {SliderWrapper} from '../style'
 import {ImageLazyLoad} from '../../../UIComponents/ImageLazyLoad'
 
 const responsive = {
@@ -22,12 +22,6 @@ export const OfferingGallery = ({data}) => {
     
     return (
         <SliderWrapper>
-            {
-                data && data.length > 1 &&
-                <ImageCountView>
-                    {`1/${data.length}`}
-                </ImageCountView>
-            }
             <Carousel
                 arrows={false}
                 responsive={responsive}
