@@ -135,31 +135,6 @@ export const UserPageHeader = (
                             </Row>
                     }
                 </Col>
-                {
-                    !!token && !!currentProfile && currentProfile.slug_name !== username && (
-                        <Col
-                            span={24}
-                            className='subs-button-wrapper'
-                            onClick={() => subscription.toggle()}
-                        >
-                            {
-                                forceLoading === 2
-                                    ? <Button
-                                        variant={
-                                            subscription.text === t('subscribe')
-                                                ? 'primary'
-                                                : 'outlined'
-                                        }
-                                    >
-                                        {t(subscription.text)}
-                                    </Button>
-                                    : <div style={{height: 30, display: 'flex', alignItems: 'center'}}>
-                                        <SkeletonUI variant='rect' height={12} width='100%'/>
-                                    </div>
-                            }
-                        </Col>
-                    )
-                }
             </Row>
         </AccountInfoWrap>
     )
