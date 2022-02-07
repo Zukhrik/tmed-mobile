@@ -8,7 +8,7 @@ export const OrgsSearchInput = () => {
     const [orgSearch, setOrgSearch] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (orgSearch.length > 1) {
+        if (orgSearch.length > 0) {
             const data = {
                 clear: true,
                 params: {

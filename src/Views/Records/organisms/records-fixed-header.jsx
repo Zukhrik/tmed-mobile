@@ -13,11 +13,11 @@ export const RecordsFixedHeader = ({goBack}) => {
     return (
         <RecordsFixedHeaderComponentWrapper>
             <Row>
-                <Col span={24} className='header' onClick={goBack}>
-                    <IconBox>
+                <Col span={24} className='header'>
+                    <IconBox onClick={goBack}>
                         <ArrowLeftSvg/>
                     </IconBox>
-                    <Title>{t('records')}</Title>
+                    <Title onClick={goBack}>{t('records')}</Title>
                 </Col>
                 <Col span={24} className='scroll-width-wrapper'>
                     {
