@@ -57,7 +57,7 @@ export const AuthCloseBtnWrap = styled(Link)`
 
 export const ImageWrapper = styled.div`
   color: var(--primary-dwed);
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   display: flex;
   justify-content: center;
   flex-direction: column;

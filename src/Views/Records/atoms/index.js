@@ -44,7 +44,7 @@ export const RecordsNavLink = styled(NavLink)`
   margin-right: 24px;
   white-space: nowrap;
   border-bottom: 0.5px solid transparent;
-  
+
   &.active {
     color: var(--primary-dwed);
     border-bottom: 0.5px solid var(--primary-dwed);
@@ -403,5 +403,31 @@ export const ManageCountInput = styled.input`
 
   &:focus {
     outline-color: var(--primary-dwed);
+  }
+`
+
+export const EmptyCartWrapper = styled.div`
+  height: 80vh;
+  display: flex;
+  align-items: center;
+
+  .centered {
+    display: flex;
+    justify-content: center;
+  }
+
+  .centered-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    ${StyledTitle} {
+      font-size: 18px;
+    }
+
+    ${StyledText} {
+      color: var(--grey-dwed);
+    }
   }
 `

@@ -7,13 +7,15 @@ import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {UserFixedHeaderComponent} from '../organisms/user-fixed-header-component'
 import {Col, Row} from 'antd'
-import {ShortCard, ShortCardSkeleton} from '../../../Components/Cards'
 import Cookies from 'js-cookie'
 import {getCurrentAccount} from '../../../Models/account-model'
 import {tokenMount} from '../../../Models/app'
 import {resetOrderCartList, resetOrgOrderCart} from '../../../Models/order-model'
-import {Title} from '../../../UIComponents/Typography/Title'
+import {AccountHeader, AccountInfoSkeleton} from '../molecules'
+import {Text} from '../../../UIComponents/Typography/Text'
+import {ArrowRightSvg} from '../../../Icons/Arrow'
 import {useTranslation} from 'react-i18next'
+import {AccountBlockItems} from '../atoms'
 
 
 export const Account = () => {
@@ -41,34 +43,58 @@ export const Account = () => {
     }
     
     return (
-        <RootContent height='100vh' paddingTop={62}>
+        <RootContent height='100vh' paddingTop={50}>
             <FixedHeader
                 component={<UserFixedHeaderComponent
                     logoClick={() => handleClick('logo')}
                     logoutClick={() => handleClick('logout')}
                 />}
             />
-            <Row className='container' gutter={[0, 12]}>
+            <Row gutter={[0, 16]}>
                 {
                     forceLoading === 2 && userInfo
                         ? (
                             <Col span={24}>
-                                <ShortCard
-                                    imgSize={48}
+                                <AccountHeader
                                     imgUrl={userInfo.avatar}
                                     name={`${userInfo.name} ${userInfo.lastname}`}
-                                    text={userInfo.main_cat.name}
+                                    category={userInfo.main_cat.name}
                                 />
                             </Col>
                         )
                         : (
                             <Col span={24}>
-                                <ShortCardSkeleton size={48}/>
+                                <AccountInfoSkeleton/>
                             </Col>
                         )
                 }
-                <Col span={24}>
-                    <Title>{t('records')}</Title>
+                <Col span={24} onClick={() => push(`/@${username}/about_me`)}>
+                    <AccountBlockItems>
+                        <Row wrap={false} justify='space-between' align='middle'>
+                            <Col>
+                                <Text level={4}>{t('about_me')}</Text>
+                                <Text level={5} className='item-description'>
+                                    {t(('passport_number_birth_living_place'))}
+                                </Text>
+                            </Col>
+                            <Col className='icon'>
+                                <ArrowRightSvg/>
+                            </Col>
+                        </Row>
+                    </AccountBlockItems>
+                </Col>
+                <Col span={24} onClick={() => push(`/@${username}/records`)}>
+                    <AccountBlockItems>
+                        <Row wrap={false} justify='space-between' align='middle'>
+                            <Col>
+                                <Text level={4}>{t('records')}</Text>
+                                <Text level={5} className='item-description'>records count</Text>
+                            </Col>
+                            <Col className='icon'>
+                                <ArrowRightSvg/>
+                            </Col>
+                        </Row>
+                    </AccountBlockItems>
                 </Col>
             </Row>
         </RootContent>

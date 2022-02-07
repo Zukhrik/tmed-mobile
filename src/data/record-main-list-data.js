@@ -1,19 +1,9 @@
 export const recordMainListData = [
     {
-        id: 'unregistered',
-        count: 30
-    },
-    {
         id: 'approved',
         bgColor: 'var(--professional-color)',
         color: '#fff',
         count: 50
-    },
-    {
-        id: 'finished',
-        bgColor: 'var(--danger-dwed)',
-        color: '#fff',
-        count: 999
     },
     {
         id: 'awaiting',
@@ -24,5 +14,15 @@ export const recordMainListData = [
         bgColor: 'var(--danger-dwed)',
         color: '#fff',
         count: 999
+    },
+    {
+        id: 'finished',
+        bgColor: 'var(--danger-dwed)',
+        color: '#fff',
+        count: 999
+    },
+    {
+        id: 'unregistered',
+        count: 30
     }
 ]

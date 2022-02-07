@@ -13,7 +13,7 @@ export function useScrollLeft() {
     const {$offeringGroupList: {loading, result}} = useStore($offeringsModel)
     
     const handleScroll = useCallback((e) => {
-        if (e.target.scrollLeft + e.target.offsetWidth === e.target.scrollWidth && !loading && !!result.next) {
+        if (e.target.scrollLeft + e.target.offsetWidth >= e.target.scrollWidth && !loading && !!result.next) {
             const data = {
                 organization: organization,
                 params: {

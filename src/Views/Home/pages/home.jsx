@@ -18,17 +18,13 @@ export const Home = () => {
     const {loadMore} = useHomeList()
     const {$allOrgList: {data, result, loading, forceLoading}} = useStore($orgModel)
     
-    const handleSearchClick = () => {
-        console.log('search icon clicked')
-    }
-    
     const handleOrgItemClick = (item) => {
         push(`/${item.slug_name}/offerings`)
     }
     
     return (
         <RootContent paddingTop={62}>
-            <FixedHeader component={<HomeFixedHeaderComponent searchClick={handleSearchClick}/>}/>
+            <FixedHeader component={<HomeFixedHeaderComponent/>}/>
             <InfiniteScroll
                 next={loadMore}
                 hasMore={!loading && !!result.next}

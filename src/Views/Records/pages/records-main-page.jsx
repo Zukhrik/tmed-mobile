@@ -25,11 +25,11 @@ export const RecordsMainPage = () => {
             />
             <Container>
                 <Switch>
-                    <PrivateRoute path='/records/unregistered' component={Unregistered}/>
                     <PrivateRoute path='/records/approved' component={Approved}/>
                     <PrivateRoute path='/records/awaiting' component={Awaiting}/>
                     <PrivateRoute path='/records/canceled' component={Canceled}/>
                     <PrivateRoute path='/records/finished' component={Finished}/>
+                    <PrivateRoute path='/records/unregistered' component={Unregistered}/>
                 </Switch>
             </Container>
         </RootContent>

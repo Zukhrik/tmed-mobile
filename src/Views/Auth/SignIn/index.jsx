@@ -37,7 +37,7 @@ export default () => {
                     <LogoSvg/>
                     <WelcomeWrapper>
                         <Title>{t('welcome')}</Title>
-                        <Text>{t('enter_phone_number')}</Text>
+                        {/*<Text>{t('enter_phone_number')}</Text>*/}
                     </WelcomeWrapper>
                 </ImageWrapper>
                 <AuthForm onSubmit={formik.handleSubmit}>

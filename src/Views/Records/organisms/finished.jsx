@@ -8,6 +8,7 @@ import {saveURLMount} from '../../../Models/app'
 import {Col, Row} from 'antd'
 import {QRCodeCartCard} from '../../../Components/Cards/QRCodeCartCard'
 import {QRCodeCartCardSkeleton} from '../../../Components/Cards'
+import {EmptyOrderContainer} from './empty-order-container'
 
 const skeleton = generateSkeleton(5)
 export const Finished = () => {
@@ -26,25 +27,34 @@ export const Finished = () => {
                 forceLoading === 2
                     ? <>
                         {
-                            data && data.map((item, idx) => (
-                                <Col
-                                    span={24}
-                                    key={`${idx + 1}`}
-                                >
-                                    <QRCodeCartCard
-                                        src={item.responsible.org.logo}
-                                        time={item.date}
-                                        cost={item.total_cost}
-                                        url={() => handlePush(item)}
-                                        count={result && result.count}
-                                        title={item.responsible.org.name}
-                                        text={item.responsible.org.category.name}
-                                        specialistImg={item.responsible.user.avatar}
-                                        specialistName={item.responsible.user.full_name}
-                                        specialistCat={item.responsible.user.main_cat.name}
-                                    />
-                                </Col>
-                            ))
+                            data && data.length > 0
+                                ? (
+                                    <>
+                                        {
+                                            data.map((item, idx) => (
+                                                <Col
+                                                    span={24}
+                                                    key={`${idx + 1}`}
+                                                >
+                                                    <QRCodeCartCard
+                                                        src={item.responsible.org.logo}
+                                                        time={item.date}
+                                                        cost={item.total_cost}
+                                                        url={() => handlePush(item)}
+                                                        count={result && result.count}
+                                                        title={item.responsible.org.name}
+                                                        text={item.responsible.org.category.name}
+                                                        specialistImg={item.responsible.user.avatar}
+                                                        specialistName={item.responsible.user.full_name}
+                                                        specialistCat={item.responsible.user.main_cat.name}
+                                                    />
+                                                </Col>
+                                            ))
+                                        }
+                                    </>
+                                ) : (
+                                    <EmptyOrderContainer/>
+                                )
                         }
                     </>
                     : <>

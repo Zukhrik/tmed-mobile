@@ -1,72 +1,7 @@
 import styled from 'styled-components'
-import {CardWrapInfo} from '../../../Components/Cards/ShortCard/style'
-import {StyledText, StyledTitle} from '../../../UIComponents/Typography/style'
 import {InputIcon, StyledInput} from '../../../UIComponents/Inputs/style'
+import {StyledText} from '../../../UIComponents/Typography/style'
 
-export const AccountSettingsWrapper = styled.div`
-  .linked-users-title {
-    color: var(--grey-dwed);
-    font-family: var(--regular-text);
-    font-size: 12px;
-    text-align: left;
-  }
-
-  .add-account-wrapper {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    font-family: var(--medium-text);
-
-    svg {
-      color: var(--grey-dwed);
-      margin-right: 12px;
-    }
-  }
-
-  .logout {
-    color: var(--danger-dwed);
-  }
-
-  ${CardWrapInfo} {
-    ${StyledText} {
-      font-size: 12px;
-    }
-  }
-`
-
-export const AccountFallsFixedHeaderWrapper = styled.div`
-  .padding-x {
-    padding: 12px 0;
-  }
-
-  .links {
-    color: var(--grey-dwed);
-    font-family: var(--regular-text);
-    font-size: 16px;
-    padding: 12px 0;
-    text-align: center;
-
-    &.active {
-      color: var(--primary-dwed);
-      border-bottom: 1px solid var(--primary-dwed);
-    }
-  }
-`
-
-export const FollsListWrapper = styled.div`
-  padding: 0 12px;
-
-  ${CardWrapInfo} {
-    ${StyledTitle} {
-      font-size: 14px;
-      font-family: var(--regular-text);
-    }
-
-    ${StyledText} {
-      font-size: 12px;
-    }
-  }
-`
 
 export const SearchInputWrapper = styled.form`
 
@@ -80,5 +15,53 @@ export const SearchInputWrapper = styled.form`
       width: 14px;
       height: 14px;
     }
+  }
+`
+
+export const AccountInfoWrapper = styled.div`
+  box-shadow: 0 4px 24px rgba(38, 38, 38, 0.04);
+  padding: 12px;
+
+  .avatar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-account {
+    text-align: center;
+
+    ${StyledText} {
+      color: var(--grey-dwed);
+    }
+  }
+`
+
+export const AccountBlockItems = styled.div`
+  box-shadow: 0 4px 24px rgba(38, 38, 38, 0.04);
+  padding: 12px;
+
+  .item-description {
+    color: var(--grey-dwed);
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+`
+
+export const AboutMeItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 12px 12px 0 12px;
+  
+  .item-name {
+    color: var(--grey-dwed);
   }
 `
