@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {EmptyContainerWrapper, RootContent} from '../../../UIComponents/GlobalStyles'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {HomeFixedHeaderComponent} from '../organisms'
@@ -13,12 +13,14 @@ import {OrganizationCard, OrganizationCardSkeleton} from '../../../Components/Ca
 import {NoSearchResultSvg} from '../../../Icons/NoSearchResult'
 import {Title} from '../../../UIComponents/Typography/Title'
 import {useTranslation} from 'react-i18next'
+import {OrgsSearchInput} from '../molecules'
 
 const skeleton = generateSkeleton(10)
 export const Home = () => {
     const {push} = useHistory()
     const {t} = useTranslation()
     const {loadMore} = useHomeList()
+    const [modal, setModal] = useState(false)
     const {$allOrgList: {data, result, loading, forceLoading}} = useStore($orgModel)
     
     const handleOrgItemClick = (item) => {
@@ -27,7 +29,12 @@ export const Home = () => {
     
     return (
         <RootContent paddingTop={62}>
-            <FixedHeader component={<HomeFixedHeaderComponent/>}/>
+            <OrgsSearchInput
+                visible={modal}
+                onCancel={() => setModal(false)}
+                setModal={setModal}
+            />
+            <FixedHeader component={<HomeFixedHeaderComponent setModal={setModal}/>}/>
             <InfiniteScroll
                 next={loadMore}
                 hasMore={!loading && !!result.next}

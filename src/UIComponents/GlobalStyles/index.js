@@ -24,7 +24,7 @@ export const RootContent = styled.div`
   background-color: ${({background}) => background ? background : 'var(--default-white)'};
   padding-top: ${({paddingTop}) => paddingTop ? `${paddingTop}px` : 'unset'};
   padding-bottom: ${({paddingBottom}) => paddingBottom ? `${paddingBottom}px` : 'unset'};
-  
+
   .container {
     position: relative;
     width: 100%;
@@ -99,6 +99,7 @@ export const FastAuthModal = styled(Modal)`
     display: none;
   }
 
+
   .ant-modal-close-x {
     font-size: 20px;
     color: var(--dark-dwed);
@@ -115,6 +116,28 @@ export const FastAuthModal = styled(Modal)`
       top: 12px;
       right: 12px;
     }
+  }
+`
+
+export const AllScreenModal = styled(Modal)`
+  max-width: 100vw;
+  margin: 0 !important;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  top: 0;
+  bottom: 0;
+
+  .ant-modal-body {
+    padding: 0;
+  }
+
+  .ant-modal-footer {
+    display: none;
+  }
+
+  .ant-modal-close {
+    display: none;
   }
 `
 
