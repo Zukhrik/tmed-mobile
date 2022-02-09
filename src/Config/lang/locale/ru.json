@@ -349,13 +349,15 @@
     "order_records": "Записи заказов",
     "add_account": "Добавить аккаунт",
     "viewers": "Зрители",
-    "offer": "Предложения",
     "about_me": "Мои данные",
     "passport_number_birth_living_place": "Номер паспорта, дата рождение, место жительство",
     "full_name": "ФИО",
     "birth_date": "Дата рождения",
     "no_orders": "Заказов нет",
     "order_something_wake_up_me": "Нажмите, чтобы записаться на прием",
-    "start_ordering": "Начать заказ"
+    "start_ordering": "Начать заказ",
+    "offer": "Предложения",
+    "your_time": "Ваше время",
+    "soon": "Скоро"
   }
 }

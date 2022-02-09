@@ -83,12 +83,14 @@ export const Account = () => {
                         </Row>
                     </AccountBlockItems>
                 </Col>
-                <Col span={24} onClick={() => push(`/@${username}/records`)}>
+                <Col span={24}
+                     // onClick={() => push(`/@${username}/records`)}
+                >
                     <AccountBlockItems>
                         <Row wrap={false} justify='space-between' align='middle'>
                             <Col>
                                 <Text level={4}>{t('records')}</Text>
-                                <Text level={5} className='item-description'>records count</Text>
+                                <Text level={5} className='item-description'>{t('soon')}</Text>
                             </Col>
                             <Col className='icon'>
                                 <ArrowRightSvg/>

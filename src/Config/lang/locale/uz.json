@@ -356,6 +356,8 @@
     "birth_date": "Tug'ilgan sanasi",
     "no_orders": "Buyurtmalar yo'q",
     "order_something_wake_up_me": "Buyurtma yaratish uchun tugmani bosing",
-    "start_ordering": "Buyurtmani boshlash"
+    "start_ordering": "Buyurtmani boshlash",
+    "your_time": "Vaqtingiz",
+    "soon": "Yaqinda"
   }
 }

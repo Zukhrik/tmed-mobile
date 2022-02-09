@@ -57,8 +57,8 @@ export const MobileView = () => {
                             forceLoading === 2 && data?.[order_id]
                                 ? <>
                                     <Image
-                                        width={210}
-                                        height={210}
+                                        width={150}
+                                        height={150}
                                         preview={data?.[order_id]?.status !== 0 ? {mask: ''} : false}
                                         src={
                                             data?.[order_id]?.status !== 0 && data?.[order_id]?.qr_code
@@ -67,8 +67,16 @@ export const MobileView = () => {
                                         }
                                     />
                                 </>
-                                : <SkeletonUI animation='wave' variant='rect' width={210} height={210}/>
+                                : <SkeletonUI animation='wave' variant='rect' width={150} height={150}/>
                         }
+                    </Col>
+                    <Col span={24} className='meet-time-mobile'>
+                        <Title alignType='center'>
+                            {data?.[order_id] && moment(data?.[order_id]?.meet_date).format('HH:mm')}
+                        </Title>
+                        <Text level={4} alignType='center'>
+                            {t('your_time')}
+                        </Text>
                     </Col>
                     <Col className='display-style'>
                         <Text
@@ -109,11 +117,9 @@ export const MobileView = () => {
                         </Title>
                     </Col>
                     <Col className='display-style'>
-                        <Text className='static-width' color='var(--grey-dwed)'>{`${t('meeting_time')}: `}</Text>
+                        <Text className='static-width' color='var(--grey-dwed)'>{`${t('date')}: `}</Text>
                         <Title>
-                            {data &&
-                                moment(data?.[order_id]?.meet_date).format('YYYY-MM-DD HH:mm')
-                            }
+                            {data && moment(data?.[order_id]?.meet_date).format('YYYY-MM-DD')}
                         </Title>
                     </Col>
                     <Col className='display-style'>

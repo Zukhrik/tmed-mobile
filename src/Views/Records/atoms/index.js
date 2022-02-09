@@ -100,40 +100,40 @@ export const DetailImageWrapper = styled.div`
   width: ${({width}) => width ? width : '260px'};
   margin: 0 auto;
   padding: ${({padding}) => padding ? padding : '0'};
-
+  
   .check-form-wrapper {
     display: flex;
     flex-direction: column;
     padding-top: 48px;
     padding-bottom: 20px;
   }
-
+  
   .qr-code-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 8px;
+    align-items: center;
   }
-
+  
   .padding-bottom {
     padding-bottom: 4px;
   }
-
+  
   .display-style {
     display: flex;
     justify-content: space-between;
   }
-
+  
   .static-width {
     width: 115px;
   }
-
-  ${StyledText} {
-    font-size: 14px;
-    display: flex;
-  }
-
-  ${StyledTitle} {
-    font-size: 14px;
+  
+  .meet-time-mobile {
+    ${StyledTitle} {
+      height: 72px;
+      line-height: 72px;
+      font-size: 72px;
+      font-family: var(--medium-text);
+    }
   }
 `
 
