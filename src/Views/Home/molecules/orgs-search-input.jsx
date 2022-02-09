@@ -1,31 +1,17 @@
 import {Col, Row} from 'antd'
-import React, {useCallback, useState} from 'react'
+import React from 'react'
 import {useTranslation} from 'react-i18next'
 import {OrgSearchInputWrapper} from '../atoms'
 import {ArrowLeftSvg} from '../../../Icons/Arrow'
 import {CloseMiniSvg} from '../../../Icons/Close'
-import {AllScreenModal} from '../../../UIComponents/GlobalStyles'
-import {$orgModel, allOrgMount} from '../../../Models/org-model'
+import {AllScreenModal, EmptyContainerWrapper} from '../../../UIComponents/GlobalStyles'
 import {ShortCard} from '../../../Components/Cards'
-import {useStore} from 'effector-react'
+import {NoSearchResultSvg} from '../../../Icons/NoSearchResult'
+import {Title} from '../../../UIComponents/Typography/Title'
 
-export const OrgsSearchInput = ({onCancel, visible, setModal}) => {
+export const OrgsSearchInput = ({onCancel, visible, setModal, handleSubmit, orgSearch, setOrgSearch, orgList}) => {
     const {t} = useTranslation()
-    const {$allOrgList: {data}} = useStore($orgModel)
-    const [orgSearch, setOrgSearch] = useState('')
     
-    const handleSubmit = useCallback((e) => {
-        e.preventDefault()
-        if (orgSearch.length > 0) {
-            const data = {
-                clear: true,
-                params: {
-                    search: orgSearch
-                }
-            }
-            allOrgMount(data)
-        }
-    }, [orgSearch])
     
     return (
         <AllScreenModal
@@ -44,7 +30,7 @@ export const OrgsSearchInput = ({onCancel, visible, setModal}) => {
                     justify='space-between'
                     className='fixed-header'
                 >
-                    <Col className='icon' onClick={() => setModal(false)}>
+                    <Col className='icon' onClick={onCancel}>
                         <ArrowLeftSvg/>
                     </Col>
                     <Col flex={1}>
@@ -58,19 +44,31 @@ export const OrgsSearchInput = ({onCancel, visible, setModal}) => {
                         <CloseMiniSvg/>
                     </Col>
                 </Row>
-                <Row gutter={[0, 12]} style={{paddingTop: 62}}>
-                    {
-                        data && data.map((item, idx) => (
-                            <Col span={24} key={`${idx + 1}`}>
-                                <ShortCard
-                                    imgSize={50}
-                                    imgUrl={item.logo}
-                                    name={item.name}
-                                />
-                            </Col>
-                        ))
-                    }
-                </Row>
+                {
+                    orgList && orgList.length > 0
+                        ? (
+                            <Row gutter={[0, 12]} className='org-list'>
+                                {
+                                    orgList.map((item, idx) => (
+                                        <Col span={24} key={`${idx + 1}`}>
+                                            <ShortCard
+                                                containerPath={`/${item.slug_name}/offerings`}
+                                                imgSize={50}
+                                                imgUrl={item.logo}
+                                                name={item.name}
+                                                text={item.category.name}
+                                            />
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        ) : (
+                            <EmptyContainerWrapper>
+                                <NoSearchResultSvg/>
+                                <Title level={4}>{t('no_search_result')}</Title>
+                            </EmptyContainerWrapper>
+                        )
+                }
             </OrgSearchInputWrapper>
         </AllScreenModal>
     )

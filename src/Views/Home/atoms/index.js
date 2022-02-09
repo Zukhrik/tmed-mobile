@@ -20,6 +20,10 @@ export const OrgSearchInputWrapper = styled.form`
   position: relative;
   z-index: 10;
 
+  .org-list {
+    padding: 62px 12px 65px 12px;
+  }
+
   .icon {
     display: flex;
     justify-content: center;

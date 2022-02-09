@@ -31,7 +31,7 @@ export const Unregistered = () => {
     }, [pathname, saveURL])
     
     return (
-        <Row gutter={[0, 12]}>
+        <Row gutter={[0, 12]} style={{paddingBottom: 65}}>
             {
                 forceLoading === 2
                     ? (

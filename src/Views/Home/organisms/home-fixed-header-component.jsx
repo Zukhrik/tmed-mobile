@@ -11,7 +11,9 @@ export const HomeFixedHeaderComponent = ({setModal}) => {
                 <Col>
                     <LogoSvg/>
                 </Col>
-                <Col className='search-icon-wrapper' onClick={() => setModal(true)}>
+                <Col className='search-icon-wrapper'
+                     onClick={() => setModal(true)}
+                >
                     <SearchSvg/>
                 </Col>
             </Row>

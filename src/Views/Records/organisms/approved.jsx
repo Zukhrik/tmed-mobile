@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {generateSkeleton} from '../../../utils/skeleton-utils'
 import {useOrderList} from '../../../Hooks/org'
 import {useHistory} from 'react-router-dom'
@@ -22,54 +22,53 @@ export const Approved = () => {
         saveURLMount(pathname)
     }
     
-    useEffect(() => {
-        saveURLMount('')
-    }, [])
-    
     return (
-        <Row gutter={[0, 12]}>
+        <Row gutter={[0, 12]} style={{paddingBottom: 65}}>
             {
                 forceLoading === 2
-                    ? <>
-                        {
-                            data && data.length > 0
-                                ? (
-                                    <>
-                                        {
-                                            data.map((item, idx) => (
-                                                <Col
-                                                    span={24}
-                                                    key={`${idx + 1}`}
-                                                >
-                                                    <QRCodeCartCard
-                                                        src={item.responsible.org.logo}
-                                                        time={item.date}
-                                                        cost={item.total_cost}
-                                                        url={() => handlePush(item)}
-                                                        title={item.responsible.org.name}
-                                                        text={item.responsible.org.category.name}
-                                                        specialistImg={item.responsible.user.avatar}
-                                                        specialistName={item.responsible.user.full_name}
-                                                        specialistCat={item.responsible.user.main_cat.name}
-                                                    />
-                                                </Col>
-                                            ))
-                                        }
-                                    </>
-                                ) : (
-                                    <EmptyOrderContainer/>
-                                )
-                        }
-                    </>
-                    : <>
-                        {
-                            skeleton.map((item, idx) => (
-                                <Col span={24} key={`${idx + 1}`}>
-                                    <QRCodeCartCardSkeleton/>
-                                </Col>
-                            ))
-                        }
-                    </>
+                    ? (
+                        <>
+                            {
+                                data && data.length > 0
+                                    ? (
+                                        <>
+                                            {
+                                                data.map((item, idx) => (
+                                                    <Col
+                                                        span={24}
+                                                        key={`${idx + 1}`}
+                                                    >
+                                                        <QRCodeCartCard
+                                                            src={item.responsible.org.logo}
+                                                            time={item.date}
+                                                            cost={item.total_cost}
+                                                            url={() => handlePush(item)}
+                                                            title={item.responsible.org.name}
+                                                            text={item.responsible.org.category.name}
+                                                            specialistImg={item.responsible.user.avatar}
+                                                            specialistName={item.responsible.user.full_name}
+                                                            specialistCat={item.responsible.user.main_cat.name}
+                                                        />
+                                                    </Col>
+                                                ))
+                                            }
+                                        </>
+                                    ) : (
+                                        <EmptyOrderContainer/>
+                                    )
+                            }
+                        </>
+                    ) : (
+                        <>
+                            {
+                                skeleton.map((item, idx) => (
+                                    <Col span={24} key={`${idx + 1}`}>
+                                        <QRCodeCartCardSkeleton/>
+                                    </Col>
+                                ))
+                            }
+                        </>
+                    )
             }
         </Row>
     )
