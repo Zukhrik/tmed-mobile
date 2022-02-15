@@ -4,6 +4,7 @@ export const OverlayContentWrapper = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-height: 400px;
   padding: 30px 12px;
   text-align: center;
   border-radius: 25px 25px 0 0;

@@ -16,15 +16,20 @@ import {INFO_MAT} from '../../../../Constants/app'
 import {$orgModel} from '../../../../Models/org-model'
 import {FormControl, FormControlLabel, FormLabel, RadioGroup} from '@material-ui/core'
 import {PAYMENT_METHOD} from '../../../../Constants/payment'
+import {AllScreenModal} from '../../../../Components/Modal'
+import {CouponList} from './CouponList'
 
-export const CheckoutDetail = ({payment, setPayment}) => {
+export const CheckoutDetail = ({payment, setPayment, setCouponId}) => {
     const {t} = useTranslation()
     const {organization} = useParams()
     const {$device} = useStore($appModel)
+    const [discount, setDiscount] = useState(null)
     const [openCard, setOpenCard] = useState(false)
     const {$orgOrderCartList: {data}} = useStore($orderModel)
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const [cardWrapper, setCardWrapper] = useState(false)
+    const [couponView, setCouponView] = useState(false)
+    const [couponName, setCouponName] = useState(t('select_coupon'))
     const {$orgPaymentMethods: {data: orgPayments}} = useStore($orgModel)
     
     const onClose = () => {
@@ -76,6 +81,22 @@ export const CheckoutDetail = ({payment, setPayment}) => {
         }
     }, [t])
     
+    const generateDiscountCost = useCallback(() => {
+        let cost = data?.[organization]?.[0]?.total_cost
+        if (discount && data) {
+            return cost - cost * (discount / 100).toLocaleString('fi-Fi')
+        } else {
+            return cost.toLocaleString('fi-Fi')
+        }
+    }, [discount, data, organization])
+    
+    const handleClick = (item) => {
+        setCouponId(item.id)
+        setCouponView(false)
+        setCouponName(item.title)
+        setDiscount(item.offerings_discount)
+    }
+    
     return (
         <CheckoutDetailWrapper>
             <OverlaySettings
@@ -87,6 +108,14 @@ export const CheckoutDetail = ({payment, setPayment}) => {
                     setCardWrapper={setCardWrapper}
                     payment={payment}
                     setPayment={setPayment}
+                />}
+            />
+            <AllScreenModal
+                visible={couponView}
+                close={() => setCouponView(false)}
+                body={<CouponList
+                    goBack={() => setCouponView(false)}
+                    handleClick={handleClick}
                 />}
             />
             {
@@ -155,6 +184,54 @@ export const CheckoutDetail = ({payment, setPayment}) => {
                                     </Col>
                                 </Row>
                             </Col>
+                            <Col span={24} onClick={() => setCouponView(true)}>
+                                <Row justify='space-between'>
+                                    <Col>
+                                        <Row>
+                                            <Col span={24}>
+                                                <Text>{t('coupon_discount')}</Text>
+                                            </Col>
+                                            <Col span={24}>
+                                                <Text color='var(--grey-dwed)'>
+                                                    {couponName}
+                                                </Text>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Col className='payment-icon-wrapper'>
+                                        <ArrowIosRightSvg/>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col span={24}>
+                                <Row gutter={[12, 0]} align='middle' justify='space-between'>
+                                    <Col>
+                                        <Title color='var(--grey-dwed)'>{`${t('cost')}:`}</Title>
+                                    </Col>
+                                    <Col>
+                                        {
+                                            data?.[organization] && currentProfile &&
+                                            <Title>
+                                                {`${data?.[organization]?.[0]?.total_cost?.toLocaleString('fi-Fi')}
+                                                ${currentProfile?.currency?.code?.toUpperCase()}`}
+                                            </Title>
+                                        }
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col span={24}>
+                                <Row gutter={[12, 0]} align='middle' justify='space-between'>
+                                    <Col>
+                                        <Title color='var(--grey-dwed)'>{`${t('discount')}:`}</Title>
+                                    </Col>
+                                    <Col>
+                                        {
+                                            !!discount &&
+                                            <Title>{`${discount}%`}</Title>
+                                        }
+                                    </Col>
+                                </Row>
+                            </Col>
                             <Col span={24}>
                                 <Row gutter={[12, 0]} align='middle' justify='space-between'>
                                     <Col>
@@ -164,7 +241,7 @@ export const CheckoutDetail = ({payment, setPayment}) => {
                                         {
                                             data?.[organization] && currentProfile &&
                                             <Title>
-                                                {`${data?.[organization]?.[0]?.total_cost?.toLocaleString('fi-Fi')}
+                                                {`${generateDiscountCost()}
                                                 ${currentProfile?.currency?.code?.toUpperCase()}`}
                                             </Title>
                                         }

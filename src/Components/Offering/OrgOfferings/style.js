@@ -93,11 +93,15 @@ export const CatItemNavLink = styled(NavLink)`
 export const OfferGroupWrapper = styled.div`
   width: 100%;
   display: flex;
-  padding: 0 12px;
   overflow-x: auto;
   overflow-y: hidden;
   align-items: flex-start;
   justify-content: flex-start;
+  
+  .centered {
+    display: flex;
+    justify-content: center;
+  }
 
   &::-webkit-scrollbar {
     height: 0;
@@ -114,6 +118,10 @@ export const GroupItemNavLink = styled(NavLink)`
   img {
     overflow: hidden;
     border-radius: 4px;
+    width: 104px;
+    height: 84px;
+    object-fit: contain;
+    border: 3px solid transparent;
   }
 
   &.active {

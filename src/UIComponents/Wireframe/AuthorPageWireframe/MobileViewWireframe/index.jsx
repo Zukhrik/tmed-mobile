@@ -10,11 +10,10 @@ export const MobileViewWireframe = (
         pageHeader,
         filterPanel,
         pageContent,
-        offeringGroup,
-        orgGroupPanel,
+        offeringGroup
     }
 ) => {
-    const {$app: {showSpecPanel, changeOrgGroupPanel}} = useStore($appModel)
+    const {$app: {showSpecPanel}} = useStore($appModel)
     
     return (
         <Row gutter={[0, 20]}>
@@ -32,13 +31,6 @@ export const MobileViewWireframe = (
                 specPanel && (
                     <SlideDown closed={!showSpecPanel}>
                         {specPanel}
-                    </SlideDown>
-                )
-            }
-            {
-                orgGroupPanel && (
-                    <SlideDown closed={!changeOrgGroupPanel}>
-                        {orgGroupPanel}
                     </SlideDown>
                 )
             }

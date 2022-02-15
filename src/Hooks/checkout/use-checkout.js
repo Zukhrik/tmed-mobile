@@ -10,7 +10,7 @@ import {$orgModel} from '../../Models/org-model'
 import {useCallback, useEffect, useState} from 'react'
 import {resetOrderCartList, resetOrgOrderCart} from '../../Models/order-model'
 
-export function useCheckout() {
+export function useCheckout(couponId) {
     useOrgPayments()
     const {$orgPaymentMethods: {data}} = useStore($orgModel)
     const [comment, setComment] = useState('')
@@ -35,6 +35,7 @@ export function useCheckout() {
                 client_comment: comment && comment.trim().length > 0 ? comment : null,
                 responsible_id: spec_id,
                 payment: payment.extraId,
+                coupon_id: couponId,
                 card_id: Number(payment.extraId) === 3 ? payment.id : null
             }
             order.createOrder(data)
@@ -47,7 +48,7 @@ export function useCheckout() {
                 })
         }
         
-    }, [spec_id, comment, meetDate, payment, push])
+    }, [spec_id, comment, meetDate, payment, push, couponId])
     
     
     useEffect(() => {

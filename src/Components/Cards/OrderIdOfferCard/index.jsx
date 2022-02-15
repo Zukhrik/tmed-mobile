@@ -13,7 +13,7 @@ export const OrderIdOfferCard = ({src, title, count, cost}) => {
     
     return (
         <OrderOfferIdCardWrapper>
-            <Row wrap={false}>
+            <Row wrap={false} align='middle'>
                 <Col>
                     <ImageLazyLoad
                         src={src}

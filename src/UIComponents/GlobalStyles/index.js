@@ -82,7 +82,7 @@ export const BoxShadowBasic = styled.div`
   box-shadow: 0 2px 14px rgba(29, 161, 242, 0.15);
 `
 
-export const FastAuthModal = styled(Modal)`
+export const FastAuthModalWrapper = styled(Modal)`
   max-width: 100vw;
   margin: 0 !important;
   min-height: 100vh;

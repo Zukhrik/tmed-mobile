@@ -71,9 +71,7 @@ const $offeringsList = createStore({loading: false, data: [], result: {}, forceL
     .reset(resetOrgOfferingList)
 
 
-const $offeringGroupList = createStore(
-    {loading: false, data: [], result: {}, forceLoading: 0, error: false}
-)
+const $offeringGroupList = createStore({loading: false, data: [], result: {}, forceLoading: 0, error: false})
     .on(fetchOrgOfferGroupList.pending, (state, loading) => ({...state, loading}))
     .on(fetchOrgOfferGroupList.fail, (state, {error}) => ({
         ...state, error, data: [], result: {}, forceLoading: state.forceLoading === 2 ? state.forceLoading : 1
@@ -85,9 +83,7 @@ const $offeringGroupList = createStore(
             response: result.data, state, clear: params.clear, ...params.params
         })
         
-        return {
-            ...state, ...processed, forceLoading: 2
-        }
+        return {...state, ...processed, forceLoading: 2}
     })
     .on(fetchUserOfferGroupList.pending, (state, loading) => ({...state, loading}))
     .on(fetchUserOfferGroupList.fail, (state, {error}) => ({

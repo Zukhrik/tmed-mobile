@@ -32,6 +32,8 @@ export const MobileView = () => {
         goBack()
     }
     
+    console.log(orderIdOffersData)
+    
     return (
         <RootContent paddingTop={70} paddingBottom={60}>
             <FixedHeader
@@ -137,7 +139,7 @@ export const MobileView = () => {
                             <Col key={`${idx + 1}`}>
                                 <OrderIdOfferCard
                                     count={item.qty}
-                                    cost={item.cost}
+                                    cost={item.offering.cost}
                                     src={item.offering.image}
                                     title={item.offering.name}
                                 />

@@ -21,6 +21,8 @@ export function useOfferingList() {
     const group = urlData[URL_KEYS.OFFERING_GROUP_ID]
     const specialist = urlData[URL_KEYS.SPECIALIST_ID]
     const {$offeringsList: {result}} = useStore($offeringsModel)
+    const {$offeringGroupList: {result: offeringGroupResult}} = useStore($offeringsModel)
+
     
     const getOfferingGroupList = useCallback((params) => {
         if (organization) {
@@ -51,6 +53,7 @@ export function useOfferingList() {
                     offset: result.nextOffset
                 }
             }
+            
             if (specialist) {
                 data['params']['responsible'] = specialist
             } else {
@@ -64,6 +67,18 @@ export function useOfferingList() {
             getOrgOfferingsList(data)
         }
     }, [getOrgOfferingsList, specialist, group, result])
+    
+    const loadMoreOfferingGroup = useCallback(() => {
+        if (offeringGroupResult?.nextOffset) {
+            const data = {
+                params: {
+                    ...initialParams,
+                    offset: offeringGroupResult?.nextOffset
+                }
+            }
+            getOfferingGroupList(data)
+        }
+    }, [offeringGroupResult, getOfferingGroupList])
     
     useEffect(() => {
         let timeout = null
@@ -122,6 +137,7 @@ export function useOfferingList() {
     }, [getOrgOfferingsList, specialist, group])
     
     return {
-        loadMoreOfferings
+        loadMoreOfferings,
+        loadMoreOfferingGroup
     }
 }

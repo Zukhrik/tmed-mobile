@@ -358,6 +358,9 @@
     "order_something_wake_up_me": "Buyurtma yaratish uchun tugmani bosing",
     "start_ordering": "Buyurtmani boshlash",
     "your_time": "Vaqtingiz",
-    "soon": "Yaqinda"
+    "soon": "Yaqinda",
+    "coupon_discount": "Kupon chegirma",
+    "select_coupon": "Chegirmani tanlang",
+    "discount": "Chegirma"
   }
 }

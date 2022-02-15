@@ -358,6 +358,9 @@
     "start_ordering": "Начать заказ",
     "offer": "Предложения",
     "your_time": "Ваше время",
-    "soon": "Скоро"
+    "soon": "Скоро",
+    "coupon_discount": "Скидка на купон",
+    "select_cou[on": "Выберите купон",
+    "discount": "Скидка"
   }
 }
