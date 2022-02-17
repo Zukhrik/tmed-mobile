@@ -1,10 +1,14 @@
 import {createEvent} from 'effector'
 import {
     fetchDeleteOrderCart,
-    fetchOrgOrderCarts,
+    fetchOrder,
     fetchOrderCartList,
-    fetchUpdateOrgOrderCart,
-    fetchOrgOrderResponsible, fetchOrder, fetchOrderList, fetchOrderIdOffers
+    fetchOrderIdOffers,
+    fetchOrderList,
+    fetchOrderOffersConclusions,
+    fetchOrgOrderCarts,
+    fetchOrgOrderResponsible,
+    fetchUpdateOrgOrderCart
 } from './effects'
 
 export const getOrgOrderResponsibleMount = createEvent()
@@ -19,6 +23,7 @@ export const resetOrgOrderCart = createEvent()
 export const resetOrderDetail = createEvent()
 export const orderInfoMount = createEvent()
 export const orderListMount = createEvent()
+export const orderOffersConclusionsMount = createEvent()
 
 orderInfoMount.watch(fetchOrder)
 orderListMount.watch(fetchOrderList)
@@ -28,3 +33,4 @@ getOrderCartListMount.watch(fetchOrderCartList)
 deleteOrderCartMount.watch(fetchDeleteOrderCart)
 updateOrderCartMount.watch(fetchUpdateOrgOrderCart)
 getOrgOrderResponsibleMount.watch(fetchOrgOrderResponsible)
+orderOffersConclusionsMount.watch(fetchOrderOffersConclusions)

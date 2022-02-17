@@ -1,4 +1,5 @@
 export {useOfferingOrderInOfferPage} from './use-offering-order-in-offer-page'
+export {useOrderOfferIdConclusions} from './use-order-offer-id-conclusions'
 export {useOrgOrderResponsible} from './use-org-order-responsible'
 export {useAddSpecialistUrl} from './use-add-specialist-url'
 export {useOrgOrderDelete} from './use-org-order-delete'

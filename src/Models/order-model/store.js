@@ -6,6 +6,7 @@ import {
     fetchOrderCartList,
     fetchOrderIdOffers,
     fetchOrderList,
+    fetchOrderOffersConclusions,
     fetchOrgOrderCarts,
     fetchOrgOrderResponsible
 } from './effects'
@@ -117,18 +118,30 @@ const $orderList = createStore({data: [], loading: false, result: {}, error: fal
         }
     })
 
-const $orderIdOffers = createStore({loading: false, data: [], result: {}, error: false})
+const $orderIdOffers = createStore({loading: false, data: [], result: {}, error: false, forceLoading: 0})
     .on(fetchOrderIdOffers.pending, (state, loading) => ({...state, loading}))
     .on(fetchOrderIdOffers.fail, (state, {error}) => ({
-        ...state, error, result: {}
+        ...state, error, data: [], result: {}, forceLoading: state.forceLoading === 2 ? state.forceLoading : 1
     }))
     .on(fetchOrderIdOffers.done, (state, {result, params}) => {
         const processed = commonStoreList({
             response: result.data, state, clear: params.clear, ...params.params
         })
-        return {...state, ...processed}
+        return {...state, ...processed, forceLoading: 2}
     })
     .reset(resetOrderIdOffers)
+
+const $orderOffersConclusions = createStore({loading: false, data: [], result: {}, error: false})
+    .on(fetchOrderOffersConclusions.pending, (state, loading) => ({...state, loading}))
+    .on(fetchOrderOffersConclusions.fail, (state, {error}) => ({
+        ...state, error, data: [], result: {}
+    }))
+    .on(fetchOrderOffersConclusions.done, (state, {result, params}) => {
+        const processed = commonStoreList({
+            response: result.data, state, clear: params.clear, ...params.params
+        })
+        return {...state, ...processed}
+    })
 
 
 export const $orderModel = combine({
@@ -137,5 +150,6 @@ export const $orderModel = combine({
     $orderIdOffers,
     $orderCartList,
     $orderDetail,
-    $orderList
+    $orderList,
+    $orderOffersConclusions
 })

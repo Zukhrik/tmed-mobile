@@ -38,7 +38,7 @@ export const Finished = () => {
                                                 >
                                                     <QRCodeCartCard
                                                         src={item.responsible.org.logo}
-                                                        time={item.date}
+                                                        time={item.meet_date}
                                                         cost={item.total_cost}
                                                         url={() => handlePush(item)}
                                                         count={result && result.count}

@@ -54,7 +54,7 @@
     "contract_end_date": "Дата окончание контракта",
     "select_offering_category": "Выберите категорию предложения",
     "name_of_offer": "Название предложения",
-    "quantity": "Количество: ",
+    "quantity": "Количество",
     "cost": "Цена",
     "select_currency": "Выберите валюту",
     "select_measurement": "Выберите измерение",

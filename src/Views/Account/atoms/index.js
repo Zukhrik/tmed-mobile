@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import {InputIcon, StyledInput} from '../../../UIComponents/Inputs/style'
 import {StyledText} from '../../../UIComponents/Typography/style'
-
+import {ShortCardContainer} from '../../../Components/Cards/ShortCard/style'
 
 export const SearchInputWrapper = styled.form`
-
   ${StyledInput} {
     background: var(--basic-grey-bg);
   }
@@ -60,8 +59,31 @@ export const AboutMeItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 12px 12px 0 12px;
-  
+
   .item-name {
     color: var(--grey-dwed);
+  }
+`
+
+export const RecordsCardWrapper = styled.div`
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(38, 38, 38, 0.1);
+  padding: 12px;
+
+  .org-name {
+    font-size: 14px;
+    font-family: var(--regular-text);
+  }
+
+  .meet-time {
+    padding-bottom: 12px;
+    color: var(--grey-dwed);
+    font-size: 12px;
+    font-family: var(--regular-text);
+  }
+
+  ${ShortCardContainer} {
+    padding-top: 12px;
+    border-top: 1px solid #f2f2f2;
   }
 `

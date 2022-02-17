@@ -10,5 +10,8 @@ export default {
     updateOrgOrderCart: ({offering_id, data}) => httpPut({url: `/orders/cart/${offering_id}/`, data}),
     postOrgOrderCart: ({org_slug_name, data}) => httpPost({url: `/orders/ocart/${org_slug_name}/`, data}),
     getOrgOrderCartList: ({org_slug_name, params}) => httpGet({url: `/orders/ocart/${org_slug_name}/`, params}),
-    getOrgOrderResponsible: ({responsible_id, params}) => httpGet({url: `/orders/oorders/${responsible_id}/`, params})
+    getOrgOrderResponsible: ({responsible_id, params}) => httpGet({url: `/orders/oorders/${responsible_id}/`, params}),
+    getOrderOffersConclusions: ({order_offer_id, params}) => httpGet({
+        url: `/orders/order_offers/${order_offer_id}/conclusions/`, params
+    })
 }

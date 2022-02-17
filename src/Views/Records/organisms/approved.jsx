@@ -40,7 +40,7 @@ export const Approved = () => {
                                                     >
                                                         <QRCodeCartCard
                                                             src={item.responsible.org.logo}
-                                                            time={item.date}
+                                                            time={item.meet_date}
                                                             cost={item.total_cost}
                                                             url={() => handlePush(item)}
                                                             title={item.responsible.org.name}

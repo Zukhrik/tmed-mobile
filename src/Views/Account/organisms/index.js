@@ -1,1 +1,5 @@
 export {AccountFixedHeader} from './account-fixed-header'
+export {AccountRecords} from './account-records'
+export {UserFixedHeaderComponent} from './user-fixed-header-component'
+export {AccountRecordsDetail} from './account-records-detail'
+export {AccountRecordOfferId} from './account-record-offer-id'
