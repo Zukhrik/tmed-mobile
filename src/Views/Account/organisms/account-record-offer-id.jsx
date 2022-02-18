@@ -11,9 +11,9 @@ import {useGoBack} from '../../../Hooks/app'
 import {Avatar} from '../../../UIComponents/Avatar'
 import {Text} from '../../../UIComponents/Typography/Text'
 import {useTranslation} from 'react-i18next'
-import {ShortCard} from '../../../Components/Cards'
 import {$accountModel} from '../../../Models/account-model'
 import moment from 'moment'
+import {AccountRecordOfferIdSkeleton} from './account-record-offer-id-skeleton'
 
 export const AccountRecordOfferId = () => {
     useOrder()
@@ -23,16 +23,14 @@ export const AccountRecordOfferId = () => {
     const {order_id, offer_id, username} = useParams()
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const {
-        $orderOffersConclusions: {data: conclusion},
-        $orderDetail: {data: detail},
-        $orderIdOffers: {data: offerList}
+        $orderOffersConclusions: {data: conclusion, forceLoading: conclusionsForceLoading},
+        $orderDetail: {data: detail, forceLoading: detailForceLoading},
+        $orderIdOffers: {data: offerList, forceLoading: orderIdOffersForceLoading}
     } = useStore($orderModel)
-    const orgName = detail && detail[order_id]?.responsible?.org?.name
     const meetDate = detail && detail[order_id]?.meet_date
     const responsible = detail && detail[order_id]?.responsible?.user
     const currentOffer = offerList && offerList.find(item => item.id === Number(offer_id))
     const {goBack} = useGoBack({pathname: `/@${username}/records/${order_id}`})
-    
     
     return (
         <RootContent
@@ -40,93 +38,86 @@ export const AccountRecordOfferId = () => {
             paddingTop={62}
         >
             <FixedHeader
-                title={orgName}
+                title={currentOffer?.offering?.name}
                 goBack={goBack}
             />
-            <Row gutter={[0, 12]} className='container'>
-                {
-                    currentOffer && (
-                        <Col span={24}>
-                            <Row wrap={false} gutter={[8, 0]}>
-                                <Col>
-                                    <Avatar size={48} shape='square' imgUrl={currentOffer?.offering?.image}/>
-                                </Col>
-                                <Col flex={1}>
-                                    <Text level={5}>{currentOffer?.offering?.name}</Text>
-                                </Col>
-                            </Row>
-                        </Col>
+            {
+                orderIdOffersForceLoading && conclusionsForceLoading && detailForceLoading === 2
+                    ? (
+                        <Row gutter={[0, 12]} className='container' style={{paddingBottom: 65}}>
+                            {
+                                currentOffer && (
+                                    <Col span={24}>
+                                        <Row wrap={false} gutter={[8, 0]} align='middle'>
+                                            <Col>
+                                                <Avatar size={48} shape='square' imgUrl={currentOffer?.offering?.image}/>
+                                            </Col>
+                                            <Col flex={1}>
+                                                <Text level={5}>{currentOffer?.offering?.name}</Text>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                )
+                            }
+                            {
+                                conclusion && (
+                                    <Col
+                                        span={24}
+                                        style={{display: 'flex', flexDirection: 'column', borderBottom: '1px solid #f2f2f2'}}
+                                    >
+                                        <Text color='var(--grey-dwed)' level={4}>{`${t('conclusion')}:`}</Text>
+                                        {
+                                            conclusion.map((item, idx) => (
+                                                <Col
+                                                    span={24}
+                                                    key={`${idx + 1}`}
+                                                    dangerouslySetInnerHTML={{__html: item.conclusion}}
+                                                />
+                                            ))
+                                        }
+                                    </Col>
+                                )
+                            }
+                            <Col span={24}>
+                                <Row wrap={false} justify='space-between'>
+                                    <Col>
+                                        <Text color='var(--grey-dwed)' level={4}>{`${t('specialist')}: `}</Text>
+                                    </Col>
+                                    <Col>
+                                        <Text level={4}>{responsible?.full_name}</Text>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col span={24}>
+                                <Row wrap={false} justify='space-between'>
+                                    <Col>
+                                        <Text color='var(--grey-dwed)' level={4}>{`${t('cost')}: `}</Text>
+                                    </Col>
+                                    {
+                                        currentOffer && currentProfile && (
+                                            <Col>
+                                                <Text
+                                                    level={4}>{`${currentOffer?.cost} ${currentProfile?.currency?.code}`}</Text>
+                                            </Col>
+                                        )
+                                    }
+                                </Row>
+                            </Col>
+                            <Col span={24}>
+                                <Row wrap={false} justify='space-between'>
+                                    <Col>
+                                        <Text color='var(--grey-dwed)' level={4}>{`${t('date')}: `}</Text>
+                                    </Col>
+                                    <Col>
+                                        <Text level={4}>{meetDate && moment(meetDate).format('HH:mm DD.MM.YYYY')}</Text>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                    ) : (
+                        <AccountRecordOfferIdSkeleton/>
                     )
-                }
-                <Col span={24}>
-                    <Text>{t('specialist')}</Text>
-                </Col>
-                {
-                    responsible && (
-                        <Col span={24}>
-                            <ShortCard
-                                imgSize={40}
-                                imgUrl={responsible?.avatar}
-                                name={responsible?.full_name}
-                                text={responsible?.main_cat?.name}
-                            />
-                        </Col>
-                    )
-                }
-                <Col span={24}>
-                    <Row wrap={false} justify='space-between'>
-                        <Col>
-                            <Text>{t('quantity')}</Text>
-                        </Col>
-                        <Col>
-                            {currentOffer?.qty}
-                        </Col>
-                    </Row>
-                </Col>
-                <Col span={24}>
-                    <Row wrap={false} justify='space-between'>
-                        <Col>
-                            <Text>{t('cost')}</Text>
-                        </Col>
-                        {
-                            currentOffer && currentProfile && (
-                                <Col>
-                                    {`${currentOffer?.cost} ${currentProfile?.currency?.code}`}
-                                </Col>
-                            )
-                        }
-                    </Row>
-                </Col>
-                <Col span={24}>
-                    <Row wrap={false} justify='space-between'>
-                        <Col>
-                            <Text>{t('date')}</Text>
-                        </Col>
-                        <Col>
-                            {meetDate && moment(meetDate).format('DD.MM.YYYY HH:mm')}
-                        </Col>
-                    </Row>
-                </Col>
-                <Col span={24}>
-                    <Text>{t('description')}</Text>
-                </Col>
-                {
-                    conclusion && conclusion.length > 0
-                        ? (
-                            <>
-                                {
-                                    conclusion.map((item, idx) => (
-                                        <Col span={24} key={`${idx + 1}`}
-                                             dangerouslySetInnerHTML={{__html: item.conclusion}}/>
-                                    ))
-                                }
-                            </>
-                        ) : (
-                            <>
-                            </>
-                        )
-                }
-            </Row>
+            }
         </RootContent>
     )
 }

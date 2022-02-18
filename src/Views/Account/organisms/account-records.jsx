@@ -8,10 +8,10 @@ import {useHistory, useParams} from 'react-router-dom'
 import {$orderModel} from '../../../Models/order-model'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {RootContent} from '../../../UIComponents/GlobalStyles'
-import {QRCodeCartCard} from '../../../Components/Cards/QRCodeCartCard'
-import {EmptyOrderContainer} from '../../Records/organisms'
-import {QRCodeCartCardSkeleton} from '../../../Components/Cards'
 import {generateSkeleton} from '../../../utils/skeleton-utils'
+import {AccountRecordsCard} from '../molecules/account-records-card'
+import moment from 'moment'
+import {AccountRecordCardSkeleton} from '../molecules'
 
 const skeleton = generateSkeleton(10)
 export const AccountRecords = () => {
@@ -19,7 +19,7 @@ export const AccountRecords = () => {
     const {push} = useHistory()
     const {t} = useTranslation()
     const {username} = useParams()
-    const {$orderList: {data, forceLoading, result}} = useStore($orderModel)
+    const {$orderList: {data, forceLoading}} = useStore($orderModel)
     const {goBack} = useGoBack({pathname: `/@${username}`})
     
     const handlePush = (item) => {
@@ -35,56 +35,44 @@ export const AccountRecords = () => {
         <RootContent
             height='100vh'
             paddingTop={62}
-            paddingBottom={65}
         >
             <FixedHeader
                 goBack={goBack}
                 title={t('records')}
             />
-            <Row gutter={[0, 12]} className='container'>
+            <Row gutter={[0, 12]} className='container' style={{paddingBottom: 65}}>
                 {
-                    forceLoading === 2
-                        ? <>
-                            {
-                                data && data.length > 0
-                                    ? (
-                                        <>
-                                            {
-                                                data.map((item, idx) => (
-                                                    <Col
-                                                        span={24}
-                                                        key={`${idx + 1}`}
-                                                    >
-                                                        <QRCodeCartCard
-                                                            src={item.responsible.org.logo}
-                                                            time={item.meet_date}
-                                                            cost={item.total_cost}
-                                                            url={() => handlePush(item)}
-                                                            count={result && result.count}
-                                                            title={item.responsible.org.name}
-                                                            text={item.responsible.org.category.name}
-                                                            specialistImg={item.responsible.user.avatar}
-                                                            specialistName={item.responsible.user.full_name}
-                                                            specialistCat={item.responsible.user.main_cat.name}
-                                                        />
-                                                    </Col>
-                                                ))
-                                            }
-                                        </>
-                                    ) : (
-                                        <EmptyOrderContainer/>
-                                    )
-                            }
-                        </>
-                        : <>
-                            {
-                                skeleton.map((item, idx) => (
-                                    <Col span={24} key={`${idx + 1}`}>
-                                        <QRCodeCartCardSkeleton/>
-                                    </Col>
-                                ))
-                            }
-                        </>
+                    forceLoading === 2 && data
+                        ? (
+                            <>
+                                {
+                                    data.map((item, idx) => (
+                                        <Col
+                                            span={24}
+                                            key={`${idx + 1}`}
+                                        >
+                                            <AccountRecordsCard
+                                                meetTime={moment(item.meet_date).calendar()}
+                                                imgUrl={item.responsible.org.logo}
+                                                orgName={item.responsible.org.name}
+                                                orgCat={item.responsible.user.main_cat.name}
+                                                handlePush={() => handlePush(item)}
+                                            />
+                                        </Col>
+                                    ))
+                                }
+                            </>
+                        ) : (
+                            <>
+                                {
+                                    skeleton.map((item, idx) => (
+                                        <Col span={24} key={`${idx + 1}`}>
+                                            <AccountRecordCardSkeleton/>
+                                        </Col>
+                                    ))
+                                }
+                            </>
+                        )
                 }
             </Row>
         </RootContent>

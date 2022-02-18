@@ -131,16 +131,16 @@ const $orderIdOffers = createStore({loading: false, data: [], result: {}, error:
     })
     .reset(resetOrderIdOffers)
 
-const $orderOffersConclusions = createStore({loading: false, data: [], result: {}, error: false})
+const $orderOffersConclusions = createStore({loading: false, data: [], result: {}, error: false, forceLoading: 0})
     .on(fetchOrderOffersConclusions.pending, (state, loading) => ({...state, loading}))
     .on(fetchOrderOffersConclusions.fail, (state, {error}) => ({
-        ...state, error, data: [], result: {}
+        ...state, error, data: [], result: {}, forceLoading: state.forceLoading === 2 ? state.forceLoading : 1
     }))
     .on(fetchOrderOffersConclusions.done, (state, {result, params}) => {
         const processed = commonStoreList({
             response: result.data, state, clear: params.clear, ...params.params
         })
-        return {...state, ...processed}
+        return {...state, ...processed, forceLoading: 2}
     })
 
 

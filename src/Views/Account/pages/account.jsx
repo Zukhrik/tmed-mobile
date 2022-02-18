@@ -5,7 +5,7 @@ import {useStore} from 'effector-react'
 import {$userModel} from '../../../Models/user-model'
 import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {FixedHeader} from '../../../Components/FixedHeader'
-import {UserFixedHeaderComponent} from '../organisms/user-fixed-header-component'
+import {UserFixedHeaderComponent} from '../organisms'
 import {Col, Row} from 'antd'
 import Cookies from 'js-cookie'
 import {getCurrentAccount} from '../../../Models/account-model'
@@ -61,8 +61,7 @@ export const Account = () => {
                                     category={userInfo.main_cat.name}
                                 />
                             </Col>
-                        )
-                        : (
+                        ) : (
                             <Col span={24}>
                                 <AccountInfoSkeleton/>
                             </Col>
@@ -87,8 +86,8 @@ export const Account = () => {
                     <AccountBlockItems>
                         <Row wrap={false} justify='space-between' align='middle'>
                             <Col>
-                                <Text level={4}>{t('records')}</Text>
-                                <Text level={5} className='item-description'>{t('soon')}</Text>
+                                <Text level={4}>{t('export_opinion')}</Text>
+                                {/*<Text level={5} className='item-description'>{t('finished_records')}</Text>*/}
                             </Col>
                             <Col className='icon'>
                                 <ArrowRightSvg/>

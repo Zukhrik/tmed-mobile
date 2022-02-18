@@ -361,6 +361,8 @@
     "soon": "Скоро",
     "coupon_discount": "Скидка на купон",
     "select_cou[on": "Выберите купон",
-    "discount": "Скидка"
+    "discount": "Скидка",
+    "conclusion": "Заключения",
+    "export_opinion": "Заключение специалиста"
   }
 }
