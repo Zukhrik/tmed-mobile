@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {InputIcon, StyledInput} from '../../../UIComponents/Inputs/style'
-import {StyledText} from '../../../UIComponents/Typography/style'
+import {StyledText, StyledTitle} from '../../../UIComponents/Typography/style'
+import {ShortCardContainer} from '../../../Components/Cards/ShortCard/style'
 
 export const SearchInputWrapper = styled.form`
   ${StyledInput} {
@@ -78,5 +79,11 @@ export const RecordsCardWrapper = styled.div`
     color: var(--grey-dwed);
     font-size: 12px;
     font-family: var(--regular-text);
+  }
+
+  ${ShortCardContainer} {
+    ${StyledTitle} {
+      font-family: var(--regular-text);
+    }
   }
 `

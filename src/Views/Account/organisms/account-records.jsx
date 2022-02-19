@@ -54,8 +54,8 @@ export const AccountRecords = () => {
                                             <AccountRecordsCard
                                                 meetTime={moment(item.meet_date).calendar()}
                                                 imgUrl={item.responsible.org.logo}
-                                                orgName={item.responsible.org.name}
-                                                orgCat={item.responsible.user.main_cat.name}
+                                                orgName={`${item.responsible.user.full_name.split(' ')[0]} - ${item.responsible.user.main_cat.name}`}
+                                                orgCat={item.responsible.org.name}
                                                 handlePush={() => handlePush(item)}
                                             />
                                         </Col>
