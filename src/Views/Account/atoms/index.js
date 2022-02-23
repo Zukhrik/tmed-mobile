@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import {InputIcon, StyledInput} from '../../../UIComponents/Inputs/style'
 import {StyledText, StyledTitle} from '../../../UIComponents/Typography/style'
 import {ShortCardContainer} from '../../../Components/Cards/ShortCard/style'
+import {IconBox} from '../../../UIComponents/GlobalStyles'
 
 export const SearchInputWrapper = styled.form`
   ${StyledInput} {
@@ -17,7 +18,7 @@ export const SearchInputWrapper = styled.form`
   }
 `
 
-export const AccountInfoWrapper = styled.div`
+export const AccountHeaderWrapper = styled.div`
   box-shadow: 0 4px 24px rgba(38, 38, 38, 0.04);
   padding: 12px;
 
@@ -31,6 +32,29 @@ export const AccountInfoWrapper = styled.div`
 
     ${StyledText} {
       color: var(--grey-dwed);
+    }
+  }
+`
+
+export const AboutAccountWrapper = styled.form`
+  padding: 0 12px;
+
+  .change-photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    ${IconBox} {
+      border-radius: 50%;
+      background: #f2f2f2;
+      width: 96px;
+      height: 96px;
+
+      svg {
+        width: 44px;
+        height: 44px;
+      }
     }
   }
 `

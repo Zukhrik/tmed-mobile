@@ -52,7 +52,7 @@ export const AccountRecords = () => {
                                             key={`${idx + 1}`}
                                         >
                                             <AccountRecordsCard
-                                                meetTime={moment(item.meet_date).calendar()}
+                                                meetTime={item.meet_date ? moment(item.meet_date).calendar() : ''}
                                                 imgUrl={item.responsible.org.logo}
                                                 orgName={`${item.responsible.user.full_name.split(' ')[0]} - ${item.responsible.user.main_cat.name}`}
                                                 orgCat={item.responsible.org.name}

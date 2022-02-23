@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+@import "~jodit/build/jodit.min.css";
 @import '~react-phone-input-2/lib/style.css';
 @import '~react-slidedown/lib/slidedown.css';
 @import "~react-multi-carousel/lib/styles.css";

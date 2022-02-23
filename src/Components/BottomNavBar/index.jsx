@@ -4,18 +4,19 @@ import {$appModel} from '../../Models/app'
 import {useLocation} from 'react-router-dom'
 import {INFO_MAT} from '../../Constants/app'
 import {useChatCommon} from '../../Hooks/chat'
-import {AuthModal} from '../../UIComponents/AuthModal'
 import {IconBox} from '../../UIComponents/GlobalStyles'
 import {$accountModel} from '../../Models/account-model'
 import {bottomNavbarWithoutToken, bottomNavbarWithToken} from '../../data'
 import {BottomNavbarCounter, BottomNavbarItem, BottomNavWrapper, NavLinkItem, NavLinkWrapper} from './style'
+import {OverlayAuth} from '../../UIComponents/OverlayAuth'
+import {OverlaySettings} from '../Overlay'
 
 
 export const BottomNavBar = () => {
     const {pathname} = useLocation()
     const {getChatList} = useChatCommon()
+    const [auth, setAuth] = useState(false)
     const {$profiles: {currentProfile}} = useStore($accountModel)
-    const [modalIsOpen, setModalIsOpen] = useState(false)
     const {$app: {token}, $socketCounters, $device} = useStore($appModel)
     
     const generateCustomPath = (id) => {
@@ -45,10 +46,14 @@ export const BottomNavBar = () => {
     
     return (
         <>
-            <AuthModal
-                title={false}
-                modalIsOpen={modalIsOpen}
-                onCancel={() => setModalIsOpen(false)}
+            <OverlaySettings
+                openSettings={auth}
+                onClose={() => setAuth(false)}
+                content={<OverlayAuth
+                    auth={auth}
+                    setAuth={setAuth}
+                    onClose={() => setAuth(false)}
+                />}
             />
             <BottomNavWrapper
                 borderBottom
@@ -120,7 +125,7 @@ export const BottomNavBar = () => {
                                                 <Fragment key={`${idx + 1}`}>
                                                     {
                                                         item.path === '/sign-in'
-                                                            ? <BottomNavbarItem onClick={() => setModalIsOpen(true)}>
+                                                            ? <BottomNavbarItem onClick={() => setAuth(true)}>
                                                                 <Icon/>
                                                             </BottomNavbarItem>
                                                             : (<NavLinkItem

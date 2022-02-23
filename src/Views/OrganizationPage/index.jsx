@@ -5,7 +5,6 @@ import {$appModel} from '../../Models/app'
 import {INFO_MAT} from '../../Constants/app'
 import {usePushToCart} from '../../Hooks/order'
 import {$orgModel} from '../../Models/org-model'
-import {OrgSpecContainer} from './OrgSpecContainer'
 import {OrganizationRoute} from './OrganizationRoute'
 import {useHistory, useParams} from 'react-router-dom'
 import {UnregisteredRecordsLink} from './UnregisteredRecordsLink'
@@ -52,7 +51,7 @@ export const OrganizationPage = () => {
                         subscription={$device && $device !== INFO_MAT && getSubscription()}
                     />}
             filterPanel={pathname === `/${organization}/offerings` && <FilterPanel/>}
-            specPanel={<OrgSpecContainer/>}
+            // specPanel={<OrgSpecContainer/>}
             orgGroupPanel={<OrgOfferingGroup/>}
             pushLink={<UnregisteredRecordsLink/>}
             offeringGroup={

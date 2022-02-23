@@ -10,7 +10,7 @@ export const AccountPage = () => {
         <Switch>
             <PrivateRoute path='/@:username/records/:order_id/:offer_id' component={AccountRecordOfferId}/>
             <PrivateRoute path='/@:username/records/:order_id' component={AccountRecordsDetail}/>
-            <Route path='/@:username/about_me' component={AccountInformationPage}/>
+            <PrivateRoute path='/@:username/about_me' component={AccountInformationPage}/>
             <PrivateRoute path='/@:username/records' component={AccountRecords}/>
             <Route path='/@:username' component={Account}/>
         </Switch>

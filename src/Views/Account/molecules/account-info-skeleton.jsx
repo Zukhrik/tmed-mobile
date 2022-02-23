@@ -1,11 +1,11 @@
 import React from 'react'
-import {AccountInfoWrapper} from '../atoms'
+import {AccountHeaderWrapper} from '../atoms'
 import {Col, Row} from 'antd'
 import {SkeletonUI} from '../../../UIComponents/GlobalStyles'
 
 export const AccountInfoSkeleton = () => {
     return (
-        <AccountInfoWrapper>
+        <AccountHeaderWrapper>
             <Row gutter={[0, 12]}>
                 <Col span={24} className='avatar'>
                     <SkeletonUI variant='circle' height={96} width={96}/>
@@ -15,6 +15,6 @@ export const AccountInfoSkeleton = () => {
                     <SkeletonUI varisnt='text'/>
                 </Col>
             </Row>
-        </AccountInfoWrapper>
+        </AccountHeaderWrapper>
     )
 }

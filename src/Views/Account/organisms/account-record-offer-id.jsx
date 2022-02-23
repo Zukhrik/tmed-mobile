@@ -63,14 +63,20 @@ export const AccountRecordOfferId = () => {
                                 conclusion && (
                                     <Col
                                         span={24}
-                                        style={{display: 'flex', flexDirection: 'column', borderBottom: '1px solid #f2f2f2'}}
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            borderBottom: '1px solid #f2f2f2',
+                                            overflowX: 'auto',
+                                            overflowY: 'hidden'
+                                        }}
                                     >
                                         <Text color='var(--grey-dwed)' level={4}>{`${t('conclusion')}:`}</Text>
                                         {
                                             conclusion.map((item, idx) => (
-                                                <Col
-                                                    span={24}
+                                                <div
                                                     key={`${idx + 1}`}
+                                                    className='jodit-wysiwyg'
                                                     dangerouslySetInnerHTML={{__html: item.conclusion}}
                                                 />
                                             ))
