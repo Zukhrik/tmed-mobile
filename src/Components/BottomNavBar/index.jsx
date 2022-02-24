@@ -67,59 +67,29 @@ export const BottomNavBar = () => {
                                     const Icon = item.icon
                                     return (
                                         <Fragment key={item.icon}>
-                                            {
-                                                item.id === 'tape'
-                                                    ? (
-                                                        <>
-                                                            {
-                                                                $device && $device !== INFO_MAT && (
-                                                                    <NavLinkItem
-                                                                        isActive={() => getActive(`${item.id === 'tape' ? '/' : `/${item.id}`}`)}
-                                                                        onClick={() => item.onClick(generateAction(item.id))}
-                                                                        to={item.generatePath(item.path, generateCustomPath(item.id))}
-                                                                    >
-                                                                        <IconBox>
-                                                                            <Icon/>
-                                                                            {
-                                                                                item.socketKey && !!$socketCounters[item.socketKey] && (
-                                                                                    <BottomNavbarCounter>
-                                                                                        {$socketCounters[item.socketKey]}
-                                                                                    </BottomNavbarCounter>
-                                                                                )
-                                                                            }
-                                                                        </IconBox>
-                                                                    </NavLinkItem>
-                                                                )
-                                                            }
-                                                        </>
-                                                    )
-                                                    : (
-                                                        <NavLinkItem
-                                                            isActive={() => getActive(`${item.id === 'tape' ? '/' : `/${item.id}`}`)}
-                                                            onClick={() => item.onClick(generateAction(item.id))}
-                                                            to={item.generatePath(item.path, generateCustomPath(item.id))}
-                                                        >
-                                                            <IconBox>
-                                                                <Icon/>
-                                                                {
-                                                                    item.socketKey && !!$socketCounters[item.socketKey] && (
-                                                                        <BottomNavbarCounter>
-                                                                            {$socketCounters[item.socketKey]}
-                                                                        </BottomNavbarCounter>
-                                                                    )
-                                                                }
-                                                            </IconBox>
-                                                        </NavLinkItem>
-                                                    )
-                                            }
-                                        
+                                            <NavLinkItem
+                                                isActive={() => getActive(`${item.id === 'tape' ? '/' : `/${item.id}`}`)}
+                                                onClick={() => item.onClick(generateAction(item.id))}
+                                                to={item.generatePath(item.path, generateCustomPath(item.id))}
+                                            >
+                                                <IconBox>
+                                                    <Icon/>
+                                                    {
+                                                        item.socketKey && !!$socketCounters[item.socketKey] && (
+                                                            <BottomNavbarCounter>
+                                                                {$socketCounters[item.socketKey]}
+                                                            </BottomNavbarCounter>
+                                                        )
+                                                    }
+                                                </IconBox>
+                                            </NavLinkItem>
                                         </Fragment>
                                     )
                                 })
                             ) : (
                                 <>
                                     {
-                                        $device && $device !== INFO_MAT && bottomNavbarWithoutToken.map((item, idx) => {
+                                        bottomNavbarWithoutToken.map((item, idx) => {
                                             const Icon = item.icon
                                             return (
                                                 <Fragment key={`${idx + 1}`}>

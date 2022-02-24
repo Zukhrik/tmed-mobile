@@ -25,14 +25,12 @@ export const MobileView = () => {
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const {$orderDetail: {data, forceLoading}} = useStore($orderModel)
     const {$orderIdOffers: {data: orderIdOffersData}} = useStore($orderModel)
-    const {goBack} = useGoBack({pathname: saveURL ? saveURL : '/records/unregistered'})
+    const {goBack} = useGoBack({pathname: saveURL ? saveURL : '/records/my_orders'})
     
     const goBackAndReset = () => {
         resetOrderIdOffers()
         goBack()
     }
-    
-    console.log(orderIdOffersData)
     
     return (
         <RootContent paddingTop={70} paddingBottom={60}>

@@ -1,17 +1,19 @@
 import React from 'react'
+import moment from 'moment'
 import {Col, Row} from 'antd'
 import {useStore} from 'effector-react'
 import {useGoBack} from '../../../Hooks/app'
 import {useTranslation} from 'react-i18next'
-import {useOrderList} from '../../../Hooks/org'
+import {AccountRecordCardSkeleton} from '../molecules'
 import {useHistory, useParams} from 'react-router-dom'
 import {$orderModel} from '../../../Models/order-model'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {generateSkeleton} from '../../../utils/skeleton-utils'
 import {AccountRecordsCard} from '../molecules/account-records-card'
-import moment from 'moment'
-import {AccountRecordCardSkeleton} from '../molecules'
+import {$appModel} from '../../../Models/app'
+import {useOrderList} from '../../../Hooks/order'
+
 
 const skeleton = generateSkeleton(10)
 export const AccountRecords = () => {
@@ -19,8 +21,9 @@ export const AccountRecords = () => {
     const {push} = useHistory()
     const {t} = useTranslation()
     const {username} = useParams()
+    const {$app: {saveURL}} = useStore($appModel)
     const {$orderList: {data, forceLoading}} = useStore($orderModel)
-    const {goBack} = useGoBack({pathname: `/@${username}`})
+    const {goBack} = useGoBack({pathname: saveURL ? saveURL : `/@${username}`})
     
     const handlePush = (item) => {
         const responsible = item.responsible.id

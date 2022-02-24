@@ -1,5 +1,6 @@
 import {useCallback, useEffect} from 'react'
-import {orderListMount} from '../../Models/order-model'
+import {$orderModel, orderListMount} from '../../Models/order-model'
+import {useStore} from 'effector-react'
 
 const initialParams = {
     limit: 20,
@@ -10,17 +11,20 @@ export function useOrderList(status) {
     const getList = useCallback((params) => {
         orderListMount(params)
     }, [])
+    const {$orderList: {result}} = useStore($orderModel)
     
     const loadMore = useCallback((page) => {
-        const data = {
-            params: {
-                ...initialParams,
-                offset: page * 10
+        if (result.nextOffset) {
+            const data = {
+                params: {
+                    ...initialParams,
+                    offset: result.nextOffset
+                }
             }
+            getList(data)
         }
         
-        getList(data)
-    }, [getList])
+    }, [getList, result])
     
     useEffect(() => {
         const data = {

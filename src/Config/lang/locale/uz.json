@@ -363,6 +363,9 @@
     "select_coupon": "Chegirmani tanlang",
     "discount": "Chegirma",
     "conclusion": "Hulosa",
-    "export_opinion": "Mutahasis xulosasi"
+    "export_opinion": "Mutahasis xulosasi",
+    "my_orders": "Mening buyurtmalarim",
+    "my_records": "Mening qaydlarim",
+    "view_record": "Qaydni ko'rish"
   }
 }

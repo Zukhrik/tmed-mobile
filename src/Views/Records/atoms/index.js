@@ -41,13 +41,11 @@ export const RecordsNavLink = styled(NavLink)`
   line-height: 15px;
   color: var(--grey-dwed);
   padding: 12px 0;
-  margin-right: 24px;
-  white-space: nowrap;
-  border-bottom: 0.5px solid transparent;
+  border-bottom: 1.5px solid transparent;
 
   &.active {
     color: var(--primary-dwed);
-    border-bottom: 0.5px solid var(--primary-dwed);
+    border-bottom: 1.5px solid var(--primary-dwed);
   }
 `
 
@@ -100,33 +98,33 @@ export const DetailImageWrapper = styled.div`
   width: ${({width}) => width ? width : '260px'};
   margin: 0 auto;
   padding: ${({padding}) => padding ? padding : '0'};
-  
+
   .check-form-wrapper {
     display: flex;
     flex-direction: column;
     padding-top: 48px;
     padding-bottom: 20px;
   }
-  
+
   .qr-code-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
+
   .padding-bottom {
     padding-bottom: 4px;
   }
-  
+
   .display-style {
     display: flex;
     justify-content: space-between;
   }
-  
+
   .static-width {
     width: 115px;
   }
-  
+
   .meet-time-mobile {
     ${StyledTitle} {
       height: 72px;
@@ -429,5 +427,55 @@ export const EmptyCartWrapper = styled.div`
     ${StyledText} {
       color: var(--grey-dwed);
     }
+  }
+`
+
+export const RecordCardWrapper = styled.div`
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 12px;
+
+  .icon-item-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 27px;
+    font-size: 12px;
+
+    svg {
+      color: ${({color}) => color ? color : 'var(--grey-dwed)'};
+      width: 16px;
+      height: 16px;
+      margin: 0 4px;
+    }
+  }
+
+  .buttons-wrapper {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    ${StyledButton} {
+      font-size: 12px;
+    }
+
+    svg {
+      margin-right: 4px;
+    }
+  }
+`
+
+export const IconItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 27px;
+  font-size: 12px;
+  color: ${({textColor}) => textColor ? textColor : 'var(--primary-dwed)'};
+
+  svg {
+    color: ${({color}) => color ? color : 'var(--primary-dwed)'};
+    width: 16px;
+    height: 16px;
+    margin: 0 4px;
   }
 `

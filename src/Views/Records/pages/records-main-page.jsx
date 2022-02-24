@@ -7,7 +7,7 @@ import {Container, RootContent} from '../../../UIComponents/GlobalStyles'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {Switch} from 'react-router-dom'
 import {PrivateRoute} from '../../../Routes'
-import {Approved, Awaiting, Canceled, Finished, RecordsFixedHeader, Unregistered} from '../organisms'
+import {MyOrders, MyRecords, RecordsFixedHeader} from '../organisms'
 
 export const RecordsMainPage = () => {
     const {$app: {saveURL}} = useStore($appModel)
@@ -25,11 +25,8 @@ export const RecordsMainPage = () => {
             />
             <Container>
                 <Switch>
-                    <PrivateRoute path='/records/approved' component={Approved}/>
-                    <PrivateRoute path='/records/awaiting' component={Awaiting}/>
-                    <PrivateRoute path='/records/canceled' component={Canceled}/>
-                    <PrivateRoute path='/records/finished' component={Finished}/>
-                    <PrivateRoute path='/records/unregistered' component={Unregistered}/>
+                    <PrivateRoute path='/records/my_orders' component={MyOrders}/>
+                    <PrivateRoute p='/records/my_records' component={MyRecords}/>
                 </Switch>
             </Container>
         </RootContent>

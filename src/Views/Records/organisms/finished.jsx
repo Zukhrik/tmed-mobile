@@ -1,6 +1,6 @@
 import React from 'react'
 import {generateSkeleton} from '../../../utils/skeleton-utils'
-import {useOrderList} from '../../../Hooks/org'
+import {useOrderList} from '../../../Hooks/order'
 import {useHistory} from 'react-router-dom'
 import {useStore} from 'effector-react'
 import {$orderModel} from '../../../Models/order-model'

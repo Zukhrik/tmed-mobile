@@ -363,6 +363,9 @@
     "select_cou[on": "Выберите купон",
     "discount": "Скидка",
     "conclusion": "Заключения",
-    "export_opinion": "Заключение специалиста"
+    "export_opinion": "Заключение специалиста",
+    "view_record": "Просмотреть запись",
+    "my_orders": "Мои заказы",
+    "my_records": "Мои записи"
   }
 }

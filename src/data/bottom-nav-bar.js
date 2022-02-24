@@ -17,8 +17,8 @@ export const bottomNavbarWithToken = [
         onClick: () => false
     },
     {
-        id: 'records/approved',
-        path: '/records/approved',
+        id: 'records/my_orders',
+        path: '/records/my_orders',
         icon: OfferingSvg,
         generatePath: generatePath,
         onClick: () => false
