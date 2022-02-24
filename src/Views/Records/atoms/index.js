@@ -438,7 +438,7 @@ export const RecordCardWrapper = styled.div`
   .icon-item-wrapper {
     display: flex;
     align-items: center;
-    margin-right: 27px;
+    margin-right: 10px;
     font-size: 12px;
 
     svg {
@@ -468,7 +468,7 @@ export const RecordCardWrapper = styled.div`
 export const IconItemWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 27px;
+  margin-right: 10px;
   font-size: 12px;
   color: ${({textColor}) => textColor ? textColor : 'var(--primary-dwed)'};
 

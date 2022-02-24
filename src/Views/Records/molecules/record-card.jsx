@@ -5,10 +5,7 @@ import {Title} from '../../../UIComponents/Typography/Title'
 import {Text} from '../../../UIComponents/Typography/Text'
 import {Avatar} from '../../../UIComponents/Avatar'
 import {TimeCircleSvg} from '../../../Icons/Time'
-import {StarSvg} from '../../../Icons/Start'
-import {OfficialSvg} from '../../../Icons/Official'
 import {useTranslation} from 'react-i18next'
-import {QuickResponseCodeSvg} from '../../../Icons/QRCode'
 import {DoneSvg} from '../../../Icons/Done'
 import {ClockSvg} from '../../../Icons/Clock'
 import {Button} from '../../../UIComponents/Button'
@@ -18,6 +15,9 @@ import {useHistory} from 'react-router-dom'
 import {useStore} from 'effector-react'
 import {$accountModel} from '../../../Models/account-model'
 import {saveURLMount} from '../../../Models/app'
+import {CloseCircleSvg} from '../../../Icons/Close'
+import {AllDoneCheckSvg} from '../../../Icons/CheckMark'
+import {InfinitySvg} from '../../../Icons/infinity'
 
 export const RecordCard = ({name, category, src, status, meet, date, link}) => {
     const {t} = useTranslation()
@@ -32,7 +32,7 @@ export const RecordCard = ({name, category, src, status, meet, date, link}) => {
                         color='var(--danger-dwed)'
                         textColor='var(--danger-dwed)'
                     >
-                        <OfficialSvg/>{t('canceled')}
+                        <CloseCircleSvg/>{t('canceled')}
                     </IconItemWrapper>
                 )
             case 0:
@@ -50,20 +50,20 @@ export const RecordCard = ({name, category, src, status, meet, date, link}) => {
                         color='var(--professional-color)'
                         textColor='var(--professional-color)'
                     >
-                        <StarSvg/>{t('approved')}
+                        <DoneSvg/>{t('approved')}
                     </IconItemWrapper>
                 )
             case 2:
                 return (
                     <IconItemWrapper
                         color='#05D696'
-                        textColor='##05D696'
+                        textColor='#05D696'
                     >
-                        <QuickResponseCodeSvg/>{t('scanned')}
+                        <InfinitySvg/>{t('QR_Code_scanned')}
                     </IconItemWrapper>
                 )
             case 5:
-                return <IconItemWrapper><DoneSvg/>{t('finished')}</IconItemWrapper>
+                return <IconItemWrapper><AllDoneCheckSvg/>{t('finished')}</IconItemWrapper>
             
             default:
                 return null
@@ -78,7 +78,7 @@ export const RecordCard = ({name, category, src, status, meet, date, link}) => {
     
     return (
         <RecordCardWrapper>
-            <Row gutter={[0, 10]}>
+            <Row gutter={[0, 12]}>
                 <Col span={24} onClick={link}>
                     <Row wrap={false} gutter={[4, 0]} justify='space-between'>
                         <Col>

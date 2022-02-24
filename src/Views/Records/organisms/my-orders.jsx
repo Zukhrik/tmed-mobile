@@ -30,10 +30,11 @@ export const MyOrders = () => {
                         <InfiniteScroll
                             next={loadMore}
                             hasMore={!loading && !!result.next}
+                            style={{overflow: 'hidden'}}
                             dataLength={result.nextOffset || 10}
                             loader={<>...loading</>}
                         >
-                            <Row gutter={[0, 12]} style={{paddingBottom: 65}}>
+                            <Row gutter={[0, 12]} style={{paddingBottom: 65}} className='container'>
                                 {
                                     data.map((item, idx) => (
                                         <Col span={24} key={`${idx + 1}`}>
@@ -53,7 +54,7 @@ export const MyOrders = () => {
                             </Row>
                         </InfiniteScroll>
                     ) : (
-                        <Row gutter={[0, 12]}>
+                        <Row gutter={[0, 12]} className='container'>
                             {
                                 skeleton.map((item, idx) => (
                                     <Col span={24} key={`${idx + 1}`}>

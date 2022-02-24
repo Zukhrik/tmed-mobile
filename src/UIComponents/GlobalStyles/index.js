@@ -30,6 +30,10 @@ export const RootContent = styled.div`
     width: 100%;
     margin: 0 auto;
     padding: 0 12px;
+
+    @media (max-width: 319px) {
+      padding: 0 6px;
+    }
   }
 `
 

@@ -3,7 +3,7 @@ import {useStore} from 'effector-react'
 import {$appModel} from '../../../Models/app'
 import {$accountModel} from '../../../Models/account-model'
 import {useGoBack} from '../../../Hooks/app'
-import {Container, RootContent} from '../../../UIComponents/GlobalStyles'
+import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {Switch} from 'react-router-dom'
 import {PrivateRoute} from '../../../Routes'
@@ -23,12 +23,10 @@ export const RecordsMainPage = () => {
                 height='auto'
                 component={<RecordsFixedHeader goBack={goBack}/>}
             />
-            <Container>
-                <Switch>
-                    <PrivateRoute path='/records/my_orders' component={MyOrders}/>
-                    <PrivateRoute p='/records/my_records' component={MyRecords}/>
-                </Switch>
-            </Container>
+            <Switch>
+                <PrivateRoute path='/records/my_orders' component={MyOrders}/>
+                <PrivateRoute p='/records/my_records' component={MyRecords}/>
+            </Switch>
         </RootContent>
     )
 }
