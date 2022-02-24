@@ -13,7 +13,6 @@ import {Avatar} from '../../../UIComponents/Avatar'
 import {useProfileInfo} from '../../../Hooks/account'
 import {ArrowIosBottomSvg} from '../../../Icons/Arrow'
 import {InputUI} from '../../../UIComponents/mu-inputs'
-import {Text} from '../../../UIComponents/Typography/Text'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {SelectionList} from '../../../Components/SelectionList'
 import {IconBox, RootContent} from '../../../UIComponents/GlobalStyles'
@@ -81,13 +80,14 @@ export const AccountInformationPage = () => {
                                     </IconBox>
                                 )
                         }
-                        <Text color='var(--primary-dwed)'>
-                            {t('change_profile_photo')}
-                        </Text>
+                        {/*<Text color='var(--primary-dwed)'>*/}
+                        {/*    {t('change_profile_photo')}*/}
+                        {/*</Text>*/}
                     </Col>
                     <Col span={24}>
                         <InputUI
                             name='name'
+                            disabled
                             label={t('name')}
                             value={formik?.values?.name}
                             onChange={(e) => formik.setFieldValue('name', e.target.value)}
@@ -95,6 +95,7 @@ export const AccountInformationPage = () => {
                     </Col>
                     <Col span={24}>
                         <InputUI
+                            disabled
                             name='lastname'
                             label={t('lastname')}
                             value={formik?.values?.lastname}
@@ -103,6 +104,7 @@ export const AccountInformationPage = () => {
                     </Col>
                     <Col span={24}>
                         <InputUI
+                            disabled
                             name='surname'
                             inputType='text'
                             label={t('surname')}
@@ -112,6 +114,7 @@ export const AccountInformationPage = () => {
                     </Col>
                     <Col span={24}>
                         <InputUI
+                            disabled
                             name='date'
                             inputType='date'
                             value={formik?.values?.birthday}
