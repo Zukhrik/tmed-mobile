@@ -7,20 +7,22 @@ import {formatter, strHourToInt} from './use-specialist-date'
 import {getDateTime, getWeekDay} from '../../utils/time-utils'
 import {$orderModel} from '../../Models/order-model'
 import order from '../../Service/order'
-import {useParams} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
 
 export function useSpecMeetDate({activeDay}) {
     const {organization} = useParams()
     const [activeDate] = useState(new Date())
+    const {push, location: {pathname}} = useHistory()
     const {$orgOrderCartList: {data}} = useStore($orderModel)
     const [dateRange, setDateRange] = useState([])
     const [meetTimes, setMeetTimes] = useState({})
     const [hours, setHours] = useState([])
+    const [procInterval, setProcInterval] = useState(false)
     const [requestData, setRequestData] = useState({})
-    const operating_modes = organization && data[organization] &&  data[organization][0]?.responsible?.operating_mode
+    const operating_modes = organization && data[organization] && data[organization][0]?.responsible?.operating_mode
     const {urlData} = useUrlParams()
     const specId = urlData[URL_KEYS.SPECIALIST_ID]
-
+    
     const generateData = useCallback((data) => {
         const tmp = {}
         for (let i = 0; i < data.length; i++) {
@@ -28,12 +30,12 @@ export function useSpecMeetDate({activeDay}) {
             const meetTime = moment(data[i].meet_date).format('HH.mm')
             tmp[id] = {
                 user: data[i].user,
-                meetTime: parseFloat(parseFloat(meetTime).toFixed(1)),
+                meetTime: parseFloat(parseFloat(meetTime).toFixed(1))
             }
         }
         return tmp
     }, [])
-
+    
     const getOrgOrder = useCallback((params) => {
         order.getOrgOrderResponsible(params)
             .then(res => {
@@ -42,13 +44,26 @@ export function useSpecMeetDate({activeDay}) {
                 setRequestData(orders)
             })
     }, [generateData])
-
+    
     const renderMeetRow = useCallback((id) => {
         const strHour = moment(id).format('HH:mm')
         const hourInt = strHourToInt(strHour)
         return meetTimes[hourInt] && Object.values(meetTimes[hourInt]).sort((a, b) => a - b)
     }, [meetTimes])
-
+    
+    const generateMeetTimeLink = useCallback(() => {
+        const url = []
+        if (specId) {
+            url.push(`${URL_KEYS.SPECIALIST_ID}=${specId}`)
+        }
+        url.push(`${URL_KEYS.DATE}=${activeDay}`)
+        url.push(`${URL_KEYS.TIME}=00:00:00`)
+        return {
+            pathname,
+            search: url.join('&')
+        }
+    }, [activeDay, pathname, specId])
+    
     useEffect(() => {
         const endDate = moment(activeDate).endOf('month')
         let start = activeDate.getUTCDate()
@@ -58,11 +73,11 @@ export function useSpecMeetDate({activeDay}) {
             const d = moment(activeDate).add(i, 'days')
             tmp.push(d.format('YYYY-MM-DD'))
         }
-
+        
         setDateRange(tmp)
     }, [activeDate])
-
-
+    
+    
     useEffect(() => {
         const day = getWeekDay(new Date())
         if (operating_modes && operating_modes[day]) {
@@ -75,45 +90,50 @@ export function useSpecMeetDate({activeDay}) {
             let from = parseInt(mode.from)
             let a = mode.from
             const date = new Date(activeDay)
-
-            while (a < to) {
-
-                for (let i = 0; i < breaks.length; i++) {
-                    if (parseInt(a) === parseInt(breaks[i].from) && (breaks[i].from >= a || a < breaks[i].to)) {
-                        a = breaks[i].to
+            
+            if (interval !== 0) {
+                while (a < to) {
+                    
+                    for (let i = 0; i < breaks.length; i++) {
+                        if (parseInt(a) === parseInt(breaks[i].from) && (breaks[i].from >= a || a < breaks[i].to)) {
+                            a = breaks[i].to
+                        }
+                    }
+                    
+                    possibleMeetTime[parseInt(a)] = possibleMeetTime[parseInt(a)]
+                        ? {...possibleMeetTime[parseInt(a)]}
+                        : {}
+                    
+                    const strHour = moment(new Date(new Date(getDateTime(a))
+                        .setMinutes(new Date(getDateTime(a === from ? mode.from : a)).getMinutes() + interval)))
+                    
+                    const id = moment(new Date(`${date.toDateString()} ${moment(getDateTime(a)).format('HH:mm')}`)).format(formatter)
+                    
+                    possibleMeetTime[parseInt(a)][id] = {
+                        intDate: a,
+                        strDate: `${moment(getDateTime(a)).format('HH:mm')} - ${strHour.format('HH:mm')}`,
+                        dateTime: new Date(new Date(`${date.toDateString()} ${moment(getDateTime(a)).format('HH:mm')}`)).getTime()
+                    }
+                    a = parseFloat(strHour.format('HH.mm'))
+                }
+                setMeetTimes(possibleMeetTime)
+                for (let i = from; i < to; i++) {
+                    const id = new Date(new Date(`${date.toDateString()} 0${i}:59`)).getTime()
+                    if (i < 10) {
+                        tmp.push({hour: `0${i}:00`, interval, id})
+                    } else {
+                        tmp.push({hour: `${i}:00`, interval, id})
                     }
                 }
-
-                possibleMeetTime[parseInt(a)] = possibleMeetTime[parseInt(a)]
-                    ? {...possibleMeetTime[parseInt(a)]}
-                    : {}
-
-                const strHour = moment(new Date(new Date(getDateTime(a))
-                    .setMinutes(new Date(getDateTime(a === from ? mode.from : a)).getMinutes() + interval)))
-
-                const id = moment(new Date(`${date.toDateString()} ${moment(getDateTime(a)).format('HH:mm')}`)).format(formatter)
-
-                possibleMeetTime[parseInt(a)][id] = {
-                    intDate: a,
-                    strDate: `${moment(getDateTime(a)).format('HH:mm')} - ${strHour.format('HH:mm')}`,
-                    dateTime: new Date(new Date(`${date.toDateString()} ${moment(getDateTime(a)).format('HH:mm')}`)).getTime()
-                }
-                a = parseFloat(strHour.format('HH.mm'))
+                setHours(tmp)
+            } else {
+                setProcInterval(true)
+                console.log('sdffsd')
             }
-            setMeetTimes(possibleMeetTime)
-            for (let i = from; i < to; i++) {
-                const id = new Date(new Date(`${date.toDateString()} 0${i}:59`)).getTime()
-                if (i < 10) {
-                    tmp.push({hour: `0${i}:00`, interval, id})
-                } else {
-                    tmp.push({hour: `${i}:00`, interval, id})
-                }
-            }
-            setHours(tmp)
         }
     }, [operating_modes, activeDay])
-
-
+    
+    
     useEffect(() => {
         if (specId && activeDay) {
             const data = {
@@ -123,12 +143,18 @@ export function useSpecMeetDate({activeDay}) {
                     limit: 200,
                     offset: 0,
                     meet_date__gt: moment(new Date(`${new Date(activeDay).toDateString()} 00:00`)).format(formatter),
-                    meet_date__lt: moment(new Date(`${new Date(activeDay).toDateString()} 23:59`)).format(formatter),
+                    meet_date__lt: moment(new Date(`${new Date(activeDay).toDateString()} 23:59`)).format(formatter)
                 }
             }
             getOrgOrder(data)
         }
     }, [specId, getOrgOrder, activeDay])
-
+    
+    useEffect(() => {
+        if (procInterval) {
+            push(generateMeetTimeLink())
+        }
+    }, [procInterval, generateMeetTimeLink, push])
+    
     return {dateRange, activeDate, hours, renderMeetRow, requestData}
 }

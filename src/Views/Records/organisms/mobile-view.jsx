@@ -32,6 +32,7 @@ export const MobileView = () => {
         goBack()
     }
     
+    
     return (
         <RootContent paddingTop={70} paddingBottom={60}>
             <FixedHeader
@@ -72,10 +73,18 @@ export const MobileView = () => {
                     </Col>
                     <Col span={24} className='meet-time-mobile'>
                         <Title alignType='center'>
-                            {data?.[order_id] && moment(data?.[order_id]?.meet_date).format('HH:mm')}
+                            {
+                                data?.[order_id] && data?.[order_id]?.todays_queue === null
+                                    ? moment(data?.[order_id]?.meet_date).format('HH:mm')
+                                    : data?.[order_id]?.todays_queue?.number
+                            }
                         </Title>
                         <Text level={4} alignType='center'>
-                            {t('your_time')}
+                            {
+                                data?.[order_id] && data?.[order_id]?.todays_queue === null
+                                    ? t('your_time')
+                                    : t('your_queue')
+                            }
                         </Text>
                     </Col>
                     <Col className='display-style'>

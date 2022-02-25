@@ -360,12 +360,13 @@
     "your_time": "Ваше время",
     "soon": "Скоро",
     "coupon_discount": "Скидка на купон",
-    "select_cou[on": "Выберите купон",
+    "select_coupon": "Выберите купон",
     "discount": "Скидка",
     "conclusion": "Заключения",
     "export_opinion": "Заключение специалиста",
     "view_record": "Просмотреть запись",
     "my_orders": "Мои заказы",
-    "my_records": "Мои записи"
+    "my_records": "Мои записи",
+    "your_queue": "Ваша очередь"
   }
 }
