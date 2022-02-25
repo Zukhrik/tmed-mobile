@@ -1,9 +1,9 @@
 import React from 'react'
 import {PhoneForm} from './PhoneForm'
-import {DWEDSvg} from '../../../Icons/DWED'
 import {useFastAuth} from '../../../Hooks/auth'
 import {ActivationForm} from './ActivationForm'
 import {FastAuthWrapper, ImageWrapper} from '../style'
+import {LogoSvg} from '../../../Icons/Logo'
 
 export default ({onClose, action}) => {
     const {
@@ -21,7 +21,7 @@ export default ({onClose, action}) => {
     return (
         <FastAuthWrapper>
             <ImageWrapper>
-                <DWEDSvg/>
+                <LogoSvg/>
             </ImageWrapper>
             {
                 nextStep

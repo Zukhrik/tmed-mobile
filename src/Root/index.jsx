@@ -1,6 +1,6 @@
 import React from 'react'
 import {Home} from '../Views/Home'
-import {Account} from '../Views/Account'
+import {AccountPage} from '../Views/Account'
 import {Checkout} from '../Views/Checkout'
 import {Route, Switch} from 'react-router-dom'
 import PrivateRoute from '../Routes/PrivateRoute'
@@ -13,7 +13,7 @@ export const Root = () => {
         <RootContent>
             <Switch>
                 <Route exact path='/' component={Home}/>
-                <Route path='/@:username' component={Account}/>
+                <Route path='/@:username' component={AccountPage}/>
                 <Route path='/:organization/offerings/:offering_id' component={OfferingPage}/>
                 <PrivateRoute path='/checkout/:organization' component={Checkout}/>
                 <Route path='/:organization' component={OrganizationPage}/>

@@ -25,12 +25,13 @@ export const MobileView = () => {
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const {$orderDetail: {data, forceLoading}} = useStore($orderModel)
     const {$orderIdOffers: {data: orderIdOffersData}} = useStore($orderModel)
-    const {goBack} = useGoBack({pathname: saveURL ? saveURL : '/records/unregistered'})
+    const {goBack} = useGoBack({pathname: saveURL ? saveURL : '/records/my_orders'})
     
     const goBackAndReset = () => {
         resetOrderIdOffers()
         goBack()
     }
+    
     
     return (
         <RootContent paddingTop={70} paddingBottom={60}>
@@ -57,8 +58,8 @@ export const MobileView = () => {
                             forceLoading === 2 && data?.[order_id]
                                 ? <>
                                     <Image
-                                        width={210}
-                                        height={210}
+                                        width={150}
+                                        height={150}
                                         preview={data?.[order_id]?.status !== 0 ? {mask: ''} : false}
                                         src={
                                             data?.[order_id]?.status !== 0 && data?.[order_id]?.qr_code
@@ -67,8 +68,24 @@ export const MobileView = () => {
                                         }
                                     />
                                 </>
-                                : <SkeletonUI animation='wave' variant='rect' width={210} height={210}/>
+                                : <SkeletonUI animation='wave' variant='rect' width={150} height={150}/>
                         }
+                    </Col>
+                    <Col span={24} className='meet-time-mobile'>
+                        <Title alignType='center'>
+                            {
+                                data?.[order_id] && data?.[order_id]?.todays_queue === null
+                                    ? moment(data?.[order_id]?.meet_date).format('HH:mm')
+                                    : data?.[order_id]?.todays_queue?.number
+                            }
+                        </Title>
+                        <Text level={4} alignType='center'>
+                            {
+                                data?.[order_id] && data?.[order_id]?.todays_queue === null
+                                    ? t('your_time')
+                                    : t('your_queue')
+                            }
+                        </Text>
                     </Col>
                     <Col className='display-style'>
                         <Text
@@ -109,11 +126,9 @@ export const MobileView = () => {
                         </Title>
                     </Col>
                     <Col className='display-style'>
-                        <Text className='static-width' color='var(--grey-dwed)'>{`${t('meeting_time')}: `}</Text>
+                        <Text className='static-width' color='var(--grey-dwed)'>{`${t('date')}: `}</Text>
                         <Title>
-                            {data &&
-                                moment(data?.[order_id]?.meet_date).format('YYYY-MM-DD HH:mm')
-                            }
+                            {data && moment(data?.[order_id]?.meet_date).format('YYYY-MM-DD')}
                         </Title>
                     </Col>
                     <Col className='display-style'>
@@ -131,7 +146,7 @@ export const MobileView = () => {
                             <Col key={`${idx + 1}`}>
                                 <OrderIdOfferCard
                                     count={item.qty}
-                                    cost={item.cost}
+                                    cost={item.offering.cost}
                                     src={item.offering.image}
                                     title={item.offering.name}
                                 />

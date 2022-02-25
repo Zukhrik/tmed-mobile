@@ -24,7 +24,7 @@ export const OrgSpecialistList = () => {
     const {$orgSpecialistsList: {data, forceLoading, result, loading}} = useStore($orgModel)
     
     const handleScroll = useCallback((e) => {
-        if (e.target.scrollLeft + e.target.offsetWidth === e.target.scrollWidth && !loading && !!result.next) {
+        if (e.target.scrollLeft + e.target.offsetWidth >= e.target.scrollWidth && !loading && !!result.next) {
             if (result.next) {
                 const data = {
                     organization: organization,

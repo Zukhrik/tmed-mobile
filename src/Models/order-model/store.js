@@ -6,10 +6,17 @@ import {
     fetchOrderCartList,
     fetchOrderIdOffers,
     fetchOrderList,
+    fetchOrderOffersConclusions,
     fetchOrgOrderCarts,
     fetchOrgOrderResponsible
 } from './effects'
-import {resetOrderCartList, resetOrderDetail, resetOrderIdOffers, resetOrgOrderCart} from './events'
+import {
+    resetOrderCartList,
+    resetOrderDetail,
+    resetOrderIdOffers,
+    resetOrderListMount,
+    resetOrgOrderCart
+} from './events'
 
 const $orgOrderCartList = createStore({loading: false, error: false, result: {}, data: [], forceLoading: 0})
     .on(fetchOrgOrderCarts.pending, (state, loading) => ({...state, loading}))
@@ -116,19 +123,32 @@ const $orderList = createStore({data: [], loading: false, result: {}, error: fal
             forceLoading: 2
         }
     })
+    .reset(resetOrderListMount)
 
-const $orderIdOffers = createStore({loading: false, data: [], result: {}, error: false})
+const $orderIdOffers = createStore({loading: false, data: [], result: {}, error: false, forceLoading: 0})
     .on(fetchOrderIdOffers.pending, (state, loading) => ({...state, loading}))
     .on(fetchOrderIdOffers.fail, (state, {error}) => ({
-        ...state, error, result: {}
+        ...state, error, data: [], result: {}, forceLoading: state.forceLoading === 2 ? state.forceLoading : 1
     }))
     .on(fetchOrderIdOffers.done, (state, {result, params}) => {
         const processed = commonStoreList({
             response: result.data, state, clear: params.clear, ...params.params
         })
-        return {...state, ...processed}
+        return {...state, ...processed, forceLoading: 2}
     })
     .reset(resetOrderIdOffers)
+
+const $orderOffersConclusions = createStore({loading: false, data: [], result: {}, error: false, forceLoading: 0})
+    .on(fetchOrderOffersConclusions.pending, (state, loading) => ({...state, loading}))
+    .on(fetchOrderOffersConclusions.fail, (state, {error}) => ({
+        ...state, error, data: [], result: {}, forceLoading: state.forceLoading === 2 ? state.forceLoading : 1
+    }))
+    .on(fetchOrderOffersConclusions.done, (state, {result, params}) => {
+        const processed = commonStoreList({
+            response: result.data, state, clear: params.clear, ...params.params
+        })
+        return {...state, ...processed, forceLoading: 2}
+    })
 
 
 export const $orderModel = combine({
@@ -137,5 +157,6 @@ export const $orderModel = combine({
     $orderIdOffers,
     $orderCartList,
     $orderDetail,
-    $orderList
+    $orderList,
+    $orderOffersConclusions
 })

@@ -1,31 +1,35 @@
 import React from 'react'
+import {useUser} from '../../../Hooks/user'
 import {useHistory, useParams} from 'react-router-dom'
 import {useStore} from 'effector-react'
 import {$userModel} from '../../../Models/user-model'
-import {useUser} from '../../../Hooks/user'
 import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {FixedHeader} from '../../../Components/FixedHeader'
-import {AccountFixedHeader} from '../organisms'
+import {UserFixedHeaderComponent} from '../organisms'
 import {Col, Row} from 'antd'
-import {ShortCard, ShortCardSkeleton} from '../../../Components/Cards'
-import {Title} from '../../../UIComponents/Typography/Title'
-import {useTranslation} from 'react-i18next'
 import Cookies from 'js-cookie'
 import {getCurrentAccount} from '../../../Models/account-model'
 import {tokenMount} from '../../../Models/app'
 import {resetOrderCartList, resetOrgOrderCart} from '../../../Models/order-model'
+import {AccountHeader, AccountInfoSkeleton} from '../molecules'
+import {Text} from '../../../UIComponents/Typography/Text'
+import {ArrowRightSvg} from '../../../Icons/Arrow'
+import {useTranslation} from 'react-i18next'
+import {AccountBlockItems} from '../atoms'
 
 
 export const Account = () => {
     useUser()
-    const {push} = useHistory()
     const {t} = useTranslation()
+    const {push} = useHistory()
     const {username} = useParams()
     const {$user: {data, forceLoading}} = useStore($userModel)
     const userInfo = data && data?.[username]
     
-    const handleClick = (text) => {
-        if (text === 'logout') {
+    const handleClick = (evt) => {
+        if (evt === 'logo') {
+            push('/')
+        } else if (evt === 'logout') {
             Cookies.remove('token')
             Cookies.remove('users')
             Cookies.remove('refresh-token')
@@ -35,48 +39,61 @@ export const Account = () => {
             push('/')
             resetOrgOrderCart()
             resetOrderCartList()
-        } else if (text === 'logoClick') {
-            push('/')
         }
     }
     
     return (
-        <RootContent
-            paddingTop={62}
-            paddingBottom={60}
-        >
+        <RootContent height='100vh' paddingTop={50}>
             <FixedHeader
-                component={
-                    <AccountFixedHeader
-                        logoClick={() => handleClick('logoClick')}
-                        logOutClick={() => handleClick('logout')}
-                    />
-                }
+                component={<UserFixedHeaderComponent
+                    logoClick={() => handleClick('logo')}
+                    logoutClick={() => handleClick('logout')}
+                />}
             />
-            <Row gutter={[0, 12]} className='container'>
+            <Row gutter={[0, 16]}>
                 {
-                    forceLoading === 2 && data
+                    forceLoading === 2 && userInfo
                         ? (
                             <Col span={24}>
-                                <ShortCard
-                                    imgSize={48}
-                                    imgUrl={userInfo && Object.values(userInfo) && userInfo?.avatar}
-                                    name={
-                                        userInfo && Object.values(userInfo) && !userInfo?.name
-                                            ? userInfo?.username
-                                            : `${userInfo?.name} ${userInfo?.lastname}`
-                                    }
-                                    text={userInfo && Object.values(userInfo) && userInfo?.main_cat?.name}
+                                <AccountHeader
+                                    imgUrl={userInfo.avatar}
+                                    name={userInfo?.name === '' ? userInfo?.username : `${userInfo.name} ${userInfo.lastname}`}
+                                    category={userInfo?.main_cat?.name}
                                 />
                             </Col>
                         ) : (
                             <Col span={24}>
-                                <ShortCardSkeleton size={48}/>
+                                <AccountInfoSkeleton/>
                             </Col>
                         )
                 }
-                <Col span={24}>
-                    <Title>{t('records')}</Title>
+                <Col span={24} onClick={() => push(`/@${username}/about_me`)}>
+                    <AccountBlockItems>
+                        <Row wrap={false} justify='space-between' align='middle'>
+                            <Col>
+                                <Text level={4}>{t('about_me')}</Text>
+                                <Text level={5} className='item-description'>
+                                    {t(('passport_number_birth_living_place'))}
+                                </Text>
+                            </Col>
+                            <Col className='icon'>
+                                <ArrowRightSvg/>
+                            </Col>
+                        </Row>
+                    </AccountBlockItems>
+                </Col>
+                <Col span={24} onClick={() => push(`/@${username}/records`)}>
+                    <AccountBlockItems>
+                        <Row wrap={false} justify='space-between' align='middle'>
+                            <Col>
+                                <Text level={4}>{t('export_opinion')}</Text>
+                                {/*<Text level={5} className='item-description'>{t('finished_records')}</Text>*/}
+                            </Col>
+                            <Col className='icon'>
+                                <ArrowRightSvg/>
+                            </Col>
+                        </Row>
+                    </AccountBlockItems>
                 </Col>
             </Row>
         </RootContent>

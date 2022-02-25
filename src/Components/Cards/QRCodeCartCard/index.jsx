@@ -16,7 +16,6 @@ export const QRCodeCartCard = (
         text,
         time,
         cost,
-        count,
         url,
         specialistImg,
         specialistName,
@@ -70,7 +69,7 @@ export const QRCodeCartCard = (
                     onClick={url}
                     className='card-item-wrapper padding'
                 >
-                    <Text>{`${count} ${t('offers')}`}</Text>
+                    <Text style={{color: 'var(--primary-dwed)'}}>{t('offers')}</Text>
                     <Title>
                         {`${cost.toLocaleString('fi-Fi')} ${currentProfile.currency.code.toUpperCase()}`}
                     </Title>

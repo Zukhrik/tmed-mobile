@@ -1,10 +1,10 @@
 import React from 'react'
-import {FastAuthModal} from '../GlobalStyles'
+import {FastAuthModalWrapper} from '../GlobalStyles'
 import FastAuthView from '../../Views/Auth/FastAuth'
 
 export const AuthModal = ({modalIsOpen, onCancel, action}) => {
     return (
-        <FastAuthModal
+        <FastAuthModalWrapper
             width='100%'
             title={false}
             closable={true}
@@ -13,6 +13,6 @@ export const AuthModal = ({modalIsOpen, onCancel, action}) => {
             destroyOnClose
         >
             <FastAuthView onClose={onCancel} action={action}/>
-        </FastAuthModal>
+        </FastAuthModalWrapper>
     )
 }

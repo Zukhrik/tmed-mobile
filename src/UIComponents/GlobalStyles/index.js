@@ -24,12 +24,16 @@ export const RootContent = styled.div`
   background-color: ${({background}) => background ? background : 'var(--default-white)'};
   padding-top: ${({paddingTop}) => paddingTop ? `${paddingTop}px` : 'unset'};
   padding-bottom: ${({paddingBottom}) => paddingBottom ? `${paddingBottom}px` : 'unset'};
-  
+
   .container {
     position: relative;
     width: 100%;
     margin: 0 auto;
     padding: 0 12px;
+
+    @media (max-width: 319px) {
+      padding: 0 6px;
+    }
   }
 `
 
@@ -82,7 +86,7 @@ export const BoxShadowBasic = styled.div`
   box-shadow: 0 2px 14px rgba(29, 161, 242, 0.15);
 `
 
-export const FastAuthModal = styled(Modal)`
+export const FastAuthModalWrapper = styled(Modal)`
   max-width: 100vw;
   margin: 0 !important;
   min-height: 100vh;
@@ -98,6 +102,7 @@ export const FastAuthModal = styled(Modal)`
   .ant-modal-footer {
     display: none;
   }
+
 
   .ant-modal-close-x {
     font-size: 20px;
@@ -115,6 +120,28 @@ export const FastAuthModal = styled(Modal)`
       top: 12px;
       right: 12px;
     }
+  }
+`
+
+export const AllScreenModal = styled(Modal)`
+  max-width: 100vw;
+  margin: 0 !important;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  top: 0;
+  bottom: 0;
+
+  .ant-modal-body {
+    padding: 0;
+  }
+
+  .ant-modal-footer {
+    display: none;
+  }
+
+  .ant-modal-close {
+    display: none;
   }
 `
 

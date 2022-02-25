@@ -349,6 +349,24 @@
     "unfollow": "Kuzatuvni to'xtatish",
     "order_records": "Buyurtmalar",
     "add_account": "Akaunt qoshish",
-    "viewers": "Kuzatuvchilar"
+    "viewers": "Kuzatuvchilar",
+    "about_me": "Men haqimda",
+    "passport_number_birth_living_place": "Passport raqami, tugilgan sana, yashash joyi",
+    "full_name": "To’liq ism sharifi",
+    "birth_date": "Tug'ilgan sanasi",
+    "no_orders": "Buyurtmalar yo'q",
+    "order_something_wake_up_me": "Buyurtma yaratish uchun tugmani bosing",
+    "start_ordering": "Buyurtmani boshlash",
+    "your_time": "Vaqtingiz",
+    "soon": "Yaqinda",
+    "coupon_discount": "Kupon chegirma",
+    "select_coupon": "Chegirmani tanlang",
+    "discount": "Chegirma",
+    "conclusion": "Hulosa",
+    "export_opinion": "Mutahasis xulosasi",
+    "my_orders": "Mening buyurtmalarim",
+    "my_records": "Mening qaydlarim",
+    "view_record": "Qaydni ko'rish",
+    "your_queue": "Sizning navbatingiz"
   }
 }

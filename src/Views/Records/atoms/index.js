@@ -37,17 +37,15 @@ export const RecordsFixedHeaderComponentWrapper = styled.div`
 export const RecordsNavLink = styled(NavLink)`
   font-family: "Golos", sans-serif;
   font-weight: var(--regular-text);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 15px;
   color: var(--grey-dwed);
   padding: 12px 0;
-  margin-right: 24px;
-  white-space: nowrap;
-  border-bottom: 0.5px solid transparent;
-  
+  border-bottom: 1.5px solid transparent;
+
   &.active {
     color: var(--primary-dwed);
-    border-bottom: 0.5px solid var(--primary-dwed);
+    border-bottom: 1.5px solid var(--primary-dwed);
   }
 `
 
@@ -111,7 +109,7 @@ export const DetailImageWrapper = styled.div`
   .qr-code-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 8px;
+    align-items: center;
   }
 
   .padding-bottom {
@@ -127,13 +125,13 @@ export const DetailImageWrapper = styled.div`
     width: 115px;
   }
 
-  ${StyledText} {
-    font-size: 14px;
-    display: flex;
-  }
-
-  ${StyledTitle} {
-    font-size: 14px;
+  .meet-time-mobile {
+    ${StyledTitle} {
+      height: 72px;
+      line-height: 72px;
+      font-size: 72px;
+      font-family: var(--medium-text);
+    }
   }
 `
 
@@ -403,5 +401,81 @@ export const ManageCountInput = styled.input`
 
   &:focus {
     outline-color: var(--primary-dwed);
+  }
+`
+
+export const EmptyCartWrapper = styled.div`
+  height: 80vh;
+  display: flex;
+  align-items: center;
+
+  .centered {
+    display: flex;
+    justify-content: center;
+  }
+
+  .centered-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    ${StyledTitle} {
+      font-size: 18px;
+    }
+
+    ${StyledText} {
+      color: var(--grey-dwed);
+    }
+  }
+`
+
+export const RecordCardWrapper = styled.div`
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 12px;
+
+  .icon-item-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 12px;
+
+    svg {
+      color: ${({color}) => color ? color : 'var(--grey-dwed)'};
+      width: 16px;
+      height: 16px;
+      margin: 0 4px;
+    }
+  }
+
+  .buttons-wrapper {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    ${StyledButton} {
+      font-size: 12px;
+    }
+
+    svg {
+      margin-right: 4px;
+    }
+  }
+`
+
+export const IconItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 12px;
+  color: ${({textColor}) => textColor ? textColor : 'var(--primary-dwed)'};
+
+  svg {
+    color: ${({color}) => color ? color : 'var(--primary-dwed)'};
+    width: 16px;
+    height: 16px;
+    margin: 0 4px;
   }
 `

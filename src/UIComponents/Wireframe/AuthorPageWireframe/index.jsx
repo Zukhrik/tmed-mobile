@@ -85,8 +85,6 @@ export const AuthorPageWireframe = (
                         pageHeader={pageHeader}
                         pageContent={pageContent}
                         filterPanel={filterPanel}
-                        orgGroupPanel={orgGroupPanel}
-                        // offeringGroup={offeringGroup}
                     />
             }
         </AuthorPageWireframeWrapper>

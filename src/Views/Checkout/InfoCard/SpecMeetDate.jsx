@@ -22,6 +22,7 @@ export const SpecMeetDate = ({activeDay, meetDate, comment, onChange}) => {
     const {$device} = useStore($appModel)
     const specId = urlData[URL_KEYS.SPECIALIST_ID]
     const {dateRange, hours, requestData, renderMeetRow} = useSpecMeetDate({activeDay})
+    
     const getDayLink = useCallback((item) => {
         const url = []
         
@@ -38,6 +39,7 @@ export const SpecMeetDate = ({activeDay, meetDate, comment, onChange}) => {
     }, [specId, pathname])
     
     const date = new Date().getTime()
+    
     
     return (
         <Row gutter={[0, 24]}>

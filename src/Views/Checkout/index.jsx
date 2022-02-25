@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import {InfoCard} from './InfoCard'
 import {useStore} from 'effector-react'
 import {useGoBack} from '../../Hooks/app'
@@ -27,7 +27,8 @@ export const Checkout = () => {
     useOrganization()
     useOrgOrderCarts()
     const {handleSurf, next} = useHandleSurf()
-    const {comment, handleSubmit, meetDate, activeDay, setComment, payment, setPayment} = useCheckout()
+    const [couponId, setCouponId] = useState(null)
+    const {comment, handleSubmit, meetDate, activeDay, setComment, payment, setPayment} = useCheckout(couponId)
     const {goBack} = useGoBack({pathname: `/records/unregistered/${organization}`})
     
     const totalCost = orgOrderData?.[organization] && orgOrderData?.[organization]?.[0]?.total_cost
@@ -44,7 +45,7 @@ export const Checkout = () => {
     
     return (
         <RootContent
-            paddingTop={$device && $device === INFO_MAT ? '100px' : '70px'}
+            paddingTop={$device && $device === INFO_MAT ? 100 : 70}
             height='100vh'
         >
             <CheckoutPageWireframe
@@ -66,6 +67,7 @@ export const Checkout = () => {
                         meetDate={meetDate}
                         activeDay={activeDay}
                         onChange={(value) => setComment(value)}
+                        setCouponId={setCouponId}
                     />
                 )}
                 link={

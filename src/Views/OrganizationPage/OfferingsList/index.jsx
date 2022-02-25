@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useStore} from 'effector-react'
 import {useParams} from 'react-router-dom'
 import {OfferingListWrapper} from '../style'
-import {$appModel} from '../../../Models/app'
+import {$appModel, switchOrgGroupPanel} from '../../../Models/app'
 import {INFO_MAT} from '../../../Constants/app'
 import {NoOfferingSvg} from '../../../Icons/NoOffering'
 import {numberFormat} from '../../../utils/number-utils'
@@ -17,13 +17,14 @@ import {useOrgOrder, useOrgOrderList} from '../../../Hooks/order'
 import Masorny, {ResponsiveMasonry} from 'react-responsive-masonry'
 import {EmptyContainerWrapper} from '../../../UIComponents/GlobalStyles'
 import {ProductCard, ProductCardSkeleton} from '../../../Components/Cards'
+import {OverlayOfferingGroup} from '../../../Components/Offering/OrgOfferings'
 
 const skeleton = generateSkeleton(10, 100, 220)
 export const OfferingsList = () => {
     useOrgOrderList()
     const {organization} = useParams()
-    const {$app: {token}, $device} = useStore($appModel)
-    const {loadMoreOfferings} = useOfferingList()
+    const {$app: {token, changeOrgGroupPanel}, $device} = useStore($appModel)
+    const {loadMoreOfferings, loadMoreOfferingGroup} = useOfferingList()
     const [auth, setAuth] = useState(false)
     const {currency, checkoutOffering} = useOrgOrder()
     const [offeringItem, setOfferingItem] = useState(false)
@@ -38,6 +39,11 @@ export const OfferingsList = () => {
     
     return (
         <>
+            <OverlaySettings
+                openSettings={changeOrgGroupPanel}
+                content={<OverlayOfferingGroup loadMore={loadMoreOfferingGroup}/>}
+                onClose={() => switchOrgGroupPanel(false)}
+            />
             {
                 $device && $device === INFO_MAT
                     ? <AuthModal

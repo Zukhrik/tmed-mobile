@@ -32,3 +32,7 @@ export const fetchOrderList = createEffect({
 export const fetchOrderIdOffers = createEffect({
     handler: order.getOrderIdOffers
 })
+
+export const fetchOrderOffersConclusions = createEffect({
+    handler: order.getOrderOffersConclusions
+})

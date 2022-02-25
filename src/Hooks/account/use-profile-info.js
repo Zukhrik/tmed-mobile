@@ -7,6 +7,10 @@ import {useTranslation} from 'react-i18next'
 import {$accountModel, accountAvatarsMount} from '../../Models/account-model'
 
 const defaultValue = {
+    name: '',
+    avatar: undefined,
+    lastname: '',
+    surname: '',
     business_ava: undefined,
     user_lang: '',
     category: null,
@@ -31,7 +35,7 @@ export function useProfileInfo() {
         enableReinitialize: true,
         onSubmit(values, {setSubmitting}) {
             setSubmitting(true)
-            const {category, region, user_lang, gender} = values
+            const {category, region, user_lang, gender, avatar} = values
             const changeLanguage = (language) => {
                 i18n.changeLanguage(language).then()
             }
@@ -40,16 +44,16 @@ export function useProfileInfo() {
                 main_cat_id: category.id,
                 region_id: region.id,
                 lang: user_lang,
-                gender: gender
+                gender: gender,
+                avatar: avatar
             }
-            
             
             if (values.user_lang === 'uz') {
                 changeLanguage('uz')
             } else if (values.user_lang === 'ru') {
                 changeLanguage('ru')
             }
-            
+    
             account.updateAccount({data})
                 .then(res => {
                     if (res) {
@@ -92,7 +96,11 @@ export function useProfileInfo() {
                 birthday: getData(accountData.birthday),
                 phone: getData(accountData.phone),
                 gender: getData(accountData.gender),
-                email: getData(accountData.email)
+                email: getData(accountData.email),
+                name: getData(accountData.name),
+                lastname: getData(accountData.lastname),
+                surname: getData(accountData.surname),
+                avatar: getData(accountData.avatar)
             })
             
             setMounted(true)

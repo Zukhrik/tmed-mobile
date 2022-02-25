@@ -1,7 +1,6 @@
 import React from 'react'
 import {Col, Row} from 'antd'
 import {useTranslation} from 'react-i18next'
-import {recordMainListData} from '../../../data'
 import {ArrowLeftSvg} from '../../../Icons/Arrow'
 import {IconBox} from '../../../UIComponents/GlobalStyles'
 import {Title} from '../../../UIComponents/Typography/Title'
@@ -13,23 +12,29 @@ export const RecordsFixedHeader = ({goBack}) => {
     return (
         <RecordsFixedHeaderComponentWrapper>
             <Row>
-                <Col span={24} className='header' onClick={goBack}>
-                    <IconBox>
+                <Col span={24} className='header'>
+                    <IconBox onClick={goBack}>
                         <ArrowLeftSvg/>
                     </IconBox>
-                    <Title>{t('records')}</Title>
+                    <Title onClick={goBack}>{t('records')}</Title>
                 </Col>
-                <Col span={24} className='scroll-width-wrapper'>
-                    {
-                        recordMainListData.map((item, idx) => (
+                <Col span={24} style={{height: 32}}>
+                    <Row wrap={false} justify='space-around' align='middle'>
+                        <Col>
                             <RecordsNavLink
-                                key={`${idx + 1}`}
-                                to={`/records/${item.id}`}
+                                to={'/records/my_orders'}
                             >
-                                {t(item.id)}
+                                {t('my_orders')}
                             </RecordsNavLink>
-                        ))
-                    }
+                        </Col>
+                        <Col>
+                            <RecordsNavLink
+                                to={'/records/my_records'}
+                            >
+                                {t('my_records')}
+                            </RecordsNavLink>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         </RecordsFixedHeaderComponentWrapper>

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import {StyledText, StyledTitle} from '../../../../UIComponents/Typography/style'
 
 export const CouponCardItemWrapper = styled.div`
-  max-width: 350px;
+  min-width: 350px;
   height: 165px;
   border-radius: 6px;
   overflow: hidden;

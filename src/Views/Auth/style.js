@@ -32,12 +32,13 @@ export const AuthContainer = styled.div`
 
 export const AuthCloseBtnWrap = styled(Link)`
   position: absolute;
+  top: 12px;
+  right: 12px;
   color: var(--default-white);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  width: 100%;
 
   svg {
     width: 24px;
@@ -56,7 +57,7 @@ export const AuthCloseBtnWrap = styled(Link)`
 
 export const ImageWrapper = styled.div`
   color: var(--primary-dwed);
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -74,7 +75,7 @@ export const ImageWrapper = styled.div`
   }
 
   @media (min-width: 576px) {
-    color: var(--default-white);
+    color: var(--dark-dwed);
   }
 
   @media (min-width: 1024px) {
@@ -89,6 +90,21 @@ export const ImageWrapper = styled.div`
       width: 180px;
       height: 70px;
     }
+  }
+`
+
+export const WelcomeWrapper = styled.div`
+  ${StyledTitle} {
+    font-family: var(--bold-text);
+    font-size: 28px;
+    color: var(--dark-dwed);
+    margin: 24px 0 8px 0;
+  }
+
+  ${StyledText} {
+    font-size: 14px;
+    color: var(--grey-dwed);
+    text-align: center;
   }
 `
 
@@ -186,6 +202,7 @@ export const ConfirmButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0 12px;
 `
 
 export const AuthAction = styled.div`

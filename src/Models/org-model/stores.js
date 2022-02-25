@@ -38,7 +38,6 @@ const $allOrgList = createStore({loading: false, data: [], result: {}, forceLoad
         return {...state, data: newData}
     })
 
-
 const $orgSpecialistCat = createStore({
     loading: false, data: [], result: {}, forceLoading: false, error: false
 })

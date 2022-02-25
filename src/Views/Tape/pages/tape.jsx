@@ -12,7 +12,7 @@ import {generateSkeleton} from '../../../utils/skeleton-utils'
 import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {TapeFixedHeader} from '../molecules/tape-fixed-header'
 import {PostSkeleton} from '../../../Components/Post/PostSkeleton'
-import {AllScreenModal} from '../../../UIComponents/AllScreenModal'
+import {FastAuthModal} from '../../../UIComponents/FastAuthModal'
 import {CreateModalPost} from '../../../Components/Post/CreateModalPost'
 
 
@@ -29,7 +29,7 @@ export const TapePage = () => {
             paddingBottom={$device && $device === INFO_MAT ? '' : '60px'}
             // background='#F2F2F2'
         >
-            <AllScreenModal
+            <FastAuthModal
                 title='search'
                 modalIsOpen={createPost}
                 onCancel={() => setCreatePost(false)}

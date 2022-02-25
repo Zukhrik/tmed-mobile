@@ -16,7 +16,7 @@ export const ChangePhoneForm = () => {
     
     return (
         <AuthContainer>
-            <AuthCloseBtnWrap to='/' style={{marginTop: 23}}>
+            <AuthCloseBtnWrap to='/'>
                 <CloseSvg/>
             </AuthCloseBtnWrap>
             <AuthForm onSubmit={formik.handleSubmit}>

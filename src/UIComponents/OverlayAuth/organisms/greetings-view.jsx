@@ -1,20 +1,20 @@
 import React from 'react'
 import {Col, Row} from 'antd'
 import {IconBox} from '../../GlobalStyles'
-import {DWEDSvg} from '../../../Icons/DWED'
 import {Button} from '../../Button'
 import {useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router-dom'
+import {LogoSvg} from '../../../Icons/Logo'
 
 export const GreetingsView = ({setAuth}) => {
     const {t} = useTranslation()
     const {push} = useHistory()
     
     return (
-        <Row gutter={[0, 12]}>
+        <Row gutter={[0, 24]}>
             <Col span={24}>
                 <IconBox color='var(--primary-dwed)'>
-                    <DWEDSvg/>
+                    <LogoSvg/>
                 </IconBox>
             </Col>
             <Col

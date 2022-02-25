@@ -3,35 +3,30 @@ import {useStore} from 'effector-react'
 import {$appModel} from '../../../Models/app'
 import {$accountModel} from '../../../Models/account-model'
 import {useGoBack} from '../../../Hooks/app'
-import {Container, RootContent} from '../../../UIComponents/GlobalStyles'
+import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {FixedHeader} from '../../../Components/FixedHeader'
 import {Switch} from 'react-router-dom'
 import {PrivateRoute} from '../../../Routes'
-import {Approved, Awaiting, Canceled, Finished, RecordsFixedHeader, Unregistered} from '../organisms'
+import {MyOrders, MyRecords, RecordsFixedHeader} from '../organisms'
 
 export const RecordsMainPage = () => {
     const {$app: {saveURL}} = useStore($appModel)
     const {$profiles: {currentProfile}} = useStore($accountModel)
-    const {goBack} = useGoBack({pathname: saveURL ? saveURL : `/@${currentProfile && currentProfile.slug_name}/tape`})
+    const {goBack} = useGoBack({pathname: saveURL ? saveURL : `/@${currentProfile && currentProfile.slug_name}`})
     
     return (
         <RootContent
             height='100vh'
-            paddingTop={100}
+            paddingTop={84}
         >
             <FixedHeader
                 height='auto'
                 component={<RecordsFixedHeader goBack={goBack}/>}
             />
-            <Container>
-                <Switch>
-                    <PrivateRoute path='/records/unregistered' component={Unregistered}/>
-                    <PrivateRoute path='/records/approved' component={Approved}/>
-                    <PrivateRoute path='/records/awaiting' component={Awaiting}/>
-                    <PrivateRoute path='/records/canceled' component={Canceled}/>
-                    <PrivateRoute path='/records/finished' component={Finished}/>
-                </Switch>
-            </Container>
+            <Switch>
+                <PrivateRoute path='/records/my_orders' component={MyOrders}/>
+                <PrivateRoute p='/records/my_records' component={MyRecords}/>
+            </Switch>
         </RootContent>
     )
 }
