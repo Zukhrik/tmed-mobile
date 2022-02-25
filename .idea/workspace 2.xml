@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a05daf98-8a6f-4a82-bf51-5bcd983ed644" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/logo 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/manifest 3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/precache-manifest.53997d97dc4fa46a438a1a4fe958699c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/robots 3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/service-worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.648708c7.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hooks/account/use-profile-info.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hooks/account/use-profile-info.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hooks/app/use-change-date-lang 2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UIComponents/mu-inputs/maleculas/date-input.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/UIComponents/mu-inputs/maleculas/date-input.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Account/atoms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Account/atoms/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Account/molecules/account-header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Account/molecules/account-header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Account/molecules/account-info-skeleton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Account/molecules/account-info-skeleton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Account/organisms/account-record-offer-id.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Account/organisms/account-record-offer-id.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Account/organisms/account-records.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Account/organisms/account-records.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Account/pages/account-information-page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Account/pages/account-information-page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Account/pages/account-page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Account/pages/account-page.jsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="24YBTNMAPQqJz0OlsIZA75Bgtnl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a05daf98-8a6f-4a82-bf51-5bcd983ed644" name="Changes" comment="" />
+      <created>1643797647704</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643797647704</updated>
+      <workItem from="1643797648937" duration="13674000" />
+      <workItem from="1643864678180" duration="13899000" />
+      <workItem from="1643885906318" duration="10769000" />
+      <workItem from="1643958502646" duration="2218000" />
+      <workItem from="1644212151084" duration="21418000" />
+      <workItem from="1644298493406" duration="11040000" />
+      <workItem from="1644400938405" duration="1230000" />
+      <workItem from="1644403423361" duration="7307000" />
+      <workItem from="1644681890823" duration="5926000" />
+      <workItem from="1644778127823" duration="9929000" />
+      <workItem from="1644923888297" duration="10732000" />
+      <workItem from="1645000087316" duration="22468000" />
+      <workItem from="1645172398786" duration="10097000" />
+      <workItem from="1645424595221" duration="14768000" />
+    </task>
+    <task id="LOCAL-00001" summary="fixing record-cards' name and category">
+      <created>1645254232133</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1645254232133</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="fixing record-cards' name and category" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing record-cards' name and category" />
+  </component>
+</project>

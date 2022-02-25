@@ -9,16 +9,23 @@ import {useHistory} from 'react-router-dom'
 import {saveURLMount} from '../../../Models/app'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {generateSkeleton} from '../../../utils/skeleton-utils'
+import {$accountModel} from '../../../Models/account-model'
 
 
 const skeleton = generateSkeleton(5)
 export const MyOrders = () => {
     const {loadMore} = useOrderList()
+    const {$profiles: {currentProfile}} = useStore($accountModel)
     const {push, location: {pathname}} = useHistory()
     const {$orderList: {data, loading, result, forceLoading}} = useStore($orderModel)
     
     const handlePush = (item) => {
         push(`/records/detail/${item.id}`)
+        saveURLMount(pathname)
+    }
+    
+    const handleRecordsPush = (item) => {
+        push(`/@${currentProfile && currentProfile.slug_name}/records/${item.id}`)
         saveURLMount(pathname)
     }
     
@@ -46,6 +53,7 @@ export const MyOrders = () => {
                                                 category={item.responsible.user.main_cat.name}
                                                 src={item.responsible.org.logo}
                                                 link={() => handlePush(item)}
+                                                recordsLink={() => handleRecordsPush(item)}
                                             />
                                         </Col>
                                     ))

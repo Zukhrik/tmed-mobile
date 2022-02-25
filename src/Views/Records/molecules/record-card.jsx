@@ -11,18 +11,12 @@ import {ClockSvg} from '../../../Icons/Clock'
 import {Button} from '../../../UIComponents/Button'
 import {DocumentText} from '../../../Icons/DocumentText'
 import {CalendarSvg} from '../../../Icons/Calendar'
-import {useHistory} from 'react-router-dom'
-import {useStore} from 'effector-react'
-import {$accountModel} from '../../../Models/account-model'
-import {saveURLMount} from '../../../Models/app'
 import {CloseCircleSvg} from '../../../Icons/Close'
 import {AllDoneCheckSvg} from '../../../Icons/CheckMark'
 import {InfinitySvg} from '../../../Icons/infinity'
 
-export const RecordCard = ({name, category, src, status, meet, date, link}) => {
+export const RecordCard = ({name, category, src, status, meet, date, link, recordsLink}) => {
     const {t} = useTranslation()
-    const {push, location: {pathname}} = useHistory()
-    const {$profiles: {currentProfile}} = useStore($accountModel)
     
     const generateStatus = useCallback((statuses) => {
         switch (statuses) {
@@ -70,12 +64,6 @@ export const RecordCard = ({name, category, src, status, meet, date, link}) => {
         }
     }, [t])
     
-    const handleRecordsPush = () => {
-        push(`/@${currentProfile && currentProfile.slug_name}/records`)
-        saveURLMount(pathname)
-    }
-    
-    
     return (
         <RecordCardWrapper>
             <Row gutter={[0, 12]}>
@@ -108,7 +96,7 @@ export const RecordCard = ({name, category, src, status, meet, date, link}) => {
                         <Col className='buttons-wrapper'>
                             {
                                 status === 5 && (
-                                    <Button variant='primary' onClick={handleRecordsPush}>
+                                    <Button variant='primary' onClick={recordsLink}>
                                         <DocumentText/>
                                         {t('view_record')}
                                     </Button>

@@ -11,16 +11,18 @@ import {FixedHeader} from '../../../Components/FixedHeader'
 import {generateSkeleton} from '../../../utils/skeleton-utils'
 import {RootContent} from '../../../UIComponents/GlobalStyles'
 import {RecordsCardSkeleton} from '../molecules/records-card-skeleton'
+import {$appModel} from '../../../Models/app'
 
 const skeleton = generateSkeleton(3)
 export const AccountRecordsDetail = () => {
     useOrder()
     useOrderIdOffers()
-    const {push, location: {pathname}} = useHistory()
     const {order_id} = useParams()
     const {username} = useParams()
+    const {push, location: {pathname}} = useHistory()
+    const {$app: {saveURL}} = useStore($appModel)
     const {$orderIdOffers: {data, forceLoading}, $orderDetail: {data: detail}} = useStore($orderModel)
-    const {goBack} = useGoBack({pathname: `/@${username}/records`})
+    const {goBack} = useGoBack({pathname: saveURL ? saveURL : `/@${username}/records`})
     const meetDate = detail && detail[order_id]?.meet_date
     
     const handleCardClick = (item) => {

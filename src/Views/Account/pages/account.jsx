@@ -57,8 +57,8 @@ export const Account = () => {
                             <Col span={24}>
                                 <AccountHeader
                                     imgUrl={userInfo.avatar}
-                                    name={`${userInfo.name} ${userInfo.lastname}`}
-                                    category={userInfo.main_cat.name}
+                                    name={userInfo?.name === '' ? userInfo?.username : `${userInfo.name} ${userInfo.lastname}`}
+                                    category={userInfo?.main_cat?.name}
                                 />
                             </Col>
                         ) : (
