@@ -10,14 +10,14 @@ const generatePath = (defaultPath, customPath = false) => {
 
 export const bottomNavbarWithToken = [
     {
-        id: 'tape',
+        id: 'org',
         path: '/',
         icon: HomeSvg,
         generatePath: generatePath,
         onClick: () => false
     },
     {
-        id: 'records/my_orders',
+        id: 'records',
         path: '/records/my_orders',
         icon: OfferingSvg,
         generatePath: generatePath,

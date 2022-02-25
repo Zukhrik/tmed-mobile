@@ -32,7 +32,7 @@ export const MyOrders = () => {
     return (
         <>
             {
-                forceLoading === 2
+                forceLoading === 2 && data
                     ? (
                         <InfiniteScroll
                             next={loadMore}
@@ -41,7 +41,7 @@ export const MyOrders = () => {
                             dataLength={result.nextOffset || 10}
                             loader={<>...loading</>}
                         >
-                            <Row gutter={[0, 12]} style={{paddingBottom: 65}} className='container'>
+                            <Row gutter={[0, 12]} style={{paddingBottom: 65, paddingTop: 12}} className='container'>
                                 {
                                     data.map((item, idx) => (
                                         <Col span={24} key={`${idx + 1}`}>
@@ -50,8 +50,8 @@ export const MyOrders = () => {
                                                 status={item.status}
                                                 date={moment(item.meet_date).format('DD/MM/YY')}
                                                 name={item.responsible.user.full_name}
-                                                category={item.responsible.user.main_cat.name}
-                                                src={item.responsible.org.logo}
+                                                category={item.responsible.org.name}
+                                                src={item.responsible.user.avatar}
                                                 link={() => handlePush(item)}
                                                 recordsLink={() => handleRecordsPush(item)}
                                             />
@@ -62,7 +62,7 @@ export const MyOrders = () => {
                             </Row>
                         </InfiniteScroll>
                     ) : (
-                        <Row gutter={[0, 12]} className='container'>
+                        <Row gutter={[0, 12]} style={{paddingBottom: 65, paddingTop: 12}} className='container'>
                             {
                                 skeleton.map((item, idx) => (
                                     <Col span={24} key={`${idx + 1}`}>

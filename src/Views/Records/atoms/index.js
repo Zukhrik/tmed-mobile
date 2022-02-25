@@ -37,7 +37,7 @@ export const RecordsFixedHeaderComponentWrapper = styled.div`
 export const RecordsNavLink = styled(NavLink)`
   font-family: "Golos", sans-serif;
   font-weight: var(--regular-text);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 15px;
   color: var(--grey-dwed);
   padding: 12px 0;

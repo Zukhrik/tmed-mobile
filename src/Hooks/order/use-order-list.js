@@ -1,5 +1,5 @@
 import {useCallback, useEffect} from 'react'
-import {$orderModel, orderListMount} from '../../Models/order-model'
+import {$orderModel, orderListMount, resetOrderListMount} from '../../Models/order-model'
 import {useStore} from 'effector-react'
 
 const initialParams = {
@@ -41,6 +41,10 @@ export function useOrderList(status) {
         }
         
         getList(data)
+        
+        return () => {
+            resetOrderListMount()
+        }
     }, [status, getList])
     
     return {loadMore}

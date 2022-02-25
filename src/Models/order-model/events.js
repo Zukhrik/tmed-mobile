@@ -23,6 +23,7 @@ export const resetOrgOrderCart = createEvent()
 export const resetOrderDetail = createEvent()
 export const orderInfoMount = createEvent()
 export const orderListMount = createEvent()
+export const resetOrderListMount = createEvent()
 export const orderOffersConclusionsMount = createEvent()
 
 orderInfoMount.watch(fetchOrder)

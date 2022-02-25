@@ -17,7 +17,7 @@ export const RecordsMainPage = () => {
     return (
         <RootContent
             height='100vh'
-            paddingTop={100}
+            paddingTop={84}
         >
             <FixedHeader
                 height='auto'

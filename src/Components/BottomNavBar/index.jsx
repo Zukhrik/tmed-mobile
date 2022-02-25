@@ -2,7 +2,6 @@ import React, {Fragment, useCallback, useState} from 'react'
 import {useStore} from 'effector-react'
 import {$appModel} from '../../Models/app'
 import {useLocation} from 'react-router-dom'
-import {INFO_MAT} from '../../Constants/app'
 import {useChatCommon} from '../../Hooks/chat'
 import {IconBox} from '../../UIComponents/GlobalStyles'
 import {$accountModel} from '../../Models/account-model'
@@ -17,7 +16,7 @@ export const BottomNavBar = () => {
     const {getChatList} = useChatCommon()
     const [auth, setAuth] = useState(false)
     const {$profiles: {currentProfile}} = useStore($accountModel)
-    const {$app: {token}, $socketCounters, $device} = useStore($appModel)
+    const {$app: {token}, $socketCounters} = useStore($appModel)
     
     const generateCustomPath = (id) => {
         const customPath = currentProfile && `${currentProfile.url}`
@@ -38,6 +37,8 @@ export const BottomNavBar = () => {
             if (currentProfile) {
                 return pathname.indexOf(currentProfile.slug_name) !== -1
             }
+        } else if (id === '/records') {
+            return pathname.slice(0, 8) === '/records'
         } else {
             return pathname === id
         }
@@ -55,20 +56,20 @@ export const BottomNavBar = () => {
                     onClose={() => setAuth(false)}
                 />}
             />
-            <BottomNavWrapper
-                borderBottom
-                style={{display: $device && $device === INFO_MAT && 'none'}}
-            >
+            <BottomNavWrapper borderBottom>
                 <NavLinkWrapper>
                     {
-                        $device && $device !== INFO_MAT ? (
-                            token && currentProfile ? (
+                        token && currentProfile
+                            ? (
                                 bottomNavbarWithToken.map((item) => {
                                     const Icon = item.icon
                                     return (
                                         <Fragment key={item.icon}>
                                             <NavLinkItem
-                                                isActive={() => getActive(`${item.id === 'tape' ? '/' : `/${item.id}`}`)}
+                                                isActive={() => getActive(`${item.id === 'org'
+                                                    ? '/'
+                                                    : `/${item.id}`}`)
+                                                }
                                                 onClick={() => item.onClick(generateAction(item.id))}
                                                 to={item.generatePath(item.path, generateCustomPath(item.id))}
                                             >
@@ -87,33 +88,28 @@ export const BottomNavBar = () => {
                                     )
                                 })
                             ) : (
-                                <>
-                                    {
-                                        bottomNavbarWithoutToken.map((item, idx) => {
-                                            const Icon = item.icon
-                                            return (
-                                                <Fragment key={`${idx + 1}`}>
-                                                    {
-                                                        item.path === '/sign-in'
-                                                            ? <BottomNavbarItem onClick={() => setAuth(true)}>
-                                                                <Icon/>
-                                                            </BottomNavbarItem>
-                                                            : (<NavLinkItem
-                                                                    isActive={() => getActive(`${item.id === 'tape' ? '/' : `/${item.id}`}`)}
-                                                                    onClick={() => item.onClick(generateAction(item.id))}
-                                                                    to={item.generatePath(item.path, generateCustomPath(item.id))}
-                                                                >
-                                                                    <Icon/>
-                                                                </NavLinkItem>
-                                                            )
-                                                    }
-                                                </Fragment>
-                                            )
-                                        })
-                                    }
-                                </>
+                                bottomNavbarWithoutToken.map((item, idx) => {
+                                    const Icon = item.icon
+                                    return (
+                                        <Fragment key={`${idx + 1}`}>
+                                            {
+                                                item.path === '/sign-in'
+                                                    ? <BottomNavbarItem onClick={() => setAuth(true)}>
+                                                        <Icon/>
+                                                    </BottomNavbarItem>
+                                                    : (<NavLinkItem
+                                                            isActive={() => getActive(`${item.id === 'tape' ? '/' : `/${item.id}`}`)}
+                                                            onClick={() => item.onClick(generateAction(item.id))}
+                                                            to={item.generatePath(item.path, generateCustomPath(item.id))}
+                                                        >
+                                                            <Icon/>
+                                                        </NavLinkItem>
+                                                    )
+                                            }
+                                        </Fragment>
+                                    )
+                                })
                             )
-                        ) : ''
                     }
                 </NavLinkWrapper>
             </BottomNavWrapper>

@@ -10,7 +10,13 @@ import {
     fetchOrgOrderCarts,
     fetchOrgOrderResponsible
 } from './effects'
-import {resetOrderCartList, resetOrderDetail, resetOrderIdOffers, resetOrgOrderCart} from './events'
+import {
+    resetOrderCartList,
+    resetOrderDetail,
+    resetOrderIdOffers,
+    resetOrderListMount,
+    resetOrgOrderCart
+} from './events'
 
 const $orgOrderCartList = createStore({loading: false, error: false, result: {}, data: [], forceLoading: 0})
     .on(fetchOrgOrderCarts.pending, (state, loading) => ({...state, loading}))
@@ -117,6 +123,7 @@ const $orderList = createStore({data: [], loading: false, result: {}, error: fal
             forceLoading: 2
         }
     })
+    .reset(resetOrderListMount)
 
 const $orderIdOffers = createStore({loading: false, data: [], result: {}, error: false, forceLoading: 0})
     .on(fetchOrderIdOffers.pending, (state, loading) => ({...state, loading}))
