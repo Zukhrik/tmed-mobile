@@ -55,7 +55,7 @@ export const Home = () => {
     }
     
     return (
-        <RootContent paddingTop={62}>
+        <RootContent paddingTop={62} paddingBottom={65}>
             <OrgsSearchInput
                 visible={modal}
                 onCancel={onClose}
@@ -91,6 +91,7 @@ export const Home = () => {
                                                                 ethics={item.rating.ethics.level}
                                                                 aesthetics={item.rating.aesthetics.level}
                                                                 professional={item.rating.professional.level}
+                                                                backgroundImage={item.background}
                                                             />
                                                         </Col>
                                                     ))

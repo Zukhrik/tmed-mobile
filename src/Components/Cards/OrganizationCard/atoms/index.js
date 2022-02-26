@@ -29,7 +29,7 @@ export const OrganizationInfoWrapper = styled.div`
   height: 90px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background: var(--default-white);
   box-shadow: var(--basic-shadow);
 
@@ -42,6 +42,7 @@ export const OrganizationInfoWrapper = styled.div`
   ${StyledText} {
     font-size: 11px;
     line-height: 11px;
+    margin-top: 8px;
   }
 `
 
