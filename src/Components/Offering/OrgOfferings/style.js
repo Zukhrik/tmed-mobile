@@ -93,18 +93,41 @@ export const CatItemNavLink = styled(NavLink)`
 export const OfferGroupWrapper = styled.div`
   width: 100%;
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  align-items: flex-start;
-  justify-content: flex-start;
-  
+  height: 400px;
+  overflow: auto;
+
   .centered {
     display: flex;
     justify-content: center;
   }
+`
 
-  &::-webkit-scrollbar {
-    height: 0;
+export const OfferingGroupSearchForm = styled.form`
+  position: fixed;
+  width: 95%;
+  background: var(--default-white);
+  height: 50px;
+  z-index: 1;
+
+  input {
+    height: 30px;
+    padding: 12px;
+    width: 100%;
+    background: var(--basic-grey-bg);
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    font-size: 12px;
+    color: var(--dark-dwed);
+  }
+
+  svg {
+    color: var(--grey-dwed);
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: 12px;
+    top: 6px;
   }
 `
 
@@ -149,12 +172,9 @@ export const GroupItemNavLink = styled(NavLink)`
 `
 
 export const FilterPanelWrapper = styled.div`
-  width: 100%;
   padding: 0 12px;
 
   ${IconBox} {
-    position: absolute;
-    right: 0;
 
     svg {
       width: 24px;
@@ -168,6 +188,8 @@ export const SearchPanelForm = styled.form`
   position: relative;
 
   ${IconBox} {
+    position: absolute;
+    right: 0;
     height: 100%;
     color: var(--grey-dwed);
 

@@ -9,14 +9,13 @@ export default ({showSeller, imgSkeletonHeight}) => {
             <SkeletonUI
                 width='100%'
                 variant='rect'
-                animation='wave'
                 borderradius={0}
                 height={imgSkeletonHeight}
             />
             <ActionLinksWrapper>
                 <InfoTextWrapper style={{marginBottom: 6}}>
-                    <SkeletonUI variant='text' heigth={16} animation='wave'/>
-                    <SkeletonUI variant='text' heigth={16} animation='wave'/>
+                    <SkeletonUI variant='text' heigth={16}/>
+                    <SkeletonUI variant='text' heigth={16}/>
                 </InfoTextWrapper>
                 {
                     showSeller
@@ -25,7 +24,7 @@ export default ({showSeller, imgSkeletonHeight}) => {
                     )
                 }
                 <ProductCostActionWrapper>
-                    <SkeletonUI animation='wave' variant='text' heigth={24} width='70%'/>
+                    <SkeletonUI variant='text' heigth={24} width='70%'/>
                 </ProductCostActionWrapper>
             </ActionLinksWrapper>
         </OffersInfoWrapper>

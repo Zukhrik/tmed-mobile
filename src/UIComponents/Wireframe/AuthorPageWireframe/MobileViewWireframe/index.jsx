@@ -16,7 +16,7 @@ export const MobileViewWireframe = (
     const {$app: {showSpecPanel}} = useStore($appModel)
     
     return (
-        <Row gutter={[0, 20]}>
+        <Row gutter={[0, 12]}>
             <Col span={24}>
                 {pageHeader}
             </Col>

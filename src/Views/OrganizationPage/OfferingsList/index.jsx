@@ -62,13 +62,13 @@ export const OfferingsList = () => {
                         />}
                     />
             }
-            <OfferingListWrapper>
-                <InfiniteScroll
-                    next={loadMoreOfferings}
-                    dataLength={result?.nextOffset || 20}
-                    hasMore={!loading && !!result?.next}
-                    loader={<>...loading</>}
-                >
+            <InfiniteScroll
+                next={loadMoreOfferings}
+                dataLength={result?.nextOffset || 20}
+                hasMore={!loading && !!result?.next}
+                loader={<>...loading</>}
+            >
+                <OfferingListWrapper>
                     <ResponsiveMasonry
                         style={{padding: '0 12px'}}
                         columnsCountBreakPoints={{350: 2, 768: 2, 900: 3}}
@@ -116,8 +116,8 @@ export const OfferingsList = () => {
                                 </Masorny>
                         }
                     </ResponsiveMasonry>
-                </InfiniteScroll>
-            </OfferingListWrapper>
+                </OfferingListWrapper>
+            </InfiniteScroll>
             {
                 result && result.count === 0 && (
                     <EmptyContainerWrapper>

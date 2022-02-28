@@ -1,18 +1,22 @@
-import React, {useCallback} from 'react'
-import {OfferGroupWrapper} from '../style'
+import React, {useCallback, useState} from 'react'
+import {OfferGroupWrapper, OfferingGroupSearchForm} from '../style'
 import {Col, Row} from 'antd'
 import {useStore} from 'effector-react'
 import {OfferingGroupItem} from '../OfferingGroupItem'
 import {URL_KEYS} from '../../../../Constants'
 import {useUrlParams} from '../../../../Hooks/app'
-import {useLocation} from 'react-router-dom'
-import {Input} from '../../../../UIComponents/Inputs'
+import {useLocation, useParams} from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import {$offeringsModel} from '../../../../Models/offerings-model'
+import {$offeringsModel, orgOfferGroupListMount} from '../../../../Models/offerings-model'
+import {SearchSvg} from '../../../../Icons/Search'
+import {useTranslation} from 'react-i18next'
 
 export const OverlayOfferingGroup = ({loadMore}) => {
+    const {t} = useTranslation()
     const {urlData} = useUrlParams()
     const {pathname} = useLocation()
+    const {organization} = useParams()
+    const [searchText, setSearchText] = useState('')
     const groupId = urlData[URL_KEYS.OFFERING_GROUP_ID]
     const {$offeringGroupList: {data, loading, result}} = useStore($offeringsModel)
     
@@ -36,19 +40,45 @@ export const OverlayOfferingGroup = ({loadMore}) => {
         }
     }, [pathname, groupId, urlData])
     
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (searchText.length > 2) {
+            const params = {
+                clear: true,
+                organization: organization,
+                params: {
+                    search: searchText
+                }
+            }
+            orgOfferGroupListMount(params)
+        }
+    }
+    
     
     return (
-        <OfferGroupWrapper>
+        <OfferGroupWrapper id='scrollableDiv'>
+            <OfferingGroupSearchForm onSubmit={handleSubmit}>
+                <input
+                    placeholder={`${t('search')}...`}
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                />
+                <SearchSvg/>
+            </OfferingGroupSearchForm>
             <InfiniteScroll
                 next={loadMore}
                 dataLength={result?.nextOffset || 20}
                 hasMore={!loading && !!result?.next}
                 loader={<>...loading</>}
+                style={{overflow: 'hidden', padding: '50px 0'}}
+                scrollableTarget='scrollableDiv'
+                endMessage={
+                    <p style={{textAlign: 'center'}}>
+                        <b>You have seen it all</b>
+                    </p>
+                }
             >
                 <Row gutter={[12, 12]}>
-                    <Col span={24}>
-                        <Input/>
-                    </Col>
                     {
                         data && data.map((item, idx) => (
                             <Col

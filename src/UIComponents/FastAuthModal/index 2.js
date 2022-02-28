@@ -1,0 +1,1 @@
+export {FastAuthModal} from './templates/fast-auth-modal'

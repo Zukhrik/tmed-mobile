@@ -1,0 +1,1 @@
+export {AllScreenModal} from './templates'
