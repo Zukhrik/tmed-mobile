@@ -1,1 +1,0 @@
-export {FastAuthModal} from './fast-auth-modal'

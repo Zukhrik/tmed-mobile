@@ -1,1 +1,0 @@
-export {AllScreenModal} from './all-screen-modal'
