@@ -69,7 +69,7 @@ export const bottomNavbarWithoutToken = [
         onClick: () => false
     },
     {
-        id: '/sign-in',
+        id: 'sign-in',
         path: '/sign-in',
         icon: LogInSvg,
         generatePath: generatePath,

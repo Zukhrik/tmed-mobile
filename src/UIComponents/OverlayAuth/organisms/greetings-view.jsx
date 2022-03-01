@@ -31,7 +31,7 @@ export const GreetingsView = ({setAuth}) => {
                 onClick={() => push('/sign-up')}
             >
                 <Button>
-                    {t('sign-up')}
+                    {t('sign_up')}
                 </Button>
             </Col>
         </Row>

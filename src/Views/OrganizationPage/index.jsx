@@ -8,14 +8,13 @@ import {$orgModel} from '../../Models/org-model'
 import {OrganizationRoute} from './OrganizationRoute'
 import {useHistory, useParams} from 'react-router-dom'
 import {UnregisteredRecordsLink} from './UnregisteredRecordsLink'
-import {useOrgSpecialistLists, useOrgSubscription} from '../../Hooks/org'
+import {useOrgSubscription} from '../../Hooks/org'
 import {FilterPanel} from '../../Components/Offering/OrgOfferings/FilterPanel'
 import {AuthorPageWireframe} from '../../UIComponents/Wireframe/AuthorPageWireframe'
 import {UserPageHeader} from '../../Components/AccountComponents'
 
 
 export const OrganizationPage = () => {
-    useOrgSpecialistLists()
     const {organization} = useParams()
     const {$device} = useStore($appModel)
     const {location: {pathname}} = useHistory()

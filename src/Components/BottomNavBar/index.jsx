@@ -15,6 +15,7 @@ export const BottomNavBar = () => {
     const {pathname} = useLocation()
     const {getChatList} = useChatCommon()
     const [auth, setAuth] = useState(false)
+    const [greetingForm, setGreetingForm] = useState(false)
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const {$app: {token}, $socketCounters} = useStore($appModel)
     
@@ -44,16 +45,21 @@ export const BottomNavBar = () => {
         }
     }, [currentProfile, pathname])
     
+    const handleClose = () => {
+        setAuth(false)
+        setGreetingForm(false)
+    }
+    
     
     return (
         <>
             <OverlaySettings
-                openSettings={auth}
-                onClose={() => setAuth(false)}
+                openSettings={greetingForm}
+                onClose={handleClose}
                 content={<OverlayAuth
                     auth={auth}
                     setAuth={setAuth}
-                    onClose={() => setAuth(false)}
+                    onClose={handleClose}
                 />}
             />
             <BottomNavWrapper borderBottom>
@@ -93,8 +99,8 @@ export const BottomNavBar = () => {
                                     return (
                                         <Fragment key={`${idx + 1}`}>
                                             {
-                                                item.path === '/sign-in'
-                                                    ? <BottomNavbarItem onClick={() => setAuth(true)}>
+                                                item.id === 'sign-in' || 'search'
+                                                    ? <BottomNavbarItem onClick={() => setGreetingForm(true)}>
                                                         <Icon/>
                                                     </BottomNavbarItem>
                                                     : (<NavLinkItem

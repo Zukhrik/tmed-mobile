@@ -13,8 +13,6 @@ export const OverlayContentWrapper = styled.div`
   left: 0;
   z-index: 1111;
   transform: translateY(${props => props.status ? 0 : '100%'});
-  overflow-x: hidden;
-  overflow-y: auto;
 `
 
 export const SettingsOverlayWrapper = styled.div`

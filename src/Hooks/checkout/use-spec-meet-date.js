@@ -128,7 +128,6 @@ export function useSpecMeetDate({activeDay}) {
                 setHours(tmp)
             } else {
                 setProcInterval(true)
-                console.log('sdffsd')
             }
         }
     }, [operating_modes, activeDay])

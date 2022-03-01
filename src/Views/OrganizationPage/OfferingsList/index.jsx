@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useStore} from 'effector-react'
 import {useParams} from 'react-router-dom'
 import {OfferingListWrapper} from '../style'
-import {$appModel, switchOrgGroupPanel} from '../../../Models/app'
+import {$appModel, changeSpecPanel, switchOrgGroupPanel} from '../../../Models/app'
 import {INFO_MAT} from '../../../Constants/app'
 import {NoOfferingSvg} from '../../../Icons/NoOffering'
 import {numberFormat} from '../../../utils/number-utils'
@@ -17,13 +17,13 @@ import {useOrgOrder, useOrgOrderList} from '../../../Hooks/order'
 import Masorny, {ResponsiveMasonry} from 'react-responsive-masonry'
 import {EmptyContainerWrapper} from '../../../UIComponents/GlobalStyles'
 import {ProductCard, ProductCardSkeleton} from '../../../Components/Cards'
-import {OverlayOfferingGroup} from '../../../Components/Offering/OrgOfferings'
+import {OverlayOfferingGroup, OverlaySpecialists} from '../../../Components/Offering/OrgOfferings'
 
 const skeleton = generateSkeleton(10, 100, 220)
 export const OfferingsList = () => {
     useOrgOrderList()
     const {organization} = useParams()
-    const {$app: {token, changeOrgGroupPanel}, $device} = useStore($appModel)
+    const {$app: {token, changeOrgGroupPanel, showSpecPanel}, $device} = useStore($appModel)
     const {loadMoreOfferings, loadMoreOfferingGroup} = useOfferingList()
     const [auth, setAuth] = useState(false)
     const {currency, checkoutOffering} = useOrgOrder()
@@ -43,6 +43,11 @@ export const OfferingsList = () => {
                 openSettings={changeOrgGroupPanel}
                 content={<OverlayOfferingGroup loadMore={loadMoreOfferingGroup}/>}
                 onClose={() => switchOrgGroupPanel(false)}
+            />
+            <OverlaySettings
+                openSettings={showSpecPanel}
+                onClose={() => changeSpecPanel(false)}
+                content={<OverlaySpecialists/>}
             />
             {
                 $device && $device === INFO_MAT
@@ -74,10 +79,10 @@ export const OfferingsList = () => {
                         columnsCountBreakPoints={{350: 2, 768: 2, 900: 3}}
                     >
                         {
-                            forceLoading === 2
+                            forceLoading === 2 && data
                                 ? <Masorny gutter='8px' style={{marginBottom: 60}}>
                                     {
-                                        data && data.length > 0 && data.map((item, idx) => {
+                                        data.length > 0 && data.map((item, idx) => {
                                             const offeringData = {
                                                 id: item.id,
                                                 qty: item.qty,

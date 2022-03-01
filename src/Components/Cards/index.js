@@ -17,4 +17,5 @@ export {OfferingHorizontalCard} from './OfferingHorizontalCard'
 export {default as ProductCardSkeleton} from './ProductCardSekelton'
 export {default as AccountCardSkeleton} from './AccountCardSkeleton'
 export {QRCodeCartCardSkeleton} from './QRCodeCartCardSkeleton'
+export {OrgSpecialistCard} from './OrgSpecialistCard'
 

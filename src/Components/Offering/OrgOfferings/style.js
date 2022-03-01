@@ -17,8 +17,17 @@ export const DataWrapper = styled.div`
 `
 
 export const SpecialistNavLink = styled(NavLink)`
+  border: 1px solid transparent;
 
   &.active {
+
+    ${StyledText} {
+      color: var(--primary-dwed);
+    }
+
+    ${StyledTitle} {
+      color: var(--primary-dwed);
+    }
 
     ${CardWrapInfo} {
       ${StyledText} {
@@ -92,9 +101,8 @@ export const CatItemNavLink = styled(NavLink)`
 
 export const OfferGroupWrapper = styled.div`
   width: 100%;
-  display: flex;
   height: 400px;
-  overflow: auto;
+  overflow-y: auto;
 
   .centered {
     display: flex;

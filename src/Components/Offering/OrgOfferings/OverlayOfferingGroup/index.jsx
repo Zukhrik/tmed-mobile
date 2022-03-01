@@ -72,11 +72,6 @@ export const OverlayOfferingGroup = ({loadMore}) => {
                 loader={<>...loading</>}
                 style={{overflow: 'hidden', padding: '50px 0'}}
                 scrollableTarget='scrollableDiv'
-                endMessage={
-                    <p style={{textAlign: 'center'}}>
-                        <b>You have seen it all</b>
-                    </p>
-                }
             >
                 <Row gutter={[12, 12]}>
                     {

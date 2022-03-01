@@ -2,7 +2,8 @@ import {useUrlParams} from '../app'
 import {URL_KEYS} from '../../Constants'
 import {useParams} from 'react-router-dom'
 import {useCallback, useEffect} from 'react'
-import {orgSpecialistCatMount, orgSpecialistsMount} from '../../Models/org-model'
+import {$orgModel, orgSpecialistCatMount, orgSpecialistsMount} from '../../Models/org-model'
+import {useStore} from 'effector-react'
 
 const initialParams = {
     limit: 20,
@@ -12,6 +13,7 @@ const initialParams = {
 export function useOrgSpecialistLists() {
     const {urlData} = useUrlParams()
     const {organization} = useParams()
+    const {$orgSpecialistsList: {result}} = useStore($orgModel)
     const spec_cat_id = urlData[URL_KEYS.SPECIALIST_CATEGORY_ID]
     
     const getOrgSpecialists = useCallback((params) => {
@@ -34,6 +36,18 @@ export function useOrgSpecialistLists() {
         }
     }, [organization])
     
+    const loadMore = useCallback(() => {
+        if (result?.nextOffset) {
+            const data = {
+                organization: organization,
+                params: {
+                    ...initialParams,
+                    offset: result.nextOffset
+                }
+            }
+            orgSpecialistsMount(data)
+        }
+    }, [result, organization])
     
     useEffect(() => {
         const data = {
@@ -69,4 +83,6 @@ export function useOrgSpecialistLists() {
         }
         
     }, [getOrgSpecialists, spec_cat_id])
+    
+    return {loadMore}
 }

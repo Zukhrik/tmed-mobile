@@ -6,19 +6,20 @@ import {SearchSvg} from '../../../../Icons/Search'
 import {useOrgOfferSearch} from '../../../../Hooks/org'
 import {IconBox} from '../../../../UIComponents/GlobalStyles'
 import {FilterPanelWrapper, FilterSearchPanel, SearchPanelForm} from '../style'
-import {$appModel, switchOrgGroupPanel} from '../../../../Models/app'
+import {$appModel, changeSpecPanel, switchOrgGroupPanel} from '../../../../Models/app'
 import {useUrlParams} from '../../../../Hooks/app'
 import {CategorySvg} from '../../../../Icons/Category'
+import {PeopleSvg} from '../../../../Icons/People'
 
 export const FilterPanel = () => {
     const {t} = useTranslation()
     const {urlData} = useUrlParams()
-    const {$app: {changeOrgGroupPanel}} = useStore($appModel)
+    const {$app: {changeOrgGroupPanel, showSpecPanel}} = useStore($appModel)
     const {searchText, setSearchText, handleSubmit} = useOrgOfferSearch()
     
     return (
         <FilterPanelWrapper>
-            <Row justify='space-between' wrap={false} align='middle' gutter={[8, 0]}>
+            <Row justify='space-between' wrap={false} align='middle' gutter={[16, 0]}>
                 <Col flex={1}>
                     <SearchPanelForm onSubmit={handleSubmit}>
                         <FilterSearchPanel
@@ -44,22 +45,18 @@ export const FilterPanel = () => {
                         <CategorySvg/>
                     </IconBox>
                 </Col>
-                {/*{*/}
-                {/*    $device && $device !== INFO_MAT && (*/}
-                {/*        <Col>*/}
-                {/*            <IconBox*/}
-                {/*                onClick={() => changeSpecPanel(!showSpecPanel)}*/}
-                {/*                color={*/}
-                {/*                    (showSpecPanel || urlData.specialist_category_id || urlData.specialist_id)*/}
-                {/*                        ? 'var(--primary-dwed)'*/}
-                {/*                        : 'var(--grey-dwed)'*/}
-                {/*                }*/}
-                {/*            >*/}
-                {/*                <PeopleSvg/>*/}
-                {/*            </IconBox>*/}
-                {/*        </Col>*/}
-                {/*    )*/}
-                {/*}*/}
+                <Col>
+                    <IconBox
+                        onClick={() => changeSpecPanel(!showSpecPanel)}
+                        color={
+                            (showSpecPanel || urlData.specialist_category_id || urlData.specialist_id)
+                                ? 'var(--primary-dwed)'
+                                : 'var(--grey-dwed)'
+                        }
+                    >
+                        <PeopleSvg/>
+                    </IconBox>
+                </Col>
             </Row>
         </FilterPanelWrapper>
     )
