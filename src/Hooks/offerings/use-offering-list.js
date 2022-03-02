@@ -127,7 +127,7 @@ export function useOfferingList() {
                 data['params']['group'] = group
             }
             offeringForceLoading()
-            getOrgOfferingsList(data)
+            // getOrgOfferingsList(data)
         }, 300)
         
         return () => {

@@ -9,7 +9,7 @@ import {$streamModel, allStreamMountList} from '../../Models/stream-model'
 import {$offeringsModel, offeringsListMount} from '../../Models/offerings-model'
 
 const initialParams = {
-    limit: 20,
+    limit: 10,
     offset: 0
 }
 

@@ -53,6 +53,7 @@
     "react-multi-carousel": "^2.6.2",
     "react-phone-input-2": "^2.13.9",
     "react-phone-number-input": "^3.1.10",
+    "react-query": "^3.34.16",
     "react-responsive-masonry": "^2.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
@@ -70,7 +71,7 @@
     "yup": "^0.32.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3030 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -97,6 +98,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.13.3",
+    "http-proxy-middleware": "^2.0.3",
     "react-dropzone": "^11.3.2"
   }
 }

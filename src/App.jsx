@@ -9,6 +9,16 @@ import {accountInfoMount} from './Models/account-model'
 import {$appModel, detectLocationMount} from './Models/app'
 import {Route, Switch, useLocation} from 'react-router-dom'
 import {useAppDb, useChatWs, useCommonWs, useIsMobile} from './Hooks/app'
+import {QueryClient, QueryClientProvider} from 'react-query'
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            retry: false
+        }
+    }
+})
 
 
 export const App = () => {
@@ -48,7 +58,7 @@ export const App = () => {
     
     
     return (
-        <>
+        <QueryClientProvider client={queryClient}>
             <Switch>
                 <Route exact path='/sign-in' component={SignInPage}/>
                 <Route exact path='/sign-up' component={SignUpPage}/>
@@ -56,6 +66,6 @@ export const App = () => {
                 <Route path='/' component={Root}/>
             </Switch>
             {generateBottomNavbar && <BottomNavBar/>}
-        </>
+        </QueryClientProvider>
     )
 }
