@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import {useStore} from 'effector-react'
 import {useParams} from 'react-router-dom'
 import {OfferingListWrapper} from '../style'
@@ -11,16 +11,18 @@ import {generateSkeleton} from '../../../utils/skeleton-utils'
 import {useOrgOrder, useOrgOrderList} from '../../../Hooks/order'
 import Masorny, {ResponsiveMasonry} from 'react-responsive-masonry'
 import {OverlayOfferingGroup, OverlaySpecialists} from '../../../Components/Offering/OrgOfferings'
-import {useBodyOverflowHidden} from '../../../Hooks/app'
+import {useBodyOverflowHidden, useUrlParams} from '../../../Hooks/app'
 import {useInfiniteQuery} from 'react-query'
 import orgApi from '../../../Service-v2/organization'
 import {numberFormat} from '../../../utils/number-utils'
 import {ProductCard, ProductCardSkeleton} from '../../../Components/Cards'
 import {EmptyContainerWrapper} from '../../../UIComponents/GlobalStyles'
 import {NoOfferingSvg} from '../../../Icons/NoOffering'
+import {URL_KEYS} from '../../../Constants'
 
 const skeleton = generateSkeleton(10, 100, 220)
 export const OfferingsList = () => {
+    const [query, setQuery] = useState(null)
     useOrgOrderList()
     const {organization} = useParams()
     const {$app: {token, changeOrgGroupPanel, showSpecPanel}} = useStore($appModel)
@@ -29,21 +31,44 @@ export const OfferingsList = () => {
     const [auth, setAuth] = useState(false)
     const {currency, checkoutOffering} = useOrgOrder()
     const [offeringItem, setOfferingItem] = useState(false)
+    const {urlData} = useUrlParams()
+    const group = urlData[URL_KEYS.OFFERING_GROUP_ID]
+    
+    useEffect(() => {
+        let timeout = null
+        timeout = setTimeout(() => {
+            const tmp = {}
+            if (group) {
+                tmp['group'] = group
+            }
+            setQuery(tmp)
+        }, 300)
+        
+        return () => {
+            clearTimeout(timeout)
+            timeout = null
+        }
+    }, [group])
     
     const {isLoading, hasNextPage, fetchNextPage, data} = useInfiniteQuery(
-        ['/org/offerings', organization],
+        ['/org/offerings', organization, query],
         async ({pageParam = 0}) => {
-            const params = {
+            
+            let params = {
                 limit: 10,
                 offset: pageParam
+            }
+            
+            if (query) {
+                params = {...params, ...query}
             }
             const res = await orgApi.getOrgOffering({slug: organization, params})
             return {...res.data, nextOffset: pageParam + 10}
         },
         {
-            enabled: !!organization,
+            enabled: !!(organization  && query),
             getNextPageParam: (data) => {
-                if (data.count - data.nextOffset > 10) {
+                if (data.count > data.nextOffset) {
                     return data?.nextOffset
                 } else {
                     return undefined
@@ -64,7 +89,9 @@ export const OfferingsList = () => {
             const arr = data?.pages
             let tmp = []
             for (let g of arr) {
-                tmp = [...tmp, ...g.result]
+                if (g) {
+                    tmp = [...tmp, ...g.result]
+                }
             }
             return tmp
         }

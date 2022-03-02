@@ -10,12 +10,13 @@ import {$appModel, detectLocationMount} from './Models/app'
 import {Route, Switch, useLocation} from 'react-router-dom'
 import {useAppDb, useChatWs, useCommonWs, useIsMobile} from './Hooks/app'
 import {QueryClient, QueryClientProvider} from 'react-query'
+import {ReactQueryDevtools} from 'react-query/devtools'
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             refetchOnWindowFocus: false,
-            retry: false
+            retry: false,
         }
     }
 })
@@ -66,6 +67,7 @@ export const App = () => {
                 <Route path='/' component={Root}/>
             </Switch>
             {generateBottomNavbar && <BottomNavBar/>}
+            <ReactQueryDevtools position='bottom-right'/>
         </QueryClientProvider>
     )
 }
