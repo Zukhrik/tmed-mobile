@@ -65,7 +65,7 @@ export const AccountInformationPage = () => {
                 title={t('about_me')}
             />
             <AboutAccountWrapper onSubmit={formik.handleSubmit}>
-                <Row gutter={[0, 12]}>
+                <Row gutter={[0, 12]} className='padding-bottom'>
                     <Col span={24} className='change-photo'>
                         {
                             formik?.values?.avatar
@@ -149,7 +149,7 @@ export const AccountInformationPage = () => {
                             onClick={() => handleClick(LISTS.REGION)}
                         />
                     </Col>
-                    <Col span={24}>
+                    <Col span={24} style={{display: 'flex', justifyContent: 'flex-end'}}>
                         <Button
                             variant='primary'
                             htmlType='submit'

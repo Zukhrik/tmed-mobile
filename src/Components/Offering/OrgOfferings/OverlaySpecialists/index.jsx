@@ -33,13 +33,24 @@ export const OverlaySpecialists = () => {
         }
     }, [search, organization])
     
+    const onChange = useCallback((value) => {
+        if(value.length === 0) {
+            const params = {
+                clear: true,
+                organization,
+            }
+            orgSpecialistsMount(params)
+        }
+        setSearch(value)
+    }, [organization])
+    
     return (
         <OfferGroupWrapper id='scrollableSpec'>
             <OfferingGroupSearchForm onSubmit={handleSubmit}>
                 <input
                     placeholder={`${t('search')}...`}
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => onChange(e.target.value)}
                 />
                 <SearchSvg/>
             </OfferingGroupSearchForm>

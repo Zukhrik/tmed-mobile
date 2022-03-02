@@ -17,7 +17,7 @@ const defaultValue = {
     region: null,
     currency: '',
     birthday: '',
-    gender: '',
+    // gender: '',
     phone: '',
     email: ''
 }
@@ -35,7 +35,7 @@ export function useProfileInfo() {
         enableReinitialize: true,
         onSubmit(values, {setSubmitting}) {
             setSubmitting(true)
-            const {category, region, user_lang, gender, avatar} = values
+            const {category, region, user_lang, avatar} = values
             const changeLanguage = (language) => {
                 i18n.changeLanguage(language).then()
             }
@@ -44,7 +44,6 @@ export function useProfileInfo() {
                 main_cat_id: category.id,
                 region_id: region.id,
                 lang: user_lang,
-                gender: gender,
                 avatar: avatar
             }
             

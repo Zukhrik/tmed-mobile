@@ -15,7 +15,7 @@ export const FilterPanel = () => {
     const {t} = useTranslation()
     const {urlData} = useUrlParams()
     const {$app: {changeOrgGroupPanel, showSpecPanel}} = useStore($appModel)
-    const {searchText, setSearchText, handleSubmit} = useOrgOfferSearch()
+    const {searchText, handleChange, handleSubmit} = useOrgOfferSearch()
     
     return (
         <FilterPanelWrapper>
@@ -26,7 +26,7 @@ export const FilterPanel = () => {
                             type='search'
                             value={searchText}
                             placeholder={`${t('search')}...`}
-                            onChange={(e) => setSearchText(e.target.value)}
+                            onChange={(e) => handleChange(e.target.value)}
                         />
                         <IconBox onClick={handleSubmit}>
                             <SearchSvg/>

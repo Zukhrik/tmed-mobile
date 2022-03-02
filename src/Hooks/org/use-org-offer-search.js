@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useCallback, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {orgOfferingsListMount} from '../../Models/offerings-model'
 
@@ -10,16 +10,27 @@ export function useOrgOfferSearch() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (searchText.trim().length > 0) {
-            let params = {
+            const params = {
                 organization: organization,
                 params: {
                     search: searchText,
                     clear: true
-                },
+                }
             }
             orgOfferingsListMount(params)
         }
     }
     
-    return {handleSubmit, setSearchText, searchText}
+    const handleChange = useCallback((value) => {
+        if (value.length === 0) {
+            const params = {
+                organization: organization,
+                clear: true
+            }
+            orgOfferingsListMount(params)
+        }
+        setSearchText(value)
+    }, [organization])
+    
+    return {handleSubmit, handleChange, searchText}
 }

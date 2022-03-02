@@ -54,6 +54,17 @@ export const OverlayOfferingGroup = ({loadMore}) => {
         }
     }
     
+    const onChange = useCallback((value) => {
+        if (value.length === 0) {
+            const params = {
+                clear: true,
+                organization
+            }
+            orgOfferGroupListMount(params)
+        }
+        setSearchText(value)
+    }, [organization])
+    
     
     return (
         <OfferGroupWrapper id='scrollableDiv'>
@@ -61,7 +72,7 @@ export const OverlayOfferingGroup = ({loadMore}) => {
                 <input
                     placeholder={`${t('search')}...`}
                     value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
+                    onChange={(e) => onChange(e.target.value)}
                 />
                 <SearchSvg/>
             </OfferingGroupSearchForm>

@@ -18,12 +18,14 @@ import Masorny, {ResponsiveMasonry} from 'react-responsive-masonry'
 import {EmptyContainerWrapper} from '../../../UIComponents/GlobalStyles'
 import {ProductCard, ProductCardSkeleton} from '../../../Components/Cards'
 import {OverlayOfferingGroup, OverlaySpecialists} from '../../../Components/Offering/OrgOfferings'
+import {useBodyOverflowHidden} from '../../../Hooks/app'
 
 const skeleton = generateSkeleton(10, 100, 220)
 export const OfferingsList = () => {
     useOrgOrderList()
     const {organization} = useParams()
     const {$app: {token, changeOrgGroupPanel, showSpecPanel}, $device} = useStore($appModel)
+    useBodyOverflowHidden(changeOrgGroupPanel || showSpecPanel)
     const {loadMoreOfferings, loadMoreOfferingGroup} = useOfferingList()
     const [auth, setAuth] = useState(false)
     const {currency, checkoutOffering} = useOrgOrder()

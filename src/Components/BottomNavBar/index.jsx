@@ -9,6 +9,7 @@ import {bottomNavbarWithoutToken, bottomNavbarWithToken} from '../../data'
 import {BottomNavbarCounter, BottomNavbarItem, BottomNavWrapper, NavLinkItem, NavLinkWrapper} from './style'
 import {OverlayAuth} from '../../UIComponents/OverlayAuth'
 import {OverlaySettings} from '../Overlay'
+import {useBodyOverflowHidden} from '../../Hooks/app'
 
 
 export const BottomNavBar = () => {
@@ -18,6 +19,7 @@ export const BottomNavBar = () => {
     const [greetingForm, setGreetingForm] = useState(false)
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const {$app: {token}, $socketCounters} = useStore($appModel)
+    useBodyOverflowHidden(greetingForm)
     
     const generateCustomPath = (id) => {
         const customPath = currentProfile && `${currentProfile.url}/tape`

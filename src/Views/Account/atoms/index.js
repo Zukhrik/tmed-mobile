@@ -57,6 +57,10 @@ export const AboutAccountWrapper = styled.form`
       }
     }
   }
+  
+  .padding-bottom {
+    padding-bottom: 65px;
+  }
 `
 
 export const AccountBlockItems = styled.div`

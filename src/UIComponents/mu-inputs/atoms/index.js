@@ -25,6 +25,10 @@ export const StyledFormControl = styled.div`
     border-bottom: none;
   }
 
+  .MuiFilledInput-underline.Mui-disabled:before {
+    border-bottom-style: none;
+  }
+
   //Standard Input
   .MuiFormControl-root.MuiTextField-root {
 
