@@ -1,5 +1,0 @@
-export {PostDescription} from './post-description'
-export {PageIndicators} from './page-indicators'
-export {CommentList} from './comment-list'
-export {PostGallery} from './post-gallery'
-export {PostPageSkeleton} from './post-page-skeleton'

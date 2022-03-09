@@ -1,1 +1,0 @@
-export {UserMessages} from './UserMessages'

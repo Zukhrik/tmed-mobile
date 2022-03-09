@@ -1,4 +1,3 @@
-export {PostCard} from '../Post'
 export {OrgCard} from './OrgCard'
 export {OfferCard} from './OfferCard'
 export {ShortCard} from './ShortCard'
@@ -15,7 +14,6 @@ export {OrderCardSkeleton} from './OrderCardSkeleton'
 export {FamousAccountCard} from './FamousAccountCard'
 export {OfferingHorizontalCard} from './OfferingHorizontalCard'
 export {default as ProductCardSkeleton} from './ProductCardSekelton'
-export {default as AccountCardSkeleton} from './AccountCardSkeleton'
 export {QRCodeCartCardSkeleton} from './QRCodeCartCardSkeleton'
 export {OrgSpecialistCard} from './OrgSpecialistCard'
 
