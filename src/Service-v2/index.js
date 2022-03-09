@@ -16,7 +16,9 @@ const axiosHeaders = (config = {}) => {
     return config
 }
 
-export const httpClientV2 = axios.create({})
+export const httpClientV2 = axios.create({
+    baseURL:'https://api.dwed.biz'
+})
 
 function subscribeTokenRefresh(cb) {
     refreshSubscribers.push(cb)

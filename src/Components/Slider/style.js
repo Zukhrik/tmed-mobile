@@ -3,6 +3,14 @@ import {IconBox} from '../../UIComponents/GlobalStyles'
 
 export const SliderWrapper = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  
+  img {
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
 
   .react-multi-carousel-dot button {
     width: 6px;

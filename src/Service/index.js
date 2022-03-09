@@ -110,7 +110,7 @@ httpClient.interceptors.request.use(config => {
         delete configParams.headers['Authorization']
         let lang = localStorage.getItem('lang') ? JSON.parse(localStorage.getItem('lang')) : 'ru'
         if (lang) {
-            configParams.headers['lang'] = lang
+            configParams.headers['X-Content-Lang'] = lang
         }
         return configParams
     }

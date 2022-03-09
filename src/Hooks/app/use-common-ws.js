@@ -31,7 +31,7 @@ export function useCommonWs() {
             // setClosed({general: true})
         },
         onError: (e) => {
-            console.log(e)
+            console.log('error from use-common-ws in app hook')
         },
     })
 

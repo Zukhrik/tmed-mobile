@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {StyledText, StyledTitle} from '../../../UIComponents/Typography/style'
 import {IconBox, SkeletonUI} from '../../../UIComponents/GlobalStyles'
+import {StyledButton} from '../../../UIComponents/Button/style'
 
 export const OfferingPageWrapper = styled.div`
   position: relative;
@@ -26,16 +27,6 @@ export const ProductInfoContentWrapper = styled.div`
   .padding {
     padding: 0 12px;
   }
-
-  .add-to-cart-button {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    font-size: 16px;
-    z-index: 10;
-    font-family: var(--medium-text);
-  }
 `
 
 export const OfferShortInfoWrapper = styled.div`
@@ -58,6 +49,26 @@ export const OfferShortInfoWrapper = styled.div`
   .info-bottom-line {
     height: 1px;
     background: #F2F2F2;
+  }
+`
+
+export const OfferingCreateButton = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  font-size: 16px;
+  z-index: 10;
+  box-shadow: 0 -2px 10px rgba(38, 38, 38, 0.25);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--default-white);
+
+  ${StyledButton} {
+    width: 100%;
+    height: 48px;
+    font-family: var(--medium-text);
   }
 `
 
@@ -171,6 +182,10 @@ export const Description = styled.div`
     line-height: 16px;
     white-space: pre-wrap;
   }
+
+  span {
+    color: var(--primary-dwed);
+  }
 `
 
 export const PropertyName = styled.div`
@@ -229,6 +244,8 @@ export const CharacteristicsList = styled.div`
     line-height: 16px;
     text-align: start;
   }
+  
+  padding-bottom: 80px;
 `
 
 export const ActionArrowWrapper = styled.div`

@@ -1,81 +1,30 @@
-import React, {useEffect, useMemo, useState} from 'react'
+import React, {useState} from 'react'
 import {useStore} from 'effector-react'
 import {useParams} from 'react-router-dom'
-import {OfferingListWrapper} from '../style'
 import {$appModel, changeSpecPanel, switchOrgGroupPanel} from '../../../Models/app'
-import {useOfferingList} from '../../../Hooks/offerings'
+import {useOfferingList, useQueryOfferingList} from '../../../Hooks/offerings'
 import {OverlaySettings} from '../../../Components/Overlay'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {OverlayAuth} from '../../../UIComponents/OverlayAuth'
 import {generateSkeleton} from '../../../utils/skeleton-utils'
 import {useOrgOrder, useOrgOrderList} from '../../../Hooks/order'
-import Masorny, {ResponsiveMasonry} from 'react-responsive-masonry'
 import {OverlayOfferingGroup, OverlaySpecialists} from '../../../Components/Offering/OrgOfferings'
-import {useBodyOverflowHidden, useUrlParams} from '../../../Hooks/app'
-import {useInfiniteQuery} from 'react-query'
-import orgApi from '../../../Service-v2/organization'
+import {useBodyOverflowHidden} from '../../../Hooks/app'
 import {numberFormat} from '../../../utils/number-utils'
 import {ProductCard, ProductCardSkeleton} from '../../../Components/Cards'
-import {EmptyContainerWrapper} from '../../../UIComponents/GlobalStyles'
-import {NoOfferingSvg} from '../../../Icons/NoOffering'
-import {URL_KEYS} from '../../../Constants'
+import {Col, Row} from 'antd'
 
 const skeleton = generateSkeleton(10, 100, 220)
 export const OfferingsList = () => {
-    const [query, setQuery] = useState(null)
     useOrgOrderList()
     const {organization} = useParams()
-    const {$app: {token, changeOrgGroupPanel, showSpecPanel}} = useStore($appModel)
-    useBodyOverflowHidden(changeOrgGroupPanel || showSpecPanel)
     const {loadMoreOfferingGroup} = useOfferingList()
     const [auth, setAuth] = useState(false)
-    const {currency, checkoutOffering} = useOrgOrder()
+    const {currency, getIsLoading, onCreatingCartItem} = useOrgOrder()
     const [offeringItem, setOfferingItem] = useState(false)
-    const {urlData} = useUrlParams()
-    const group = urlData[URL_KEYS.OFFERING_GROUP_ID]
-    
-    useEffect(() => {
-        let timeout = null
-        timeout = setTimeout(() => {
-            const tmp = {}
-            if (group) {
-                tmp['group'] = group
-            }
-            setQuery(tmp)
-        }, 300)
-        
-        return () => {
-            clearTimeout(timeout)
-            timeout = null
-        }
-    }, [group])
-    
-    const {isLoading, hasNextPage, fetchNextPage, data} = useInfiniteQuery(
-        ['/org/offerings', organization, query],
-        async ({pageParam = 0}) => {
-            
-            let params = {
-                limit: 10,
-                offset: pageParam
-            }
-            
-            if (query) {
-                params = {...params, ...query}
-            }
-            const res = await orgApi.getOrgOffering({slug: organization, params})
-            return {...res.data, nextOffset: pageParam + 10}
-        },
-        {
-            enabled: !!(organization  && query),
-            getNextPageParam: (data) => {
-                if (data.count > data.nextOffset) {
-                    return data?.nextOffset
-                } else {
-                    return undefined
-                }
-            }
-        }
-    )
+    const {$app: {token, changeOrgGroupPanel, showSpecPanel}} = useStore($appModel)
+    useBodyOverflowHidden(changeOrgGroupPanel || showSpecPanel)
+    const {list, dataLength, fetchNextPage, hasNextPage, isLoading} = useQueryOfferingList()
     
     const handleClose = () => {
         if (auth) {
@@ -83,25 +32,6 @@ export const OfferingsList = () => {
         }
         setOfferingItem(false)
     }
-    
-    const list = useMemo(() => {
-        if (data?.pages && data?.pages.length > 0) {
-            const arr = data?.pages
-            let tmp = []
-            for (let g of arr) {
-                if (g) {
-                    tmp = [...tmp, ...g.result]
-                }
-            }
-            return tmp
-        }
-        return []
-    }, [data])
-    
-    const dataLength = useMemo(() => {
-        return data?.pages ? data.pages[data.pages.length - 1]?.nextOffset || 10 : 10
-    }, [data])
-    
     
     return (
         <>
@@ -119,7 +49,7 @@ export const OfferingsList = () => {
                 openSettings={offeringItem}
                 onClose={handleClose}
                 content={<OverlayAuth
-                    action={() => checkoutOffering(offeringItem)}
+                    action={() => onCreatingCartItem(offeringItem)}
                     auth={auth}
                     setAuth={setAuth}
                     onClose={handleClose}
@@ -131,60 +61,56 @@ export const OfferingsList = () => {
                 hasMore={!isLoading && !!hasNextPage}
                 loader={<>...loading</>}
             >
-                <OfferingListWrapper>
-                    <ResponsiveMasonry
-                        style={{padding: '0 12px'}}
-                        columnsCountBreakPoints={{350: 2, 768: 2, 900: 3}}
-                    >
-                        <Masorny gutter='8px'>
-                            {
-                                !isLoading
-                                    ? (
-                                        list?.length > 0 && list.map((item) => {
-                                            const offeringData = {
-                                                id: item.id,
-                                                qty: item.qty,
-                                                name: item.name,
-                                                image: item.image,
-                                                currency: currency,
-                                                loading: item.loading,
-                                                inCart: item.is_in_cart,
-                                                organization: organization,
-                                                cost: numberFormat(item.cost),
-                                                responsible: item.responsible,
-                                                path: `/${organization}/offerings/${item.id}`
-                                            }
-                                            return (
-                                                <ProductCard
-                                                    showBag
-                                                    key={item.id}
-                                                    item={offeringData}
-                                                    handleClick={(item) => {
-                                                        token ? checkoutOffering(item) : setOfferingItem(item)
-                                                    }}
-                                                />
-                                            )
-                                        })
-                                    ) : (
-                                        skeleton.map((item, idx) => (
-                                            <ProductCardSkeleton
-                                                key={`${idx + 1}`}
-                                                imgSkeletonHeight={item}
+                <Row gutter={[12, 12]}>
+                    {
+                        !isLoading
+                            ? (
+                                list?.length > 0 && list.map((item, idx) => {
+                                    const offeringData = {
+                                        id: item.id,
+                                        qty: item.qty,
+                                        name: item.name,
+                                        image: item.image,
+                                        currency: currency,
+                                        loading: getIsLoading(item.id),
+                                        inCart: item.is_in_cart,
+                                        organization: organization,
+                                        cost: numberFormat(item.cost),
+                                        responsible: item.responsible,
+                                        path: `/${organization}/offerings/${item.id}`
+                                    }
+                                    return (
+                                        <Col span={12} key={idx + 1}>
+                                            <ProductCard
+                                                showBag
+                                                isLoading={isLoading}
+                                                item={offeringData}
+                                                handleClick={(item) => {
+                                                    !!token
+                                                        ? onCreatingCartItem(item)
+                                                        : setOfferingItem(item)
+                                                }}
                                             />
-                                        ))
+                                        </Col>
                                     )
-                            }
-                        </Masorny>
-                    </ResponsiveMasonry>
-                </OfferingListWrapper>
+                                })
+                            ) : (
+                                skeleton.map((item, idx) => (
+                                    <Col span={12} key={idx + 1}>
+                                        <ProductCardSkeleton/>
+                                    </Col>
+                                ))
+                            )
+                    }
+                </Row>
             </InfiniteScroll>
-            {
-                data?.pages && data?.pages?.count === 0 && (
-                    <EmptyContainerWrapper>
-                        <NoOfferingSvg/>
-                    </EmptyContainerWrapper>
-                )
-            }
+            {/*{*/}
+            {/*    list && list?.length === 0 && (*/}
+            {/*        <EmptyContainerWrapper>*/}
+            {/*            <NoOfferingSvg/>*/}
+            {/*        </EmptyContainerWrapper>*/}
+            {/*    )*/}
+            {/*}*/}
         </>
     )
 }

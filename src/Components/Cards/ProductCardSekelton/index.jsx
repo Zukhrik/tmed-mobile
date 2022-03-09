@@ -10,7 +10,7 @@ export default ({showSeller, imgSkeletonHeight}) => {
                 width='100%'
                 variant='rect'
                 borderradius={0}
-                height={imgSkeletonHeight}
+                height={150}
             />
             <ActionLinksWrapper>
                 <InfoTextWrapper style={{marginBottom: 6}}>

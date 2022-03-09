@@ -67,7 +67,7 @@ export const App = () => {
                 <Route path='/' component={Root}/>
             </Switch>
             {generateBottomNavbar && <BottomNavBar/>}
-            <ReactQueryDevtools position='bottom-right'/>
+            <ReactQueryDevtools position='bottom-left'/>
         </QueryClientProvider>
     )
 }

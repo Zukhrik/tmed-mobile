@@ -10,6 +10,7 @@ import {$appModel, changeSpecPanel, switchOrgGroupPanel} from '../../../../Model
 import {useUrlParams} from '../../../../Hooks/app'
 import {CategorySvg} from '../../../../Icons/Category'
 import {PeopleSvg} from '../../../../Icons/People'
+import {URL_KEYS} from '../../../../Constants'
 
 export const FilterPanel = () => {
     const {t} = useTranslation()
@@ -37,7 +38,7 @@ export const FilterPanel = () => {
                     <IconBox
                         onClick={() => switchOrgGroupPanel(!changeOrgGroupPanel)}
                         color={
-                            (changeOrgGroupPanel || urlData.specialist_category_id || urlData.specialist_id)
+                            (changeOrgGroupPanel || urlData[URL_KEYS.OFFERING_GROUP_ID])
                                 ? 'var(--primary-dwed)'
                                 : 'var(--grey-dwed)'
                         }
@@ -49,7 +50,7 @@ export const FilterPanel = () => {
                     <IconBox
                         onClick={() => changeSpecPanel(!showSpecPanel)}
                         color={
-                            (showSpecPanel || urlData.specialist_category_id || urlData.specialist_id)
+                            (showSpecPanel || urlData[URL_KEYS.SPECIALIST_ID])
                                 ? 'var(--primary-dwed)'
                                 : 'var(--grey-dwed)'
                         }

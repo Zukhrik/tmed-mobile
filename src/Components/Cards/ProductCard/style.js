@@ -16,8 +16,8 @@ export const OffersInfoWrapper = styled.div`
   position: relative;
 
   img {
+    height: 150px;
     width: 100%;
-    height: auto;
   }
 `
 
