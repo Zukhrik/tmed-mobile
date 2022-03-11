@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
 import {IconBox} from '../../../UIComponents/GlobalStyles'
 import {StyledText, StyledTitle} from '../../../UIComponents/Typography/style'
-import {CardImgWrapper, CardWrapInfo, ShortCardContainer} from '../../Cards/ShortCard/style'
+import {CardImgWrapper, CardWrapInfo} from '../../Cards/ShortCard/style'
 
 export const DataWrapper = styled.div`
   width: 100%;
@@ -17,41 +17,17 @@ export const DataWrapper = styled.div`
 `
 
 export const SpecialistNavLink = styled(NavLink)`
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
+  border-radius: 6px;
 
   &.active {
-
-    ${StyledText} {
-      color: var(--primary-dwed);
-    }
-
-    ${StyledTitle} {
-      color: var(--primary-dwed);
-    }
-
-    ${CardWrapInfo} {
-      ${StyledText} {
-        span {
-          color: var(--primary-dwed);
-        }
-      }
-
-      ${StyledTitle} {
-        span {
-          color: var(--primary-dwed);
-        }
-      }
-    }
-  }
-
-  ${ShortCardContainer} {
-    margin-right: 32px;
-    flex-direction: column;
+    border: 1.5px solid var(--primary-dwed);
   }
 
   ${CardImgWrapper} {
     margin: 0;
   }
+  
 
   ${CardWrapInfo} {
     display: flex;
@@ -60,12 +36,17 @@ export const SpecialistNavLink = styled(NavLink)`
     justify-content: center;
 
     ${StyledText} {
-      span {
-        align-items: center;
-        -webkit-line-clamp: 2;
-        letter-spacing: -0.3px;
-        color: var(--dark-dwed);
-      }
+      align-items: center;
+      -webkit-line-clamp: 2;
+      color: var(--dark-dwed);
+      word-break: break-word;
+    }
+
+    ${StyledTitle} {
+      align-items: center;
+      -webkit-line-clamp: 2;
+      color: var(--dark-dwed);
+      word-break: break-word;
     }
   }
 `
@@ -150,10 +131,10 @@ export const GroupItemNavLink = styled(NavLink)`
   background-color: var(--basic-grey-bg);
   border-radius: 6px;
   padding: 12px;
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
 
   &.active {
-    border: 1px solid var(--primary-dwed);
+    border: 1.5px solid var(--primary-dwed);
   }
 
   ${StyledText} {

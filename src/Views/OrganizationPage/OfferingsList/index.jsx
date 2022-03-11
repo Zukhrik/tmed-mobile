@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
 import {useStore} from 'effector-react'
 import {useParams} from 'react-router-dom'
-import {$appModel, changeSpecPanel, switchOrgGroupPanel} from '../../../Models/app'
-import {useOfferingList, useQueryOfferingList} from '../../../Hooks/offerings'
+import {$appModel} from '../../../Models/app'
+import {useQueryOfferingList} from '../../../Hooks/offerings'
 import {OverlaySettings} from '../../../Components/Overlay'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {OverlayAuth} from '../../../UIComponents/OverlayAuth'
 import {generateSkeleton} from '../../../utils/skeleton-utils'
 import {useOrgOrder, useOrgOrderList} from '../../../Hooks/order'
-import {OverlayOfferingGroup, OverlaySpecialists} from '../../../Components/Offering/OrgOfferings'
 import {useBodyOverflowHidden} from '../../../Hooks/app'
 import {numberFormat} from '../../../utils/number-utils'
 import {ProductCard, ProductCardSkeleton} from '../../../Components/Cards'
@@ -18,7 +17,6 @@ const skeleton = generateSkeleton(10, 100, 220)
 export const OfferingsList = () => {
     useOrgOrderList()
     const {organization} = useParams()
-    const {loadMoreOfferingGroup} = useOfferingList()
     const [auth, setAuth] = useState(false)
     const {currency, getIsLoading, onCreatingCartItem} = useOrgOrder()
     const [offeringItem, setOfferingItem] = useState(false)
@@ -36,16 +34,6 @@ export const OfferingsList = () => {
     
     return (
         <>
-            <OverlaySettings
-                openSettings={changeOrgGroupPanel}
-                content={<OverlayOfferingGroup loadMore={loadMoreOfferingGroup}/>}
-                onClose={() => switchOrgGroupPanel(false)}
-            />
-            <OverlaySettings
-                openSettings={showSpecPanel}
-                onClose={() => changeSpecPanel(false)}
-                content={<OverlaySpecialists/>}
-            />
             <OverlaySettings
                 openSettings={offeringItem}
                 onClose={handleClose}

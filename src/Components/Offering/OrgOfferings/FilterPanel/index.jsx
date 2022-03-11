@@ -11,6 +11,9 @@ import {useUrlParams} from '../../../../Hooks/app'
 import {CategorySvg} from '../../../../Icons/Category'
 import {PeopleSvg} from '../../../../Icons/People'
 import {URL_KEYS} from '../../../../Constants'
+import {OverlaySettings} from '../../../Overlay'
+import {OverlayOfferingGroup} from '../OverlayOfferingGroup'
+import {OverlaySpecialists} from '../OverlaySpecialists'
 
 export const FilterPanel = () => {
     const {t} = useTranslation()
@@ -20,6 +23,16 @@ export const FilterPanel = () => {
     
     return (
         <FilterPanelWrapper>
+            <OverlaySettings
+                openSettings={changeOrgGroupPanel}
+                content={<OverlayOfferingGroup/>}
+                onClose={() => switchOrgGroupPanel(false)}
+            />
+            <OverlaySettings
+                openSettings={showSpecPanel}
+                onClose={() => changeSpecPanel(false)}
+                content={<OverlaySpecialists/>}
+            />
             <Row justify='space-between' wrap={false} align='middle' gutter={[16, 0]}>
                 <Col flex={1}>
                     <SearchPanelForm onSubmit={handleSubmit}>

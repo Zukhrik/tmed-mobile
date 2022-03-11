@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react'
 import {OfferGroupWrapper, OfferingGroupSearchForm} from '../style'
-import {Col, Row} from 'antd'
+import {Col, Row, Spin} from 'antd'
 import {useStore} from 'effector-react'
 import {OfferingGroupItem} from '../OfferingGroupItem'
 import {URL_KEYS} from '../../../../Constants'
@@ -10,12 +10,14 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import {$offeringsModel, orgOfferGroupListMount} from '../../../../Models/offerings-model'
 import {SearchSvg} from '../../../../Icons/Search'
 import {useTranslation} from 'react-i18next'
+import {useOfferingList} from '../../../../Hooks/offerings'
 
-export const OverlayOfferingGroup = ({loadMore}) => {
+export const OverlayOfferingGroup = () => {
     const {t} = useTranslation()
     const {urlData} = useUrlParams()
     const {pathname} = useLocation()
     const {organization} = useParams()
+    const {loadMoreOfferingGroup} = useOfferingList()
     const [searchText, setSearchText] = useState('')
     const groupId = urlData[URL_KEYS.OFFERING_GROUP_ID]
     const {$offeringGroupList: {data, loading, result}} = useStore($offeringsModel)
@@ -77,10 +79,10 @@ export const OverlayOfferingGroup = ({loadMore}) => {
                 <SearchSvg/>
             </OfferingGroupSearchForm>
             <InfiniteScroll
-                next={loadMore}
+                next={loadMoreOfferingGroup}
                 dataLength={result?.nextOffset || 20}
                 hasMore={!loading && !!result?.next}
-                loader={<>...loading</>}
+                loader={<Spin/>}
                 style={{overflow: 'hidden', padding: '50px 0'}}
                 scrollableTarget='scrollableDiv'
             >

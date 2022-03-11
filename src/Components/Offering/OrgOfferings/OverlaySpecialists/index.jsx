@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react'
 import {OfferGroupWrapper, OfferingGroupSearchForm, SpecialistNavLink} from '../style'
 import {SearchSvg} from '../../../../Icons/Search'
-import {Col, Row} from 'antd'
+import {Col, Row, Spin} from 'antd'
 import {useTranslation} from 'react-i18next'
 import {useStore} from 'effector-react'
 import {$orgModel, orgSpecialistsMount} from '../../../../Models/org-model'
@@ -34,10 +34,10 @@ export const OverlaySpecialists = () => {
     }, [search, organization])
     
     const onChange = useCallback((value) => {
-        if(value.length === 0) {
+        if (value.length === 0) {
             const params = {
                 clear: true,
-                organization,
+                organization
             }
             orgSpecialistsMount(params)
         }
@@ -58,7 +58,7 @@ export const OverlaySpecialists = () => {
                 next={loadMore}
                 dataLength={result.nextOffset || 20}
                 hasMore={!loading && !!result?.next}
-                loader={<>...loading</>}
+                loader={<Spin/>}
                 style={{overflow: 'hidden', padding: '50px 0'}}
                 scrollableTarget='scrollableSpec'
             >
@@ -67,7 +67,8 @@ export const OverlaySpecialists = () => {
                         data && data.map((item, idx) => (
                             <Col
                                 className='centered'
-                                key={`${idx + 1}`} span={8}
+                                key={`${idx + 1}`}
+                                xs={8} sm={6} md={4}
                             >
                                 <SpecialistNavLink
                                     key={`${idx + 1}`}
