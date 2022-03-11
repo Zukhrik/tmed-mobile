@@ -8,6 +8,7 @@ import {tokenMount} from '../../Models/app'
 import {useTranslation} from 'react-i18next'
 import {isValidPhoneNumber} from 'libphonenumber-js'
 import {getCurrentAccount} from '../../Models/account-model'
+import {queryClient} from '../../App'
 
 const values = {
     phone: null,
@@ -63,6 +64,7 @@ export function useFastAuth({onClose, action}) {
                             Cookies.set('token', res.data.access)
                             Cookies.set('refresh-token', res.data.refresh)
                             getCurrentAccount()
+                            queryClient.clear()
                             onClose()
                             if (action) {
                                 action()

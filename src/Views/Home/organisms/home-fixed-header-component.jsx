@@ -8,7 +8,7 @@ import {IconBox} from '../../../UIComponents/GlobalStyles'
 export const HomeFixedHeaderComponent = ({setModal}) => {
     return (
         <HomeFixedHeaderComponentWrapper>
-            <Row justify='space-between' wrap={false}>
+            <Row justify='space-between' wrap={false} align='middle'>
                 <Col>
                     <IconBox>
                         <LogoSvg/>

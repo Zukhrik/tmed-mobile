@@ -8,7 +8,7 @@ export function useQueryOfferingList() {
     const {query} = useListQuery()
     const {organization} = useParams()
     
-    const {isLoading, hasNextPage, fetchNextPage, data} = useInfiniteQuery(
+    const orgOfferQuery = useInfiniteQuery(
         ['/org/offerings', organization, query],
         async ({pageParam = 0}) => {
             
@@ -36,6 +36,7 @@ export function useQueryOfferingList() {
     )
     
     const list = useMemo(() => {
+        const data = orgOfferQuery.data
         if (data?.pages && data?.pages.length > 0) {
             const arr = data?.pages
             let tmp = []
@@ -47,11 +48,12 @@ export function useQueryOfferingList() {
             return tmp
         }
         return []
-    }, [data])
+    }, [orgOfferQuery.data])
     
     const dataLength = useMemo(() => {
+        const data = orgOfferQuery.data
         return data?.pages ? data.pages[data.pages.length - 1]?.nextOffset || 10 : 10
-    }, [data])
+    }, [orgOfferQuery.data])
     
-    return {dataLength, list, isLoading, hasNextPage, fetchNextPage, }
+    return {orgOfferQuery, dataLength, list}
 }

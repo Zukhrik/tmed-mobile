@@ -119,7 +119,6 @@ export const Home = () => {
                         )
                 }
             </InfiniteScroll>
-        
         </RootContent>
     )
 }

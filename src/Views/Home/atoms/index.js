@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const HomeFixedHeaderComponentWrapper = styled.div`
   .search-icon-wrapper {
-    color: var(--dark-dwed);
+    color: var(--grey-dwed);
     display: flex;
     justify-content: center;
     align-items: center;

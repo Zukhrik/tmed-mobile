@@ -101,7 +101,7 @@ export const BottomNavBar = () => {
                                     return (
                                         <Fragment key={`${idx + 1}`}>
                                             {
-                                                item.id === 'sign-in' || 'search'
+                                                item.id === 'sign-in'
                                                     ? <BottomNavbarItem onClick={() => setGreetingForm(true)}>
                                                         <Icon/>
                                                     </BottomNavbarItem>

@@ -8,6 +8,7 @@ import {$accountModel} from '../../Models/account-model'
 import {getOrgOrderCartsMount} from '../../Models/order-model'
 import {useMutation} from 'react-query'
 import {queryClient} from '../../App'
+import cart from '../../Service-v2/cart'
 
 export function useOrgOrder() {
     const {query} = useListQuery()
@@ -17,59 +18,7 @@ export function useOrgOrder() {
     const {$profiles: {currentProfile}} = useStore($accountModel)
     const currency = currentProfile ? currentProfile.currency.code : $detectLocationInfo.currency || ''
     
-    // const checkoutOffering = useCallback((event) => {
-    //     const orgSpecList = event.responsible
-    //
-    //     if (!event.loading) {
-    //         changeLoadingStatusOffering({id: event.id, status: true})
-    //         if (!event.inCart) {
-    //             const params = {
-    //                 org_slug_name: event.organization,
-    //                 data: {
-    //                     offering_id: event.id,
-    //                     responsible_id: specId ? specId : orgSpecList[0].id
-    //                 }
-    //             }
-    //             order.postOrgOrderCart(params)
-    //                 .then((res) => {
-    //                     if (res) {
-    //                         saveURLMount(pathname)
-    //                         changeOrgOfferingStatus({
-    //                             offering_id: params.data.offering_id,
-    //                             status: true,
-    //                             loadingStatus: false
-    //                         })
-    //                         getOrgOrderCartsMount({
-    //                             org_slug_name: event.organization,
-    //                             params: {limit: 1, offset: 0},
-    //                             clear: true
-    //                         })
-    //                     }
-    //                 })
-    //                 .catch((e) => {
-    //                     console.log(e.response)
-    //                 })
-    //         } else {
-    //             order.deleteOrderCart({offering_id: event.id})
-    //                 .then((res) => {
-    //                     if (res) {
-    //                         changeOrgOfferingStatus({offering_id: event.id, status: false, loadingStatus: false})
-    //                         getOrgOrderCartsMount({
-    //                             org_slug_name: event.organization,
-    //                             params: {limit: 1, offset: 0},
-    //                             clear: true
-    //                         })
-    //                     }
-    //                 })
-    //                 .catch((e) => {
-    //                     console.log(e.response)
-    //                 })
-    //         }
-    //     }
-    //
-    // }, [specId, pathname])
-    
-    const create = useMutation(order.postOrgOrderCart, {
+    const create = useMutation(cart.addToCart, {
         onMutate: itemInfo => {
             queryClient.cancelQueries(['/org/offerings', organization])
             
@@ -129,26 +78,29 @@ export function useOrgOrder() {
         if (event.inCart) {
             remove.mutate({offering_id: event.id})
         } else {
-            const params = {
-                org_slug_name: event.organization,
-                data: {
+            const data = [
+                {
                     offering_id: event.id,
-                    responsible_id: specId ? specId : orgSpecList[0].id
+                    responsible_id: specId ? specId : orgSpecList[0].id,
+                    qty: event.qty ? event.qty : 1
                 }
-            }
-            create.mutate(params)
+            ]
+            create.mutate(data)
         }
     }, [create, specId, remove])
     
     const getIsLoading = useCallback((id) => {
         if (create.isLoading && create?.variables?.data?.offering_id === id) {
             return true
-        } else if (remove.isLoading && remove?.variables?.offering_id === id) {
+        }
+        
+        if (remove.isLoading && remove?.variables?.offering_id === id) {
             return true
         }
         
         return false
     }, [create, remove])
+    
     
     return {
         currency,

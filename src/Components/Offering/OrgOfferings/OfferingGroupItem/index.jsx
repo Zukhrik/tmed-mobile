@@ -4,6 +4,7 @@ import {GroupItemNavLink} from '../style'
 import {$appModel} from '../../../../Models/app'
 import {INFO_MAT} from '../../../../Constants/app'
 import {Text} from '../../../../UIComponents/Typography/Text'
+import {Avatar} from '../../../../UIComponents/Avatar'
 
 export const OfferingGroupItem = ({imgUrl, path, isActive, name}) => {
     const {$device} = useStore($appModel)
@@ -12,9 +13,8 @@ export const OfferingGroupItem = ({imgUrl, path, isActive, name}) => {
         <GroupItemNavLink
             to={path}
             isActive={() => isActive()}
-            maxwidth={$device && $device === INFO_MAT ? '120px' : ''}
         >
-            <img src={imgUrl} alt={name}/>
+            <Avatar size={60} shape='circular' imgUrl={imgUrl}/>
             <Text
                 className='offering-group-name'
                 level={$device && $device === INFO_MAT ? 3 : 5}

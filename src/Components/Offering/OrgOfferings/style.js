@@ -107,6 +107,7 @@ export const OfferGroupWrapper = styled.div`
   .centered {
     display: flex;
     justify-content: center;
+    align-items: start;
   }
 `
 
@@ -142,28 +143,17 @@ export const OfferingGroupSearchForm = styled.form`
 export const GroupItemNavLink = styled(NavLink)`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  max-width: ${({maxwidth}) => maxwidth ? maxwidth : '75px'};
-
-  img {
-    overflow: hidden;
-    border-radius: 4px;
-    width: 104px;
-    height: 84px;
-    object-fit: contain;
-    border: 3px solid transparent;
-  }
+  justify-content: space-between;
+  width: 100%;
+  height: 134px;
+  background-color: var(--basic-grey-bg);
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid transparent;
 
   &.active {
-    img {
-      border: 3px solid var(--primary-dwed);
-      border-radius: var(--basic-border-radius);
-    }
-
-    .offering-group-name {
-      color: var(--primary-dwed);
-    }
+    border: 1px solid var(--primary-dwed);
   }
 
   ${StyledText} {
@@ -176,6 +166,7 @@ export const GroupItemNavLink = styled(NavLink)`
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    word-break: break-word;
   }
 `
 

@@ -7,7 +7,6 @@ import {usePushToCart} from '../../Hooks/order'
 import {$orgModel} from '../../Models/org-model'
 import {OrganizationRoute} from './OrganizationRoute'
 import {useHistory, useParams} from 'react-router-dom'
-import {UnregisteredRecordsLink} from './UnregisteredRecordsLink'
 import {useOrgSubscription} from '../../Hooks/org'
 import {FilterPanel} from '../../Components/Offering/OrgOfferings/FilterPanel'
 import {AuthorPageWireframe} from '../../UIComponents/Wireframe/AuthorPageWireframe'
@@ -40,7 +39,6 @@ export const OrganizationPage = () => {
                 />
             }
             filterPanel={pathname === `/${organization}/offerings` && <FilterPanel/>}
-            pushLink={<UnregisteredRecordsLink/>}
             pageContent={<OrganizationRoute/>}
         />
     )

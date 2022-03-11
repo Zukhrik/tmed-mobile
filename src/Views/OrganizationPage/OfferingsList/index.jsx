@@ -24,7 +24,7 @@ export const OfferingsList = () => {
     const [offeringItem, setOfferingItem] = useState(false)
     const {$app: {token, changeOrgGroupPanel, showSpecPanel}} = useStore($appModel)
     useBodyOverflowHidden(changeOrgGroupPanel || showSpecPanel)
-    const {list, dataLength, fetchNextPage, hasNextPage, isLoading} = useQueryOfferingList()
+    const {list, dataLength, orgOfferQuery: {isLoading, hasNextPage, fetchNextPage}} = useQueryOfferingList()
     
     const handleClose = () => {
         if (auth) {
@@ -32,6 +32,7 @@ export const OfferingsList = () => {
         }
         setOfferingItem(false)
     }
+    
     
     return (
         <>
