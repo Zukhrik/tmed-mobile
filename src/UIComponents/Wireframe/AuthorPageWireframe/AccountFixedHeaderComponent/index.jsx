@@ -3,7 +3,20 @@ import {Col, Row} from 'antd'
 import {IconBox} from '../../../GlobalStyles'
 import {AccountFixedHeaderWrapper} from '../style'
 
-export const AccountFixedHeaderComponent = ({logo, cart, menu, logoClick, cartClick, menuClick, title, create, handleCreate}) => {
+export const AccountFixedHeaderComponent = (
+    {
+        logo,
+        cart,
+        menu,
+        logoClick,
+        cartClick,
+        menuClick,
+        title,
+        create,
+        handleCreate
+        
+    }
+) => {
     return (
         <AccountFixedHeaderWrapper>
             <Row gutter={[12, 0]} align='middle' justify='space-between'>

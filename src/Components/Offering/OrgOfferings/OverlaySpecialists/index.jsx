@@ -10,14 +10,17 @@ import {URL_KEYS} from '../../../../Constants'
 import {useOrgSpecialistLists, useUrlGenerate} from '../../../../Hooks/org'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {useParams} from 'react-router-dom'
+import {generateSkeleton} from '../../../../utils/skeleton-utils'
+import {OfferingGroupItemSkeleton} from '../OfferingGroupItemSkeleton'
 
+const skeleton = generateSkeleton(10)
 export const OverlaySpecialists = () => {
     const {t} = useTranslation()
     const {organization} = useParams()
     const {loadMore} = useOrgSpecialistLists()
     const {getActive, generateUrl} = useUrlGenerate()
     const [search, setSearch] = useState('')
-    const {$orgSpecialistsList: {data, result, loading}} = useStore($orgModel)
+    const {$orgSpecialistsList: {data, result, loading, forceLoading}} = useStore($orgModel)
     
     const handleSubmit = useCallback((e) => {
         e.preventDefault()
@@ -64,25 +67,34 @@ export const OverlaySpecialists = () => {
             >
                 <Row gutter={[12, 12]}>
                     {
-                        data && data.map((item, idx) => (
-                            <Col
-                                className='centered'
-                                key={`${idx + 1}`}
-                                xs={8} sm={6} md={4}
-                            >
-                                <SpecialistNavLink
-                                    key={`${idx + 1}`}
-                                    to={generateUrl(URL_KEYS.SPECIALIST_ID, item.id)}
-                                    isActive={() => getActive(URL_KEYS.SPECIALIST_ID, item.id)}
-                                >
-                                    <OrgSpecialistCard
-                                        name={item.user.full_name}
-                                        src={item.user.avatar}
-                                        category={item.job.name}
-                                    />
-                                </SpecialistNavLink>
-                            </Col>
-                        ))
+                        data && forceLoading === 2
+                            ? (
+                                data.map((item, idx) => (
+                                    <Col
+                                        className='centered'
+                                        key={`${idx + 1}`}
+                                        xs={8} sm={6} md={4}
+                                    >
+                                        <SpecialistNavLink
+                                            key={`${idx + 1}`}
+                                            to={generateUrl(URL_KEYS.SPECIALIST_ID, item.id)}
+                                            isActive={() => getActive(URL_KEYS.SPECIALIST_ID, item.id)}
+                                        >
+                                            <OrgSpecialistCard
+                                                name={item.user.full_name}
+                                                src={item.user.avatar}
+                                                category={item.job.name}
+                                            />
+                                        </SpecialistNavLink>
+                                    </Col>
+                                ))
+                            ) : (
+                                skeleton.map((ite, idx) => (
+                                    <Col key={idx + 1} xs={8} sm={6} md={4}>
+                                        <OfferingGroupItemSkeleton/>
+                                    </Col>
+                                ))
+                            )
                     }
                 </Row>
             </InfiniteScroll>

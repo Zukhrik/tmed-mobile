@@ -2,16 +2,12 @@ import {useUrlParams} from '../app'
 import {URL_KEYS} from '../../Constants'
 import {useParams} from 'react-router-dom'
 import {useCallback, useEffect} from 'react'
-import {
-    $offeringsModel,
-    offeringForceLoading,
-    orgOfferGroupListMount,
-    orgOfferingsListMount
-} from '../../Models/offerings-model'
+import {$offeringsModel, orgOfferGroupListMount, orgOfferingsListMount} from '../../Models/offerings-model'
 import {useStore} from 'effector-react'
+import {$appModel} from '../../Models/app'
 
 const initialParams = {
-    limit: 20,
+    limit: 10,
     offset: 0
 }
 
@@ -20,9 +16,10 @@ export function useOfferingList() {
     const {organization} = useParams()
     const group = urlData[URL_KEYS.OFFERING_GROUP_ID]
     const specialist = urlData[URL_KEYS.SPECIALIST_ID]
+    const {$app: {changeOrgGroupPanel}} = useStore($appModel)
     const {$offeringsList: {result}} = useStore($offeringsModel)
     const {$offeringGroupList: {result: offeringGroupResult}} = useStore($offeringsModel)
-
+    
     
     const getOfferingGroupList = useCallback((params) => {
         if (organization) {
@@ -91,50 +88,21 @@ export function useOfferingList() {
                 }
             }
             
-            if (specialist) {
-                data['params']['specialist'] = specialist
-            } else {
-                delete data['params']['specialist']
-            }
-            
-            getOfferingGroupList(data)
-        }, 300)
-        
-        return () => {
-            clearTimeout(timeout)
-            timeout = null
-        }
-    }, [specialist, getOfferingGroupList])
-    
-    useEffect(() => {
-        let timeout = null
-        
-        timeout = setTimeout(() => {
-            const data = {
-                clear: true,
-                params: {
-                    ...initialParams
+            if (changeOrgGroupPanel) {
+                if (specialist) {
+                    data['params']['specialist'] = specialist
+                } else {
+                    delete data['params']['specialist']
                 }
+                getOfferingGroupList(data)
             }
-            
-            if (specialist) {
-                data['params']['responsible'] = specialist
-            } else {
-                delete data['params']['responsible']
-            }
-            
-            if (group) {
-                data['params']['group'] = group
-            }
-            offeringForceLoading()
-            // getOrgOfferingsList(data)
         }, 300)
         
         return () => {
             clearTimeout(timeout)
             timeout = null
         }
-    }, [getOrgOfferingsList, specialist, group])
+    }, [specialist, getOfferingGroupList, changeOrgGroupPanel])
     
     return {
         loadMoreOfferings,

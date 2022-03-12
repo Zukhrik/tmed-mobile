@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
-import {IconBox} from '../../../UIComponents/GlobalStyles'
 import {StyledText, StyledTitle} from '../../../UIComponents/Typography/style'
 import {CardImgWrapper, CardWrapInfo} from '../../Cards/ShortCard/style'
 
@@ -27,7 +26,7 @@ export const SpecialistNavLink = styled(NavLink)`
   ${CardImgWrapper} {
     margin: 0;
   }
-  
+
 
   ${CardWrapInfo} {
     display: flex;
@@ -151,57 +150,15 @@ export const GroupItemNavLink = styled(NavLink)`
   }
 `
 
-export const FilterPanelWrapper = styled.div`
-  padding: 0 12px;
-
-  ${IconBox} {
-
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-  }
-`
-
-export const SearchPanelForm = styled.form`
-  display: flex;
-  position: relative;
-
-  ${IconBox} {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    color: var(--grey-dwed);
-
-    svg {
-      width: 14px;
-      height: 14px;
-      margin-right: 12px;
-    }
-  }
-`
-
-export const FilterSearchPanel = styled.input`
-  height: 30px;
-  padding: 12px;
-  width: 100%;
-  background: var(--basic-grey-bg);
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  font-size: 12px;
-  color: var(--dark-dwed);
-
-  &::placeholder {
-    color: var(--grey-dwed);
-    font-size: 12px;
-  }
-`
-
 export const OfferingGroupItemSkeletonWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: ${({height}) => height ? height : 'auto'};
+  justify-content: space-between;
+  width: 100%;
+  height: 134px;
+  background-color: var(--basic-grey-bg);
+  border-radius: 6px;
+  padding: 12px;
+  border: 1.5px solid #f2f2f2;
 `

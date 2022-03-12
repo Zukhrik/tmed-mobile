@@ -20,7 +20,6 @@ export const OfferingGroupItem = ({imgUrl, path, isActive, name}) => {
                 level={$device && $device === INFO_MAT ? 3 : 5}
             >
                 {name}
-                {/*{truncateString(name, $device && $device === INFO_MAT ? 6 : 7)}*/}
             </Text>
         </GroupItemNavLink>
     )

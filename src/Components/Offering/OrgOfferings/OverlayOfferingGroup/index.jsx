@@ -11,7 +11,10 @@ import {$offeringsModel, orgOfferGroupListMount} from '../../../../Models/offeri
 import {SearchSvg} from '../../../../Icons/Search'
 import {useTranslation} from 'react-i18next'
 import {useOfferingList} from '../../../../Hooks/offerings'
+import {generateSkeleton} from '../../../../utils/skeleton-utils'
+import {OfferingGroupItemSkeleton} from '../OfferingGroupItemSkeleton'
 
+const skeleton = generateSkeleton(10)
 export const OverlayOfferingGroup = () => {
     const {t} = useTranslation()
     const {urlData} = useUrlParams()
@@ -20,7 +23,7 @@ export const OverlayOfferingGroup = () => {
     const {loadMoreOfferingGroup} = useOfferingList()
     const [searchText, setSearchText] = useState('')
     const groupId = urlData[URL_KEYS.OFFERING_GROUP_ID]
-    const {$offeringGroupList: {data, loading, result}} = useStore($offeringsModel)
+    const {$offeringGroupList: {data, loading, result, forceLoading}} = useStore($offeringsModel)
     
     const generateUrl = useCallback((id) => {
         const url = []
@@ -88,19 +91,28 @@ export const OverlayOfferingGroup = () => {
             >
                 <Row gutter={[12, 12]}>
                     {
-                        data && data.map((item, idx) => (
-                            <Col
-                                className='centered'
-                                key={`${idx + 1}`} span={8}
-                            >
-                                <OfferingGroupItem
-                                    name={item.name}
-                                    imgUrl={item.image}
-                                    path={generateUrl(item.id)}
-                                    isActive={() => groupId && groupId === String(item.id)}
-                                />
-                            </Col>
-                        ))
+                        data && forceLoading === 2
+                            ? (
+                                data.map((item, idx) => (
+                                    <Col
+                                        className='centered'
+                                        key={idx + 1} xs={8} sm={6} md={4}
+                                    >
+                                        <OfferingGroupItem
+                                            name={item.name}
+                                            imgUrl={item.image}
+                                            path={generateUrl(item.id)}
+                                            isActive={() => groupId && groupId === String(item.id)}
+                                        />
+                                    </Col>
+                                ))
+                            ) : (
+                                skeleton.map((item, idx) => (
+                                    <Col key={idx + 1} xs={8} sm={6} md={4} className='centered'>
+                                        <OfferingGroupItemSkeleton/>
+                                    </Col>
+                                ))
+                            )
                     }
                 </Row>
             </InfiniteScroll>

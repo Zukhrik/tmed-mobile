@@ -6,7 +6,7 @@ import {Route, Switch} from 'react-router-dom'
 import PrivateRoute from '../Routes/PrivateRoute'
 import {OfferingPage} from '../Views/OfferingPage'
 import {RootContent} from '../UIComponents/GlobalStyles'
-import {OrganizationPage} from '../Views/OrganizationPage'
+import {OrganizationPage} from '../Views/Organization'
 
 export const Root = () => {
     return (
