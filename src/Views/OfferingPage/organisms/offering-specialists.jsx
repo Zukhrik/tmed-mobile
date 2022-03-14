@@ -1,12 +1,11 @@
 import React from 'react'
 import {Col, Row} from 'antd'
-import {DescriptionWrapper} from '../atoms'
+import {DescriptionWrapper, SpecialistNavLink, SpecListWrapper} from '../atoms'
 import {URL_KEYS} from '../../../Constants'
 import {useTranslation} from 'react-i18next'
 import {useUrlGenerate} from '../../../Hooks/org'
 import {Text} from '../../../UIComponents/Typography/Text'
 import {ShortCard, ShortCardSkeleton} from '../../../Components/Cards'
-import {DataWrapper, SpecialistNavLink} from '../../../Components/Offering/OrgOfferings/style'
 
 
 export const OfferSpecialists = ({res, isLoading}) => {
@@ -22,7 +21,7 @@ export const OfferSpecialists = ({res, isLoading}) => {
                 </DescriptionWrapper>
             </Col>
             <Col span={24}>
-                <DataWrapper>
+                <SpecListWrapper>
                     {
                         !isLoading
                             ? (
@@ -57,7 +56,7 @@ export const OfferSpecialists = ({res, isLoading}) => {
                                 />
                             )
                     }
-                </DataWrapper>
+                </SpecListWrapper>
             </Col>
         </Row>
     )

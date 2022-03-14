@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import {StyledText, StyledTitle} from '../../../UIComponents/Typography/style'
 import {IconBox, SkeletonUI} from '../../../UIComponents/GlobalStyles'
 import {StyledButton} from '../../../UIComponents/Button/style'
+import {NavLink} from 'react-router-dom'
+import {CardImgWrapper, CardWrapInfo} from '../../../Components/Cards/ShortCard/style'
 
 export const OfferingPageWrapper = styled.div`
   position: relative;
@@ -244,7 +246,7 @@ export const CharacteristicsList = styled.div`
     line-height: 16px;
     text-align: start;
   }
-  
+
   padding-bottom: 80px;
 `
 
@@ -256,4 +258,53 @@ export const ActionArrowWrapper = styled.div`
   color: var(--dark-dwed);
   justify-content: space-between;
   transform: scaleY(${({status}) => status ? -1 : 1});
+`
+
+export const SpecListWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  align-items: flex-start;
+
+  &::-webkit-scrollbar {
+    height: 0;
+  }
+`
+
+export const SpecialistNavLink = styled(NavLink)`
+  margin-right: 12px;
+
+  &.active {
+    span {
+      color: var(--primary-dwed);
+    }
+
+    span {
+      color: var(--primary-dwed);
+    }
+  }
+
+  ${CardImgWrapper} {
+    margin: 0;
+  }
+
+  ${CardWrapInfo} {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    ${StyledText} {
+      align-items: center;
+      -webkit-line-clamp: 2;
+      color: var(--dark-dwed);
+    }
+
+    ${StyledTitle} {
+      align-items: center;
+      -webkit-line-clamp: 2;
+      color: var(--dark-dwed);
+    }
+  }
 `
