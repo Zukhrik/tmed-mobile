@@ -10,7 +10,7 @@ export function useAddSpecialistUrl() {
     const {urlData} = useUrlParams()
     const {organization} = useParams()
     const specId = urlData[URL_KEYS.SPECIALIST_ID]
-    const {$orderCartList: {data, forceLoading}} = useStore($orderModel)
+    const {$orderCartList: {data}} = useStore($orderModel)
     const currentOrg = data.find(item => item.seller.slug_name === organization)
     const otherOrgs = data.filter(item => item.seller.slug_name !== organization)
     const specList = currentOrg ? currentOrg.seller.specialists : []
@@ -31,5 +31,5 @@ export function useAddSpecialistUrl() {
         }
     }, [specList, specId, organization, currentOrg, push, data])
     
-    return {currentOrg, organization, specId, specList, otherOrgs, currentSpecInfo, push, forceLoading}
+    return {currentOrg, organization, specId, specList, otherOrgs, currentSpecInfo, push}
 }

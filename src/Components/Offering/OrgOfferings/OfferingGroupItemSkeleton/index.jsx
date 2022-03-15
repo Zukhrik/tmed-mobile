@@ -1,19 +1,17 @@
 import React from 'react'
-import {useStore} from 'effector-react'
-import {$appModel} from '../../../../Models/app'
-import {INFO_MAT} from '../../../../Constants/app'
-import {OfferingGroupItemSkeletonWrapper} from '../style'
 import {SkeletonUI} from '../../../../UIComponents/GlobalStyles'
-import {Avatar} from '../../../../UIComponents/Avatar'
+import {Col, Row} from 'antd'
 
 export const OfferingGroupItemSkeleton = () => {
-    const {$device} = useStore($appModel)
     
     return (
-        <OfferingGroupItemSkeletonWrapper height={$device && $device !== INFO_MAT ? '113px' : ''}>
-            <Avatar size={60}/>
-            <SkeletonUI variant='text' width={75}/>
-            <SkeletonUI variant='text' width={85}/>
-        </OfferingGroupItemSkeletonWrapper>
+        <Row gutter={[0, 4]}>
+            <Col span={24}>
+                <SkeletonUI variant='rect' width={90} height={90}/>
+            </Col>
+            <Col span={24}>
+                <SkeletonUI variant='text' width={90} height={18}/>
+            </Col>
+        </Row>
     )
 }

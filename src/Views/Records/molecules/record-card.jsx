@@ -53,7 +53,7 @@ export const RecordCard = ({name, category, src, status, meet, date, link, recor
                         color='#05D696'
                         textColor='#05D696'
                     >
-                        <InfinitySvg/>{t('QR_Code_scanned')}
+                        <InfinitySvg/>{t('in_processing')}
                     </IconItemWrapper>
                 )
             case 5:

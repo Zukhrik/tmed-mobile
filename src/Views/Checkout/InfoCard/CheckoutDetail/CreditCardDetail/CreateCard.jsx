@@ -32,7 +32,7 @@ export const CreateCard = (
                 cardId
                     ? (
                         <CreditCardDetailForm onSubmit={codeFormik.handleSubmit}>
-                            <Row gutter={[0, 24]}>
+                            <Row gutter={[0, 12]}>
                                 <Col span={24}>
                                     <Title>{t('enter_code_activation')}</Title>
                                 </Col>
@@ -92,7 +92,7 @@ export const CreateCard = (
                     )
                     : (
                         <CreditCardDetailForm onSubmit={formik.handleSubmit}>
-                            <Row gutter={[0, 24]}>
+                            <Row gutter={[0, 12]}>
                                 <Col span={24}>
                                     <Title>{t('enter_bank_card_details')}</Title>
                                 </Col>

@@ -84,10 +84,6 @@ export const OfferingPage = () => {
                                 <OfferSpecialists
                                     res={res}
                                     isLoading={isLoading}
-                                    buttonLoad={buttonLoad}
-                                    openModal={openModal}
-                                    handleRequest={handleRequest}
-                                    setOpenModal={setOpenModal}
                                 />
                             </Col>
                             <Col span={24}>

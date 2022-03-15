@@ -41,6 +41,23 @@ export function useOfferingOrderInOfferPage() {
                     }
                 })
         }
+        
+        // const params = {
+        //     org_slug_name: organization,
+        //     data: {
+        //         offering_id,
+        //         responsible_id: specId
+        //     }
+        // }
+        // setButtonLoad(true)
+        // order.postOrgOrderCart(params)
+        //     .then(response => {
+        //         getOrgOrderCartsMount()
+        //         if (response) {
+        //             push(`/records/unregistered/${organization}?${URL_KEYS.SPECIALIST_ID}=${urlData[URL_KEYS.SPECIALIST_ID]}`)
+        //             setButtonLoad(false)
+        //         }
+        //     })
     }
     
     return {handleRequest, openModal, setOpenModal, buttonLoad}

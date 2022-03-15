@@ -30,7 +30,7 @@ export const LoginView = ({onClose, action}) => {
             {
                 nextStep
                     ? <form onSubmit={formik.handleSubmit}>
-                        <Row gutter={[0, 24]}>
+                        <Row gutter={[0, 12]}>
                             <Col span={24}>
                                 <Title weight={500}>{t('SMS_confirmation')}</Title>
                             </Col>

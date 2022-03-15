@@ -11,7 +11,7 @@ export const GreetingsView = ({setAuth}) => {
     const {push} = useHistory()
     
     return (
-        <Row gutter={[0, 24]}>
+        <Row gutter={[0, 12]}>
             <Col span={24}>
                 <IconBox color='var(--primary-dwed)'>
                     <LogoSvg/>

@@ -4,14 +4,14 @@ export const OverlayContentWrapper = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
-  max-height: 400px;
-  padding: 30px 12px;
+  padding: 30px 12px 0 12px;
   text-align: center;
-  border-radius: 25px 25px 0 0;
+  border-radius: 10px 10px 0 0;
   background: var(--default-white);
   transition: 0.5s;
   left: 0;
   z-index: 1111;
+  overflow: auto;
   transform: translateY(${props => props.status ? 0 : '100%'});
 `
 

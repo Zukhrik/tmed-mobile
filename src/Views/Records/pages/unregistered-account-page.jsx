@@ -1,51 +1,42 @@
 import React from 'react'
 import {useAddSpecialistUrl, useAllOrdersList} from '../../../Hooks/order'
 import {useHistory, useParams} from 'react-router-dom'
-import {useTranslation} from 'react-i18next'
-import {useUrlParams} from '../../../Hooks/app'
 import {useStore} from 'effector-react'
 import {$appModel} from '../../../Models/app'
 import {resetOrderCartList} from '../../../Models/order-model'
-import {URL_KEYS} from '../../../Constants'
-import {UnregisteredAccountPageWrapper} from '../atoms'
-import {UnregisteredAccountPageWireframe} from '../../../UIComponents/Wireframe/UnregisteredAccountPageWireframe'
 import {INFO_MAT} from '../../../Constants/app'
 import {AccountSpecialists, TotalCost, UnregisteredOfferings} from '../organisms'
+import {FixedHeader} from '../../../Components/FixedHeader'
+import {Col, Row} from 'antd'
+import {RootContent} from '../../../UIComponents/GlobalStyles'
 
 export const UnregisteredAccountPage = () => {
     useAllOrdersList()
     const {push} = useHistory()
-    const {t} = useTranslation()
-    const {urlData} = useUrlParams()
     const {organization} = useParams()
     const {$device, $app: {saveURL}} = useStore($appModel)
-    const {currentOrg, forceLoading} = useAddSpecialistUrl()
+    const {currentOrg} = useAddSpecialistUrl()
     
     const goBack = () => {
         push({pathname: saveURL ? saveURL : `/${organization}/offerings`})
         resetOrderCartList()
     }
     
-    const handlePush = () => {
-        push(`/checkout/${organization}?${URL_KEYS.SPECIALIST_ID}=${urlData.specialist_id}`)
-    }
-    
     return (
-        <UnregisteredAccountPageWrapper>
-            <UnregisteredAccountPageWireframe
-                goBack={() => goBack()}
-                title3={t('will_continue')}
-                nextTo={() => handlePush()}
-                title1={currentOrg?.seller?.name}
-                title={
-                    forceLoading === 2
-                        ? currentOrg?.seller?.name
-                        : ''
-                }
-                specCard={<AccountSpecialists/>}
-                offerings={<UnregisteredOfferings/>}
+        <RootContent paddingTop={62} paddingBottom={65}>
+            <FixedHeader
+                goBack={goBack}
+                title={currentOrg?.seller?.name}
             />
+            <Row className='container' gutter={[0, 12]}>
+                <Col span={24}>
+                    <AccountSpecialists/>
+                </Col>
+                <Col span={24}>
+                    <UnregisteredOfferings/>
+                </Col>
+            </Row>
             {$device && $device !== INFO_MAT && <TotalCost/>}
-        </UnregisteredAccountPageWrapper>
+        </RootContent>
     )
 }

@@ -254,10 +254,10 @@
     "leave_a_comment": "Оставить комментарий",
     "comment": "Комментарий",
     "unregistered": "Неоформленные",
-    "approved": "Утвержденные",
+    "approved": "Принятый",
     "awaiting": "В ожидании",
-    "finished": "Завершенные",
-    "canceled": "Отклоненные",
+    "finished": "Завершенный",
+    "canceled": "Отклоненный",
     "specialist": "Специалист",
     "application_has_been_successfully_completed": "Заявка успешно оформлена",
     "show_this_QR_code_to_your_specialist": "Покажите данный QR код обслуживающему Вас специалисту",
@@ -367,6 +367,7 @@
     "view_record": "Просмотреть запись",
     "my_orders": "Мои заказы",
     "my_records": "Мои записи",
-    "your_queue": "Ваша очередь"
+    "your_queue": "Ваша очередь",
+    "in_processing": "В обработке"
   }
 }

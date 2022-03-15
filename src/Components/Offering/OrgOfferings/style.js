@@ -126,18 +126,22 @@ export const GroupItemNavLink = styled(NavLink)`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 134px;
-  background-color: var(--basic-grey-bg);
-  border-radius: 6px;
-  padding: 12px;
   border: 1.5px solid transparent;
 
+  img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+  }
+
   &.active {
-    border: 1.5px solid var(--primary-dwed);
+    ${StyledText} {
+      color: var(--primary-dwed);
+    }
   }
 
   ${StyledText} {
-    margin-top: 2px;
+    margin-top: 8px;
     text-align: center;
     line-height: 1.5;
     display: -webkit-box;
@@ -148,17 +152,4 @@ export const GroupItemNavLink = styled(NavLink)`
     -webkit-box-orient: vertical;
     word-break: break-word;
   }
-`
-
-export const OfferingGroupItemSkeletonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 134px;
-  background-color: var(--basic-grey-bg);
-  border-radius: 6px;
-  padding: 12px;
-  border: 1.5px solid #f2f2f2;
 `

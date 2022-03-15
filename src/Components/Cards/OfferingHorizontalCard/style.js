@@ -9,7 +9,6 @@ export const OfferingHorizontalCardWrapper = styled.div`
   height: 95px;
   width: 100%;
   overflow: hidden;
-  //box-shadow: 0 2px 14px rgba(29, 161, 242, 0.15);
   border: 1px solid #F8F8F8;
 
   img {
@@ -26,21 +25,14 @@ export const OfferingHorizontalCardWrapper = styled.div`
   }
 
   ${IconBox} {
-    border: 1px solid transparent;
     border-radius: 50%;
-    color: var(--default-white);
-    background: var(--grey-dwed);
-    position: absolute;
     width: 24px;
     height: 24px;
-    top: 8px;
-    z-index: 1;
-    left: 8px;
 
     svg {
       width: 24px;
+      padding: 6px;
       height: 24px;
-      padding: 4px;
     }
   }
 
@@ -51,19 +43,15 @@ export const OfferingHorizontalCardWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
   }
-
-  .cost-manage-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 `
 
-export const CloseButtonWrapper = styled.div`
-  margin: 12px;
+export const OfferNameActionWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
-  svg {
-    width: 30px;
-    height: 30px;
-  }
+export const CostManageWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `

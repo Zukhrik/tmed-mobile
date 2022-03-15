@@ -69,8 +69,9 @@ export const UnregisteredOfferings = () => {
                                             ? (
                                                 <Text level={4}>
                                                     {
-                                                        `${t('total_cost')}: ${result?.[organization]?.total_cost?.toLocaleString('fi-Fi')}
-                                                ${currentProfile?.currency?.code?.toUpperCase()}`
+                                                        `${t('total_cost')}:
+                                                        ${result?.[organization]?.total_cost?.toLocaleString('fi-Fi')}
+                                                            ${currentProfile?.currency?.code?.toUpperCase()}`
                                                     }
                                                 </Text>
                                             )

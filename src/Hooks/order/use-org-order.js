@@ -13,6 +13,7 @@ import cart from '../../Service-v2/cart'
 export function useOrgOrder() {
     const {query} = useListQuery()
     const {organization} = useParams()
+    const {$app: {token}} = useStore($appModel)
     const {$detectLocationInfo} = useStore($appModel)
     const {urlData: {specialist_id: specId}} = useUrlParams()
     const {$profiles: {currentProfile}} = useStore($accountModel)
@@ -75,19 +76,23 @@ export function useOrgOrder() {
     
     const onCreatingCartItem = useCallback((event) => {
         const orgSpecList = event.responsible
-        if (event.inCart) {
-            remove.mutate({offering_id: event.id})
+        if (!!token) {
+            if (event.inCart) {
+                remove.mutate({offering_id: event.id})
+            } else {
+                const data = [
+                    {
+                        offering_id: event.id,
+                        responsible_id: specId ? specId : orgSpecList[0].id,
+                        qty: event.qty ? event.qty : 1
+                    }
+                ]
+                create.mutate(data)
+            }
         } else {
-            const data = [
-                {
-                    offering_id: event.id,
-                    responsible_id: specId ? specId : orgSpecList[0].id,
-                    qty: event.qty ? event.qty : 1
-                }
-            ]
-            create.mutate(data)
+            queryClient.clear()
         }
-    }, [create, specId, remove])
+    }, [create, specId, remove, token])
     
     const getIsLoading = useCallback((id) => {
         if (create.isLoading && create?.variables?.data?.offering_id === id) {

@@ -31,7 +31,6 @@ export const OfferingsList = () => {
         setOfferingItem(false)
     }
     
-    
     return (
         <>
             <OverlaySettings

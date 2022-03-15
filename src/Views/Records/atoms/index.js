@@ -213,16 +213,11 @@ export const ModalActionsWrapper = styled.div`
   }
 `
 
-export const UnregisteredAccountPageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100vh;
-`
-
 export const AccountScrollWrapper = styled.div`
   padding: 3px;
   overflow-x: auto;
   overflow-y: hidden;
+  display: ${({display}) => display ? display : 'none'};
 
   &::-webkit-scrollbar {
     height: 0;
@@ -242,31 +237,38 @@ export const SpecialistNavLink = styled(NavLink)`
   margin-right: 16px;
   position: relative;
 
+  ${StyledAvatar} {
+    transition: width .3s, height .3s;
+  }
+
   ${StyledText} {
-    span {
-      -webkit-line-clamp: 2;
-    }
+    display: none;
+  }
+
+  ${StyledTitle} {
+    display: none;
   }
 
   &.active {
-    ${StyledAvatar} {
-      border: 3px solid var(--primary-dwed);
-    }
-
     ${ShortCardContainer} {
       ${StyledAvatar} {
-        border: 4px solid var(--primary-dwed);
+        border: 2px solid var(--primary-dwed);
+        width: 64px !important;
+        height: 64px !important;
       }
 
       ${StyledTitle} {
+        display: block;
         color: var(--primary-dwed);
       }
 
       ${StyledText} {
+        display: block;
         color: var(--primary-dwed);
       }
     }
   }
+
 `
 
 export const ServeSpecWrapper = styled.div`

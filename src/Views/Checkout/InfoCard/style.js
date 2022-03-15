@@ -178,7 +178,6 @@ export const CheckoutDetailWrapper = styled.div`
     }
 
     .ant-space-item {
-      height: 60px;
       display: flex;
       align-items: center;
       width: 100%;

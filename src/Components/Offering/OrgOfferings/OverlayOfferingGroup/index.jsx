@@ -14,7 +14,7 @@ import {useOfferingList} from '../../../../Hooks/offerings'
 import {generateSkeleton} from '../../../../utils/skeleton-utils'
 import {OfferingGroupItemSkeleton} from '../OfferingGroupItemSkeleton'
 
-const skeleton = generateSkeleton(10)
+const skeleton = generateSkeleton(9)
 export const OverlayOfferingGroup = () => {
     const {t} = useTranslation()
     const {urlData} = useUrlParams()
@@ -86,10 +86,10 @@ export const OverlayOfferingGroup = () => {
                 dataLength={result?.nextOffset || 20}
                 hasMore={!loading && !!result?.next}
                 loader={<Spin/>}
-                style={{overflow: 'hidden', padding: '50px 0'}}
+                style={{overflow: 'hidden', paddingTop: 50, paddingBottom: 12}}
                 scrollableTarget='scrollableDiv'
             >
-                <Row gutter={[12, 12]}>
+                <Row gutter={[12, 12]} align='top'>
                     {
                         data && forceLoading === 2
                             ? (

@@ -8,7 +8,7 @@ import {BottomNavBar} from './Components/BottomNavBar'
 import {accountInfoMount} from './Models/account-model'
 import {$appModel, detectLocationMount} from './Models/app'
 import {Route, Switch, useLocation} from 'react-router-dom'
-import {useAppDb, useChatWs, useCommonWs, useIsMobile} from './Hooks/app'
+import {useAppDb, useIsMobile} from './Hooks/app'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
 
@@ -16,7 +16,7 @@ export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             refetchOnWindowFocus: false,
-            retry: false,
+            retry: false
         }
     }
 })
@@ -34,8 +34,8 @@ export const App = () => {
     )
     
     useAppDb()
-    useChatWs()
-    useCommonWs()
+    // useChatWs()
+    // useCommonWs()
     useIsMobile()
     
     const {i18n} = useTranslation()

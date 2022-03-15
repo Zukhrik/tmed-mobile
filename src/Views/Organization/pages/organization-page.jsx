@@ -1,8 +1,6 @@
 import React from 'react'
 import {useStore} from 'effector-react'
 import {useGoBack} from '../../../Hooks/app'
-import {$appModel} from '../../../Models/app'
-import {INFO_MAT} from '../../../Constants/app'
 import {usePushToCart} from '../../../Hooks/order'
 import {$orgModel} from '../../../Models/org-model'
 import {useParams} from 'react-router-dom'
@@ -14,15 +12,14 @@ import {Col, Row} from 'antd'
 import {FilterPanel, OrgBodyRoute, OrgPageHeader} from '../organisms'
 
 export const OrganizationPage = () => {
+    useOrgSubscription()
     const {organization} = useParams()
-    const {$device} = useStore($appModel)
     const {handlePush, result} = usePushToCart()
-    const {getSubscription} = useOrgSubscription()
     const {goBack} = useGoBack({pathname: '/'})
     const {$organizationInfo: {data, forceLoading}} = useStore($orgModel)
     
     return (
-        <RootContent height='100vh' paddingBottom={65} paddingTop={62}>
+        <RootContent height='100vh' paddingTop={62}>
             <FixedHeader
                 component={<InfoInFixedHeader
                     title={data[organization]?.slug_name}
@@ -38,7 +35,6 @@ export const OrganizationPage = () => {
                         name={data?.[organization]?.name}
                         imgUrl={data?.[organization]?.logo}
                         category={data?.[organization]?.category?.name}
-                        subscription={$device && $device !== INFO_MAT && getSubscription()}
                     />
                 </Col>
                 <Col span={24}>

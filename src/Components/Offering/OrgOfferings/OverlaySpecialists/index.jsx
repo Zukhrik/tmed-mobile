@@ -5,15 +5,14 @@ import {Col, Row, Spin} from 'antd'
 import {useTranslation} from 'react-i18next'
 import {useStore} from 'effector-react'
 import {$orgModel, orgSpecialistsMount} from '../../../../Models/org-model'
-import {OrgSpecialistCard} from '../../../Cards'
+import {OrgSpecialistCard, OrgSpecialistCardSkeleton} from '../../../Cards'
 import {URL_KEYS} from '../../../../Constants'
 import {useOrgSpecialistLists, useUrlGenerate} from '../../../../Hooks/org'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {useParams} from 'react-router-dom'
 import {generateSkeleton} from '../../../../utils/skeleton-utils'
-import {OfferingGroupItemSkeleton} from '../OfferingGroupItemSkeleton'
 
-const skeleton = generateSkeleton(10)
+const skeleton = generateSkeleton(9)
 export const OverlaySpecialists = () => {
     const {t} = useTranslation()
     const {organization} = useParams()
@@ -62,7 +61,7 @@ export const OverlaySpecialists = () => {
                 dataLength={result.nextOffset || 20}
                 hasMore={!loading && !!result?.next}
                 loader={<Spin/>}
-                style={{overflow: 'hidden', padding: '50px 0'}}
+                style={{overflow: 'hidden', paddingTop: 50, paddingBottom: 12}}
                 scrollableTarget='scrollableSpec'
             >
                 <Row gutter={[12, 12]}>
@@ -91,7 +90,7 @@ export const OverlaySpecialists = () => {
                             ) : (
                                 skeleton.map((ite, idx) => (
                                     <Col key={idx + 1} xs={8} sm={6} md={4}>
-                                        <OfferingGroupItemSkeleton/>
+                                        <OrgSpecialistCardSkeleton/>
                                     </Col>
                                 ))
                             )
